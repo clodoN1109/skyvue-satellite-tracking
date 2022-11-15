@@ -1,0 +1,48 @@
+header {
+
+	padding: 50px ;
+	background-color: rgba(0, 0, 0, 0.3);
+
+}
+
+.interface {
+
+	display: inline-flex;
+	flex-wrap: wrap;
+	column-gap: 80px;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	
+}
+
+.map_container {
+
+}
+
+.map {
+
+	background-image: url(C:/Users/Clodomir/Documents/Clodo/Profissional/FreelanceWorks/Apps/ISSTracking/assets/mapmundi.png); 
+	background-size:cover; 
+	width: 800px; 
+	height: 400px;
+}
+
+.satellite {
+	width:8%;
+	height:14%;
+	transition: all 2s;
+}
+
+
+
+
+
+footer {
+
+	padding: 50px ;
+	background-color: rgba(0, 0, 0, 0.3);
+	text-align: center; 
+	font-size: 30px;
+
+}
