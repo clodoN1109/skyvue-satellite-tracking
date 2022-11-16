@@ -6,32 +6,41 @@
 	<title>ISS Real Time Tracking</title>
 	<link rel="icon" href="assets/space_station.png">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Oriya:wght@700&display=swap" rel="stylesheet">
 
 <body>
 
 	<header>
 		
-		<div style="text-align: center; font-size: 30px;"> ISS Real Time Locator </div>
+		<div style="text-align: center; font-size: 30px;"> ISS PATH VIEWER </div>
 
 	</header>
 
 	<div class="interface" style="width: 100%;">
 		
-		<div>
-			<label>latitude</label>
+		<div class="data_display" >
+
 			<div>
-				<input type="text" id="latitude" readonly value="523523762642">
+				<label>latitude</label>
+				<div>
+					<input style="cursor: default;" id="latitude" readonly value="523523762642">
+				</div>
 			</div>
 
-
-			<label>longitude</label>
 			<div>
-				<input type="text" id="longitude" readonly class="" value="352353265">
+				<label>longitude</label>
+				<div>
+					<input style="cursor: default;" type="text" id="longitude" readonly class="" value="352353265">
+				</div>
 			</div>
 
-			<label>time</label>
 			<div>
-				<input type="text" id="time" readonly class="" value="12365">
+				<label>time</label>
+				<div>
+					<input style="cursor: default;" type="text" id="time" readonly class="" value="12365">
+				</div>
 			</div>
 
 		</div>
@@ -50,9 +59,21 @@
 
 
 	<footer style="background-image: url(); background-size: cover;">
+
 		
-		Footer
+		<div class="footer-box">
+			
+			<p style="font-family:courier;"> by <a style="transition: all 0s" href="C:\Users\Clodomir\Documents\Clodo\heyClodo.com\index.html">Clodo</p></a>
+
+			<a class="box-image" href="C:\Users\Clodomir\Documents\Clodo\heyClodo.com\index.html"></a>
+
+			<a href="C:\Users\Clodomir\Documents\Clodo\heyClodo.com\index.html" style="transition: all 0s;"><div class="clodo-web-address" style="font-size: 0.8rem; transition: all 0s;">heyclodo.com</div></a> 
+			
+		</div>
 		
+
+
+
 	</footer>
 
 	<script type="text/javascript" src="./main.js"></script>
