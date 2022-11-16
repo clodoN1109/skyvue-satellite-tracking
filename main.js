@@ -55,7 +55,7 @@ function fetchIssData(){
     document.getElementsByClassName("satellite")[0]
     .style.transform = "translate(" + longitude + "px, " + latitude +  "px)";
 
-  setTimeout(fetchIssData,4000);
+  setTimeout(fetchIssData,3000);
 
 
 

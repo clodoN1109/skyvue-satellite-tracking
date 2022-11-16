@@ -12,10 +12,12 @@
 
 <body>
 
-	<header style="background-image: url(assets/header-background.jpg); background-size: cover;">
+	<header style=" background-image: url(assets/header-background.jpg); background-size: cover;">
 		
-		<div style="cursor: default; text-align: center; font-size: 30px; color: gray;"> ISS PATH VIEWER </div>
-
+		<div class="header-box">
+			<img src="assets/iss-earth-astro.png" style=" height: 150px; width: 170px;">
+			<div style="cursor: default; text-align: center; font-size: 30px; color: darkslategray;"> ISS PATH VIEWER </div>
+		</div>
 	</header>
 
 	<div class="interface" style="width: 100%;">
@@ -43,8 +45,10 @@
 				</div>
 			</div>
 
+
 			<button class="copyButton" style="font-family: courier;" onclick="copyCoordinates()">Copy Coordinates</button>
 
+			<a href="https://api.wheretheiss.at/v1/satellites/25544"><div style="font-size:11px;">API / Data Source Link</div></a>
 			
 
 		</div>
@@ -65,18 +69,21 @@
 
 	<footer  style="background-image: url(assets/footer-background.jpg); background-size: cover	;">
 
-		
-		<div class="footer-box">
-			
-			<p style="font-family:courier; cursor: default;"> by <a style="transition: all 0s" href="https://clodo.me">Clodo</p></a>
+		<div class ="footer-flexbox">
 
-			<a class="box-image" href="https://clodo.me"></a>
+			<div class="footer-box">
 
-			<a href="https://clodo.me" style="transition: all 0s;"><div class="clodo-web-address" style="font-size: 0.8rem; transition: all 0s;">clodo.com</div></a> 
-			
+				<p style="font-family:courier; cursor: default;"> by <a style="transition: all 0s" href="https://clodo.me">Clodo</p></a>
+
+				<a class="box-image" href="https://clodo.me"></a>
+
+				<a href="https://clodo.me" style="transition: all 0s;"><div class="clodo-web-address" style="font-size: 0.8rem; transition: all 0s;">clodo.com</div></a> 
+
+			</div>
+
+			<div class="wikiInfo"> "A ISS é um laboratório espacial cuja montagem em órbita começou em 1998 e terminou oficialmente em 8 de julho de 2011." </div>
+
 		</div>
-		
-
 
 
 	</footer>
