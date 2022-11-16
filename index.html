@@ -12,40 +12,45 @@
 
 <body>
 
-	<header>
+	<header style="background-image: url(assets/header-background.jpg); background-size: cover;">
 		
-		<div style="text-align: center; font-size: 30px;"> ISS PATH VIEWER </div>
+		<div style="cursor: default; text-align: center; font-size: 30px; color: gray;"> ISS PATH VIEWER </div>
 
 	</header>
 
 	<div class="interface" style="width: 100%;">
 		
-		<div class="data_display" >
+		<div class="data_display" style="font-family: courier; font-weight: bold;" >
 
 			<div>
-				<label>latitude</label>
-				<div>
-					<input style="cursor: default;" id="latitude" readonly value="523523762642">
+				<label>Latitude</label>
+				<div style="cursor:default;">
+					<input style="cursor: default;" id="latitude" readonly value="523523762642"> Deg
 				</div>
 			</div>
 
 			<div>
-				<label>longitude</label>
-				<div>
-					<input style="cursor: default;" type="text" id="longitude" readonly class="" value="352353265">
+				<label>Longitude</label>
+				<div style="cursor:default;">
+					<input style="cursor: default;" type="text" id="longitude" readonly class="" value="352353265"> Deg
 				</div>
 			</div>
 
-			<div>
-				<label>time</label>
-				<div>
-					<input style="cursor: default;" type="text" id="time" readonly class="" value="12365">
+			<div >
+				<label>Altitude</label>
+				<div style="cursor:default;">
+					<input style="cursor: default;" type="text" id="altitude" readonly class="" value="352353265"> Km
 				</div>
 			</div>
+
+			<button class="copyButton" style="font-family: courier;" onclick="copyCoordinates()">Copy Coordinates</button>
+
+			
 
 		</div>
 
 		<div class ="map_container">
+			<input style="cursor: default; width: 400px;" type="text" id="time" readonly class="" value="12365">
 			<div class=	"map" style="">
 
 				<img class="satellite" src="assets/space_station.png" alt="a mundi map" lang="en" style="transform: translate(0px,0px);">
@@ -58,12 +63,12 @@
 	</div>
 
 
-	<footer style="background-image: url(); background-size: cover;">
+	<footer  style="background-image: url(assets/footer-background.jpg); background-size: cover	;">
 
 		
 		<div class="footer-box">
 			
-			<p style="font-family:courier;"> by <a style="transition: all 0s" href="https://clodo.me">Clodo</p></a>
+			<p style="font-family:courier; cursor: default;"> by <a style="transition: all 0s" href="https://clodo.me">Clodo</p></a>
 
 			<a class="box-image" href="https://clodo.me"></a>
 

@@ -27,6 +27,8 @@ header {
 
 .map_container {
 
+
+
 }
 
 .map {
@@ -111,7 +113,7 @@ footer img{
 }
 
 a:hover{
-	color: black;
+	color: gray;
 	font-weight: bolder;
 	
 }
@@ -135,7 +137,7 @@ p{
 	flex-direction: column;
 	justify-content: center;
 	justify-items: center;
-	align-items: center;
+	align-items: flex-start;
 
 	gap: 10px;
 
@@ -144,4 +146,10 @@ p{
 label {
 	font-family: courier;
 	font-weight: bolder;
+}
+
+.copyButton:hover {
+
+	cursor: pointer;
+	
 }
