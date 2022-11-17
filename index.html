@@ -9,15 +9,28 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Oriya:wght@700&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 <body>
 
 	<header style=" background-image: url(assets/header-background.jpg); background-size: cover;">
 		
-		<div class="header-box">
-			<img src="assets/iss-earth-astro.png" style=" height: 150px; width: 170px;">
-			<div style="cursor: default; text-align: center; font-size: 30px; color: darkslategray;"> ISS PATH VIEWER </div>
+
+		<div class ="header-grid">
+			<div class="header-box">
+				<img src="assets/iss-earth-astro.png" style=" height: 150px; width: 170px;">
+				<div style="cursor: default; text-align: center; font-size: 30px; color: darkslategray;"> ISS PATH VIEWER </div>
+			</div>
+			<div class="metaInfo" style="cursor: default; font-family: courier;">
+					This page consists of an exercise in collecting data from the internet through API's and using them to dynamically update the page. The concepts are implemented in a very simple way, so it can probably help other people to study them.
+				<div>	
+				<p class="badge bg-secondary">HTML/CSS/Javascript</p> 
+                <p class="badge bg-secondary">API's</p>
+                <p class="badge bg-secondary">Fetching Data</p> 
+            </div>
+			</div>
 		</div>
+
 	</header>
 
 	<div class="interface" style="width: 100%;">
@@ -54,7 +67,7 @@
 		</div>
 
 		<div class ="map_container">
-			<input style="cursor: default; width: 400px;" type="text" id="time" readonly class="" value="12365">
+			<input style="cursor: default; text-align: center; width: 500px;" type="text" id="time" readonly class="" value="12365">
 			<div class=	"map" style="">
 
 				<img class="satellite" src="assets/space_station.png" alt="a mundi map" lang="en" style="transform: translate(0px,0px);">
@@ -69,7 +82,7 @@
 
 	<footer  style="background-image: url(assets/footer-background.jpg); background-size: cover	;">
 
-		<div class ="footer-flexbox">
+		<div class ="footer-grid">
 
 			<div class="footer-box">
 
@@ -81,7 +94,9 @@
 
 			</div>
 
-			<div class="wikiInfo"> "A ISS é um laboratório espacial cuja montagem em órbita começou em 1998 e terminou oficialmente em 8 de julho de 2011." </div>
+
+			<div class="wikiInfo"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
+
 
 		</div>
 

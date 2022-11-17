@@ -28,6 +28,16 @@ header {
 	border-radius: 15%;
 }
 
+.header-grid{
+
+	display: grid;
+    grid-template-columns: 5fr 3fr;
+    grid-gap: 10px;
+    align-items: center;
+	justify-content: center;
+
+}
+
 
 .interface {
 
@@ -176,10 +186,12 @@ label {
 
 }
 
-.footer-flexbox{
+.footer-grid{
 
-	display: inline-flex;
-	align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-gap: 10px;
+    align-items: center;
 	justify-content: center;
 
 }
@@ -188,6 +200,7 @@ label {
 
 	font-family: courier;
 	font-size: 20px;
+	padding-right: 20px;
 
 
 }
