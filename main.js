@@ -1,4 +1,46 @@
 const iss_data = [0, 0, 0, 0];
+const iss_path = [];
+let lat = 0;
+let lon = 0;
+
+
+function draw(latitude, longitude) {
+  const canvas = document.getElementById("canvas");
+  if (canvas.getContext) {
+    const ctx = canvas.getContext("2d");
+
+
+    let scale_fix = 2.66;
+
+    /*console.log(iss_path);*/
+
+/*    for (item in iss_path) {
+
+      lat = iss_path[item][0]/scale_fix;
+      lon = iss_path[item][1]/scale_fix;
+      
+
+      ctx.fillStyle = "rgba(250, 100, 0, 1)";
+      ctx.fillRect(lon, lat, 0.4, 0.4);
+
+    }*/
+
+
+      lat = latitude/scale_fix;
+      lon = longitude/scale_fix;
+      
+
+      ctx.fillStyle = "rgba(250, 100, 0, 1)";
+      ctx.fillRect(lon, lat, 0.4, 1);
+
+
+
+    
+
+  }
+}
+
+
 
 function timestampToDateConversion(timestamp){
 
@@ -52,6 +94,10 @@ function fetchIssData(){
     iss_data[2] = timestampToDateConversion(Number(iss.timestamp));
     iss_data[3] = iss.altitude;
 
+/*    console.log(iss_data[0]);
+    console.log(iss_data[1]);*/
+   /* console.log(iss_path);*/
+
 
     /*console.log("iss_data: ", iss_data);*/
 
@@ -64,11 +110,16 @@ function fetchIssData(){
     let longitude = (Number(iss_data[1]) + 180)*(2.2222);
     let time = iss_data[2];
 
+    iss_path.push([latitude,longitude]);
+
+    draw(latitude, longitude);
+
     let actual_position = document.getElementsByClassName("satellite")[0].style.transform;
 
 
     document.getElementsByClassName("satellite")[0]
     .style.transform = "translate(" + longitude + "px, " + latitude +  "px)";
+
 
   setTimeout(fetchIssData,3000);
 
@@ -81,5 +132,4 @@ function fetchIssData(){
 
 setTimeout(updateWikiInfo,7000);
 fetchIssData();
-
 

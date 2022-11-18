@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ISS Real Time Tracking</title>
+	<title>ISS Path Viewer</title>
 	<link rel="icon" href="assets/space_station.png">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,13 +67,15 @@
 		</div>
 
 		<div class ="map_container">
-			<input style="cursor: default; text-align: center; width: 500px;" type="text" id="time" readonly class="" value="12365">
-			<div class=	"map" style="">
+
+			<input style="font-family: courier; cursor: default; text-align: center; width: 600px;" type="text" id="time" readonly class="" value="12365">
+			<div class=	"map" >
 
 				<img class="satellite" src="assets/space_station.png" alt="a mundi map" lang="en" style="transform: translate(0px,0px);">
-				
+				  <canvas id="canvas"></canvas>
 
 			</div>
+
 		</div>
 
 
