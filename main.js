@@ -30,12 +30,9 @@ function draw(latitude, longitude) {
     lon = longitude/scale_fix;
 
 
-    ctx.fillStyle = "rgba(250, 100, 0, 1)";
+    ctx.fillStyle = "rgba(220, 140, 20, 1)";
     ctx.fillRect(lon, lat, 0.4, 1);
 
-
-
-    
 
   }
 }
@@ -142,13 +139,19 @@ function fetchIssData(){
     .then((iss) => {
 
       let country_code = iss.country_code;
-      document.getElementById("location").textContent = "";
-
+/*      country_code = 'US';*/
       if (country_code != "??"){
 
+        document.getElementById("location").textContent = country_code;
         let flagURL = "url(https://countryflagsapi.com/png/" + country_code + ")";
-        document.getElementById("location").style.backgroundImage = flagURL;
+        document.getElementById("location-flag").style.backgroundImage = flagURL;
 
+      }
+
+      else{
+
+        document.getElementById("location-flag").style.backgroundImage = '';
+        document.getElementById("location").textContent = "";
       }
 
 

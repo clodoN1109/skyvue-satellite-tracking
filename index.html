@@ -45,7 +45,7 @@
 
 			<div style="display: inline-flex; gap: 5px;">
 				<div class="fetchSign" id="sign"></div>
-				<div id="fetchWarning" style="font-weight: lighter; font-family:courier; font-size: 15px;">Fetching Data</div>
+				<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-family:courier; font-size: 15px;">Fetching Data</div>
 			</div>
 
 			<div>
@@ -88,7 +88,12 @@
 
 				<img class="satellite" src="assets/space_station.png" alt="a mundi map" lang="en" style="transform: translate(0px,0px);">
 				  <canvas id="canvas"></canvas>
-				  <div class="current-place" id = "location" >US, California</div>
+				  <div class="current-place">
+				  	
+				  	<div id="location-flag"></div>
+				  	<div id = "location"></div>
+
+				  </div>
 
 			</div>
 
