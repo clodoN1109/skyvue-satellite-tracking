@@ -26,12 +26,12 @@ function draw(latitude, longitude) {
     }*/
 
 
-      lat = latitude/scale_fix;
-      lon = longitude/scale_fix;
-      
+    lat = latitude/scale_fix;
+    lon = longitude/scale_fix;
 
-      ctx.fillStyle = "rgba(250, 100, 0, 1)";
-      ctx.fillRect(lon, lat, 0.4, 1);
+
+    ctx.fillStyle = "rgba(250, 100, 0, 1)";
+    ctx.fillRect(lon, lat, 0.4, 1);
 
 
 
@@ -54,25 +54,25 @@ function timestampToDateConversion(timestamp){
 
 function updateWikiInfo(){
 
-    let info1 = "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit.";
-    let info2 = "The first ISS component was launched in 1998, and the first long-term residents arrived on 2 November 2000 after being launched from the Baikonur Cosmodrome on 31 October 2000."
-    let info3 ="The ISS programme evolved from the Space Station Freedom, a 1984 American proposal to construct a permanently crewed Earth-orbiting station,[15] and the contemporaneous Soviet/Russian Mir-2 proposal from 1976 with similar aims.";
-    let info4 ="The station is divided into two sections: the Russian Orbital Segment (ROS) is operated by Russia, while the United States Orbital Segment (USOS) is run by the United States as well as by the other states.";
-    let info5 = " As of April 2022, 251 astronauts, cosmonauts, and space tourists from 20 different nations have visited the space station, many of them multiple times.";
-    let infoList = [info1, info2, info3, info4, info5];
+  let info1 = "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit.";
+  let info2 = "The first ISS component was launched in 1998, and the first long-term residents arrived on 2 November 2000 after being launched from the Baikonur Cosmodrome on 31 October 2000."
+  let info3 ="The ISS orbital period is approximately 90 minutes.";
+  let info4 ="The station is divided into two sections: the Russian Orbital Segment (ROS) is operated by Russia, while the United States Orbital Segment (USOS) is run by the United States as well as by the other states.";
+  let info5 = " As of April 2022, 251 astronauts, cosmonauts, and space tourists from 20 different nations have visited the space station, many of them multiple times.";
+  let infoList = [info1, info2, info3, info4, info5];
 
-    document.getElementsByClassName("wikiInfo")[0].textContent = infoList[Math.floor(Math.random() * infoList.length)];
+  document.getElementsByClassName("wikiInfo")[0].textContent = infoList[Math.floor(Math.random() * infoList.length)];
 
 
-    setTimeout(updateWikiInfo,7000);
+  setTimeout(updateWikiInfo,7000);
 }
 
 function copyCoordinates(){
 
   let copyInfo = document.getElementById("latitude").value + ", " +
-                    document.getElementById("longitude").value  + ", " +
-                    document.getElementById("altitude").value + ", " +
-                    document.getElementById("time").value;
+  document.getElementById("longitude").value  + ", " +
+  document.getElementById("altitude").value + ", " +
+  document.getElementById("time").value;
 
 
   navigator.clipboard.writeText(copyInfo);
@@ -88,6 +88,18 @@ function fetchIssData(){
   .then((iss) => {
 
 /*    console.log(iss);*/
+
+    document.getElementById("sign").style.backgroundImage = 
+    'linear-gradient(0deg, rgba(0, 215, 0, 1.0), rgba(0, 180, 0, 1.0))';
+    document.getElementById("fetchWarning").style.color = 'black';
+
+    setTimeout(() => {
+
+      document.getElementById("sign").style.backgroundImage = '';
+      document.getElementById("fetchWarning").style.color = 'white';
+
+    },1000);
+
 
     iss_data[0] = iss.latitude;
     iss_data[1] = iss.longitude;
@@ -114,17 +126,39 @@ function fetchIssData(){
 
     draw(latitude, longitude);
 
-    let actual_position = document.getElementsByClassName("satellite")[0].style.transform;
+/*    let actual_position = document.getElementsByClassName("satellite")[0].style.transform;*/
 
 
     document.getElementsByClassName("satellite")[0]
     .style.transform = "translate(" + longitude + "px, " + latitude +  "px)";
 
+    latitude = (Number(latitude) - 470);
+    longitude = (Number(longitude) + 13);
+    document.getElementsByClassName("current-place")[0]
+    .style.transform = "translate(" + longitude + "px, " + latitude +  "px)";
 
-  setTimeout(fetchIssData,3000);
+    fetch("https://api.wheretheiss.at/v1/coordinates/" + iss_data[0] + "," + iss_data[1])
+    .then((response) => response.json())
+    .then((iss) => {
+
+      let country_code = iss.country_code;
+      document.getElementById("location").textContent = "";
+
+      if (country_code != "??"){
+
+        let flagURL = "url(https://countryflagsapi.com/png/" + country_code + ")";
+        document.getElementById("location").style.backgroundImage = flagURL;
+
+      }
 
 
 
+      setTimeout(fetchIssData,3000);
+      
+
+    })
+
+    
   });
 
 }

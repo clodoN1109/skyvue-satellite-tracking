@@ -19,16 +19,22 @@
 		<div class ="header-grid">
 			<div class="header-box">
 				<img src="assets/iss-earth-astro.png" style=" height: 150px; width: 170px;">
-				<div style="cursor: default; text-align: center; font-size: 30px; color: darkslategray;"> ISS PATH VIEWER </div>
+				<div class="header-title" style="cursor:default;"> ISS PATH VIEWER </div>
 			</div>
-			<div class="metaInfo" style="cursor: default; font-family: courier;">
-					This page consists of an exercise in collecting data from the internet through API's and using them to dynamically update the page. The concepts are implemented in a very simple way, so it can probably help other people to study them.
-				<div>	
+			<div class="metaInfo" style="cursor:default;">
+
+					This page consists of an exercise in collecting data from the internet through API's and using them to dynamically update the page's contents. The concepts are implemented in a very straightfoward way, so it would probably help other people to study them.
+			<div>	
 				<p class="badge bg-secondary">HTML/CSS/Javascript</p> 
                 <p class="badge bg-secondary">API's</p>
                 <p class="badge bg-secondary">Fetching Data</p> 
+
             </div>
+
+            <div class="warning" style="font-weight:lighter; font-family: courier; font-size: 15px;">all content intended only for learning of programming/web dev concepts</div>
+
 			</div>
+
 		</div>
 
 	</header>
@@ -36,6 +42,11 @@
 	<div class="interface" style="width: 100%;">
 		
 		<div class="data_display" style="font-family: courier; font-weight: bold;" >
+
+			<div style="display: inline-flex; gap: 5px;">
+				<div class="fetchSign" id="sign"></div>
+				<div id="fetchWarning" style="font-weight: lighter; font-family:courier; font-size: 15px;">Fetching Data</div>
+			</div>
 
 			<div>
 				<label>Latitude</label>
@@ -61,7 +72,11 @@
 
 			<button class="copyButton" style="font-family: courier;" onclick="copyCoordinates()">Copy Coordinates</button>
 
-			<a href="https://api.wheretheiss.at/v1/satellites/25544"><div style="font-size:11px;">API / Data Source Link</div></a>
+			<a href="https://wheretheiss.at/w/developer"><div style="font-size:11px;">API Link (ISS Data)</div></a>
+			<a href="https://countryflagsapi.com/"><div style="font-size:11px;">API Link (Flags Data)</div></a>
+			<a href="https://github.com/clodoN1109/ISS-Tracking"><div style="font-size:11px;">Github Project Page</div></a>
+
+
 			
 
 		</div>
@@ -73,6 +88,7 @@
 
 				<img class="satellite" src="assets/space_station.png" alt="a mundi map" lang="en" style="transform: translate(0px,0px);">
 				  <canvas id="canvas"></canvas>
+				  <div class="current-place" id = "location" >US, California</div>
 
 			</div>
 
@@ -97,7 +113,7 @@
 			</div>
 
 
-			<div class="wikiInfo"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
+			<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
 
 
 		</div>
