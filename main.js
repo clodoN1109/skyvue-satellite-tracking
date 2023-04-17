@@ -30,8 +30,8 @@ function draw(latitude, longitude) {
     lon = longitude/scale_fix;
 
 
-    ctx.fillStyle = "rgba(220, 140, 20, 1)";
-    ctx.fillRect(lon, lat, 0.4, 1);
+    ctx.fillStyle = "rgba(20, 40, 200, 1)";
+    ctx.fillRect(lon, lat, 0.33, 1);
 
 
   }
@@ -143,7 +143,7 @@ function fetchIssData(){
       if (country_code != "??"){
 
         document.getElementById("location").textContent = country_code;
-        let flagURL = "url(https://countryflagsapi.com/png/" + country_code + ")";
+        let flagURL = "url(https://flagsapi.com/" + country_code + "/flat/64.png" + ")";
         document.getElementById("location-flag").style.backgroundImage = flagURL;
 
       }
@@ -152,6 +152,7 @@ function fetchIssData(){
 
         document.getElementById("location-flag").style.backgroundImage = '';
         document.getElementById("location").textContent = "";
+        
       }
 
 

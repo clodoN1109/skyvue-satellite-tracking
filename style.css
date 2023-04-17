@@ -10,7 +10,7 @@ header {
 	font-family: 'Noto Serif Oriya', serif;
 	padding: 30px ;
 	background-color: rgba(0, 0, 0, 0.05);
-	border-width: 0 0 3px 0;
+	border-width: 0 0 2px 0;
 	border-style: solid;
 	border-color: darkslategray;
 
@@ -18,7 +18,7 @@ header {
 
 .header-title{
 
-	style="cursor: default; 
+	cursor: default; 
 	text-align: center; 
 	font-size: 30px; 
 	color: darkslategray;
@@ -81,8 +81,9 @@ header {
 	transition: all 2s;
 	
 	border-style: solid;
-	border-width: 10px 0 0 10px;
-	border-image: linear-gradient(45deg, darkorange, lightcoral);
+	border-width: 7px 0 0 7px;
+	border-radius: 50%;
+	border-image: linear-gradient(45deg, rgb(31, 31, 255), rgb(0, 98, 255));
 
 }
 
@@ -238,9 +239,8 @@ canvas {
 	border-width: 1px 0 1px 0;
 	border-color: darkslategray;
 
-
-	style="cursor: default; 
-	font-family: courier;"
+	cursor: default; 
+	font-family: courier;
 	font-weight: bolder;
 	color: darkslategray;
 }
@@ -251,7 +251,7 @@ canvas {
 	border-style: solid;
 	border-width: 1px 0 1px 0;
 	border-color: darkslategray;
-	style="cursor: default; 
+	cursor: default; 
 	font-weight: bolder;
 	color: darkslategray;
 	font-family: courier;
@@ -289,7 +289,7 @@ canvas {
 	content: "";
 	height: 20px;
 	width:30px; 
-	opacity: 0.6;
+	opacity: 0.9;
 	background-size: cover;
 
 }
@@ -300,7 +300,11 @@ canvas {
 	height: 15px;
 	width:30px; 
 	font-weight: bolder; 
-	color: darkslategray; 
+	color: rgb(16, 18, 18); 
 	font-size: 14px;
+	font-weight: 900;
 
+
+
+	
 }
