@@ -1,4 +1,4 @@
-# ISS-Tracking ![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fclodon1109.github.io%2FISS-Tracking%2F?style=flat&logo=webtrees&logoColor=white&labelColor=gray&color=blue&link=https%3A%2F%2Fclodon1109.github.io%2FISS-Tracking%2F)
+# ISS-Tracking ![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fclodon1109.github.io%2FISS-Tracking%2F?style=flat&logoColor=white&label=webpage&labelColor=gray&color=blue&link=https%3A%2F%2Fclodon1109.github.io%2FISS-Tracking%2F)
 
 ## Webpage for visualizing the current path of the International Space Station. 
 
