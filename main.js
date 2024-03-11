@@ -60,8 +60,6 @@ function updateWikiInfo(){
 
   document.getElementsByClassName("wikiInfo")[0].textContent = infoList[Math.floor(Math.random() * infoList.length)];
 
-
-  setTimeout(updateWikiInfo,7000);
 }
 
 function copyCoordinates(){
@@ -167,7 +165,6 @@ function fetchIssData(){
 
 }
 
-
-setTimeout(updateWikiInfo,7000);
+const intervalID = setInterval(updateWikiInfo, 7000);
 fetchIssData();
 

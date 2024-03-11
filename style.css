@@ -68,7 +68,7 @@ header {
 
 .map {
 
-	background-image: url(assets/mapmundi.png); 
+	background-image: url(assets/images/mapmundi.png); 
 	background-size:cover; 
 	width: 800px; 
 	height: 400px;
@@ -133,7 +133,7 @@ footer img{
 .box-image:hover:before{
 
 	content: "";
-    background-image: url(assets/heyclodo-icon-gray-inverted.jpg);
+    background-image: url(assets/images/heyclodo-icon-gray-inverted.jpg);
     background-size: cover;
     position: absolute;
     top: 0px;
@@ -147,7 +147,7 @@ footer img{
 
 
 .box-image{
-	background-image: url(assets/heyclodo-icon-gray.jpg);
+	background-image: url(assets/images/heyclodo-icon-gray.jpg);
 	background-size: cover;
 	position: relative;
 	height: 100px; 
