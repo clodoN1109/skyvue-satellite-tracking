@@ -1,9 +1,11 @@
-# ISS-Tracking ![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fclodon1109.github.io%2FISS-Tracking%2F?style=flat&logoColor=white&label=webpage&labelColor=gray&color=blue&link=https%3A%2F%2Fclodon1109.github.io%2FISS-Tracking%2F)
+# Horizon-Path-Tracking ![Static Badge](https://img.shields.io/badge/https%3A%2F%2Fclodon1109.github.io%2FISS-Tracking%2F?style=flat&logoColor=white&label=webpage&labelColor=gray&color=blue&link=https%3A%2F%2Fclodon1109.github.io%2FISS-Tracking%2F)
 
-## Webpage for visualizing the International Space Station's path around the globe. 
+## Webpage for visualizing satellites's and celestial bodies's paths with respect to Earth.
 
 <div align="center">
-<img width="70%" alt="snapshot" src="https://user-images.githubusercontent.com/104923248/203157589-e12c476a-a628-48e3-8678-95808930bf1d.png">
+<img width="70%" alt="snapshot" src="https://github.com/clodoN1109/ISS-Tracking/assets/104923248/225fd032-aa88-4374-b2f8-67c0e115384d">
 </div>
- 
-ISS's coordinates are fetched from the web API https://wheretheiss.at/w/developer. 
+
+<br>
+
+The purpose of this project is giving people a clear ideia of the movement of artificial sattelites and celestial bodies with Earth as reference.
