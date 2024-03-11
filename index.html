@@ -13,68 +13,67 @@
 
 <body>
 
-	<header style=" background-image: url(assets/images/header-background.jpg); background-size: cover;">
+	<header>
 		
 
 		<div class ="header-grid">
 			<div class="header-box">
-				<img src="assets/images/iss-earth-astro.png" style=" height: 150px; width: 170px;">
-				<div class="header-title" style="cursor:default;"> ISS PATH VIEWER </div>
+				<img id="logo" src="assets/images/iss-earth-astro.png">
+				<div class="header-title"> CELESTIAL PATHS</div>
 			</div>
-			<div class="metaInfo" style="cursor:default;">
 
-					This page consists of an exercise in collecting data from the internet through API's and using them to dynamically update the page's contents.
-			<div>	
-				<p class="badge bg-secondary">HTML/CSS/Javascript</p> 
-                <p class="badge bg-secondary">API</p>
+			<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="60px"></a>
 
-            </div>
-
-            <div class="warning" style="font-weight:lighter; font-family: courier; font-size: 15px;">All content intended only for learning of programming/web development concepts.</div>
-
-			</div>
+            <!-- <div class="warning">All content here is intended only for learning purposes.</div>
+			</div> -->
 
 		</div>
 
 	</header>
 
-	<div class="interface" style="width: 100%;">
+	<div class="interface">
 		
-		<div class="data_display" style="font-family: courier; font-weight: bold;" >
+		<div class="data_display" >
 
 			<div style="display: inline-flex; gap: 5px;">
 				<div class="fetchSign" id="sign"></div>
-				<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-family:courier; font-size: 15px;">Fetching Data</div>
+				<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-size: 15px;">Fetching Data</div>
 			</div>
 
 			<div>
-				<label>Latitude</label>
-				<div style="cursor:default;">
-					<input style="cursor: default;" id="latitude" readonly value="523523762642"> Deg
+				<div>Latitude</div>
+				<div class="data-field">
+					<input style="cursor: default;" id="latitude" readonly value="523523762642"> 
+					<div>Deg</div>
 				</div>
 			</div>
 
 			<div>
-				<label>Longitude</label>
-				<div style="cursor:default;">
-					<input style="cursor: default;" type="text" id="longitude" readonly class="" value="352353265"> Deg
+				<div>Longitude</div>
+				<div class="data-field">
+					<input style="cursor: default;" type="text" id="longitude" readonly class="" value="352353265">
+					<div> Deg</div>
 				</div>
 			</div>
 
 			<div >
-				<label>Altitude</label>
-				<div style="cursor:default;">
-					<input style="cursor: default;" type="text" id="altitude" readonly class="" value="352353265"> Km
+				<div>Altitude</div>
+				<div class="data-field">
+					<input style="cursor: default;" type="text" id="altitude" readonly class="" value="352353265">	
+					<div> Km</div>
+				</div>
+			</div>
+
+			<div >
+				<div>Velocity</div>
+				<div class="data-field">
+					<input style="cursor: default;" type="text" id="velocity" readonly class="" value="352353265">	
+					<div>Km/h</div>
 				</div>
 			</div>
 
 
-			<button class="copyButton" style="font-family: courier;" onclick="copyCoordinates()">Copy Coordinates</button>
-
-			<a href="https://wheretheiss.at/w/developer"><div style="font-size:11px;">API Link (ISS Data)</div></a>
-			<a href="https://countryflagsapi.com/"><div style="font-size:11px;">API Link (Flags Data)</div></a>
-			<a href="https://github.com/clodoN1109/ISS-Tracking"><div style="font-size:11px;">Github Project Page</div></a>
-
+			<button onclick="copyCoordinates()" class="blue-button">save as</button>
 
 			
 
@@ -82,7 +81,7 @@
 
 		<div class ="map_container">
 
-			<input style="font-family: courier; cursor: default; text-align: center; width: 600px;" type="text" id="time" readonly class="" value="12365">
+			<input style="font-family: courier; cursor: default; text-align: center;" type="text" id="time" readonly class="" value="12365">
 			<div class=	"map" >
 
 				<img class="satellite" src="assets/images/space_station.png" alt="a mundi map" lang="en" style="transform: translate(0px,0px);">
@@ -101,30 +100,52 @@
 
 	</div>
 
+	<div class="band-container">
+        <div class="band-display">
+			<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
+        </div>
+    </div>
 
-	<footer  style="background-image: url(assets/images/footer-background.jpg); background-size: cover	;">
+	<div class="band-container">
+        <div class="band-display">
+            <a id="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+            <div class="inline-flex-container">
+                <h1 id="the-team-title">THE TEAM</h1>
+                <div style="display: inline-flex; flex-wrap: nowrap; gap: 4vh;">
+                    <div class="team-button-container"><a target="_blank" href="" target="_blank"><button class="team-button" id="dev1-button"></button></a><div class="dev-name">Clodomir Vianna</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+	<footer>	
 
 		<div class ="footer-grid">
 
-			<div class="footer-box">
+			<a target="_blank" href="https://clodo.me">
+				<div class="footer-box">
 
-				<p style="font-family:courier; cursor: default;"> by <a style="transition: all 0s" href="https://clodo.me">Clodo</p></a>
+					<div style="font-family:courier; font-size: 10px; color: white;"><div style="transition: all 0s"> by Clodo</div></div>
+	
+					<div class="box-image" ></div>
+	
+					<div style="transition: all 0s; color: white;"><div class="clodo-web-address" style="font-size: 0.8rem; transition: all 0s;">clodo.me</div></div> 
+	
+				</div>
+			</a>
 
-				<a class="box-image" href="https://clodo.me"></a>
-
-				<a href="https://clodo.me" style="transition: all 0s;"><div class="clodo-web-address" style="font-size: 0.8rem; transition: all 0s;">clodo.com</div></a> 
-
-			</div>
-
-
-			<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
-
+			<a target="_blank" href="https://wheretheiss.at/w/developer"><img src="./assets/images/wheretheissat.png" width="200px"></a>
 
 		</div>
 
 
 	</footer>
-
+	
+	<script type="text/javascript" src="./scripts/tracking.js"></script>
+	<script type="text/javascript" src="./scripts/map.js"></script>
+	<script type="text/javascript" src="./scripts/misc.js"></script>
 	<script type="text/javascript" src="./main.js"></script>
 
 </body>
