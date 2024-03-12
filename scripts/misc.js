@@ -2,7 +2,7 @@ function updateWikiInfo(){
 
     let info1 = "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit.";
     let info2 = "The first ISS component was launched in 1998, and the first long-term residents arrived on 2 November 2000 after being launched from the Baikonur Cosmodrome on 31 October 2000."
-    let info3 ="The ISS orbital period is approximately 90 minutes.";
+    let info3 ="The ISS orbital period is about 90 minutes.";
     let info4 ="The station is divided into two sections: the Russian Orbital Segment (ROS) is operated by Russia, while the United States Orbital Segment (USOS) is run by the United States as well as by the other states.";
     let info5 = " As of April 2022, 251 astronauts, cosmonauts, and space tourists from 20 different nations have visited the space station, many of them multiple times.";
     let infoList = [info1, info2, info3, info4, info5];
@@ -35,11 +35,8 @@ function updateWikiInfo(){
   
   }
   
-  function saveas(){}
+  function exportData(){}
 
-  const selectElement = document.getElementById("mySelect");
-  const selectedValue = selectElement.value;
-  const selectedText = selectElement.options[selectElement.selectedIndex].text;
-
-  console.log(`Selected value: ${selectedValue}`);
-  console.log(`Selected text: ${selectedText}`);
+  // const selectElement = document.getElementById("mySelect");
+  // const selectedValue = selectElement.value;
+  // const selectedText = selectElement.options[selectElement.selectedIndex].text;

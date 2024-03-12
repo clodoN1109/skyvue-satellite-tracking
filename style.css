@@ -1,13 +1,11 @@
 body {
 
-	background-color: rgba(250, 250, 250, 1.0);
 	color: aliceblue;	
 	cursor: default;
 
-
 }
 
-body::before{
+/* body::before{
 
 	position: fixed;
 
@@ -19,6 +17,16 @@ body::before{
 	background-image: url(./assets/images/background.jpeg);
 	background-size: cover;
 
+} */
+
+#video-bg {
+
+	position: fixed;
+
+	width: 100%;
+	height: 100%;
+
+	object-fit: fill;
 }
 
 header {
@@ -26,6 +34,7 @@ header {
 	height:30vh;
 	font-family: 'Noto Serif Oriya', serif;
 	padding: 10px 0 50px 0;
+	margin-bottom: 5px;
 	
 	background-color: rgba(0, 0, 0, 0.05);
 	border-width: 0 0 3px 0;
@@ -75,9 +84,9 @@ header {
 	border-radius: 8px; 
 	border-style: solid;
 	border-color: white;
-	
 
-	font-family: monospace; 
+	font-family:monospace;
+	font-weight: 400;
 }
 
 
@@ -128,7 +137,7 @@ header {
 .interface {
 
 	width: 100%;
-	height: 70vh;
+	height: fit-content;
 	margin: 0;
 	padding: 0;
 
@@ -155,6 +164,10 @@ input {
 	border-radius: 5px;
 }
 
+#satellite-field {
+	width: 100%;
+}
+
 #date-painel	 {
 
 	color: white;
@@ -163,7 +176,7 @@ input {
 
 	border-style: solid;
 	border-color: rgb(255, 255, 255);
-	border-width: 2px 2px 0 2px;
+	border-width: 2px 0 2px 0;
 	border-radius: 5px 5px 0 0 ;
 
 	font-family: courier; 
@@ -209,7 +222,7 @@ input {
 	height: 100%;
 	max-width: 80%;
 
-	padding: 30px;
+
 
 	display: flex;
 	flex-direction: column;
@@ -235,7 +248,7 @@ input {
 
 .map {
 
-	background-image: url(assets/images/reference.png); 
+	background-image: url(assets/images/mapmundi.png); 
 	background-size:cover; 
 	width: 800px; 
 	height: 400px;
@@ -261,10 +274,10 @@ canvas {
 	transition: all 0s;
 	
 	border-style: solid;
-	border-width: 0.5px;
+	border-width: 5px;
 	border-radius: 50%;
-	border-color: rgba(255, 255, 255, 0.932);
-	background-color: rgba(28, 27, 26, 0.703);
+	border-color: rgba(245, 243, 243, 0);
+	background-color: rgba(192, 185, 177, 0);
 
 	backdrop-filter: blur(10px);
 	box-shadow: 0.3vw 0.3vw 1vw 0.2vw rgba(229, 235, 255, 0.767);
@@ -283,7 +296,7 @@ canvas {
 	transition: all 0s;
 	
 	border-style: solid;
-	border-width: 0.5px;
+	border-width: 4px;
 	border-radius: 50%;
 	border-color: rgba(255, 255, 255, 0.932);
 	background-color: rgba(255, 255, 255, 0.252);
@@ -357,10 +370,10 @@ footer img{
 
 	position: relative;
 	justify-self: center;
-	opacity: 0.7;
-	border-color: whitesmoke;
+	opacity: 0.9;
+	/* border-color: whitesmoke;
 	border-style: solid;
-	border-width: 0.5px;
+	border-width: 0.5px; */
 
 
 }
@@ -403,10 +416,8 @@ p{
 
 .data-display {
 
-	height: 100%;
-	width: max-content;
-
-	padding: 30px;
+	height: fit-content;
+	width: 300px;
 
 	display: flex;
 	flex-wrap: no-wrap;
@@ -414,7 +425,7 @@ p{
 	justify-content: center;
 	justify-items: center;
 	align-items: flex-start;
-	gap: 10px;
+	gap: 0px;
 
 	color: white; 
 	font-family: monospace; 	
@@ -429,7 +440,19 @@ p{
 
 }
 
-.input-display, .output-display {
+.export-box {
+	width: 100%;
+	height: 100%;
+
+	padding	: 10px;
+
+	display: inline-flex;
+	justify-content: flex-end;
+	align-content: center;
+
+}
+
+.input-display {
 
 	height: 100%;
 	width: 100%;
@@ -450,10 +473,46 @@ p{
 
 	border-style: solid;
 	border-color: rgba(255, 255, 255, 0.788);
-	border-width: 0.5px;
-	border-radius: 5px;
+	border-width: 0px;
+	border-radius: 0px;
 
 	backdrop-filter: blur(20px);
+
+}
+
+.output-display {
+
+	height: 100%;
+	width: 100%;
+
+	padding: 30px;
+
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	justify-items: center;
+	align-items: flex-start;
+	gap: 10px;
+
+	color: white; 
+	font-family: monospace; 	
+	font-weight: bold;
+
+	border-style: solid;
+	border-color: rgba(255, 255, 255, 0.788);
+	border-width: 0.5px 0 0.5px 0;
+	border-radius: 0px;
+
+	backdrop-filter: blur(20px);
+
+}
+
+.parameters-display {
+
+	height: 210px;
+	overflow-y: auto;
+
 
 }
 
@@ -472,22 +531,29 @@ p{
 
 }
 
-.blue-button {
-
+.export-button {
+    
 	height: fit-content;
-    background-color: rgba(49, 45, 39, 0.324);
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+	
+    border: solid;
+    border-radius: 1px;
+	border-color: transparent;
 
+	padding: 10px;
+    
+	background-color: rgba(49, 45, 39, 0.324);
 	backdrop-filter: blur(5px);
     background-image: linear-gradient(45deg, rgba(48, 40, 40, 0.777), transparent);
     box-shadow: 0.3vw 0.3vw 1vw 0.2vw rgba(235, 172, 155, 0.329);   
 
-	align-self: flex-end;
-  }
+	cursor: pointer;
+
+	color: white;
+}
+
+.export-button:hover {
+	border-color: rgba(255, 255, 255, 0.639);
+} 
 
 label {
 	font-family: monospace; 
@@ -499,24 +565,6 @@ label {
 	cursor: pointer;
 
 }
-
-
-
-
-.particle {
-
-	background-color: orange;
-	width:1%;
-	height:2%;
-	border-radius: 50%;
-
-
-
-}
-
-
-
-
 
 .metaInfo{
 
@@ -580,9 +628,21 @@ label {
 
 	position: absolute;
 	opacity: 1;
+	padding: 0.5px;
 
-	height: 20px;
-	width:30px; 
+	/* background-color: white; */
+
+	height: fit-content;
+	width: fit-content;
+
+	border-radius: 10%;
+
+	color: rgba(255, 255, 255, 0.932);
+
+	font-size: smaller;
+	font-weight: 600;
+	text-align: center;
+	text-justify: center;
 
 }
 
@@ -673,6 +733,11 @@ label {
     opacity: 1;
 }
 
+#contribute{
+	display: inline-flex;
+	gap: 20px;
+}
+
 .team-button{
 
     background-color: transparent;
@@ -708,11 +773,11 @@ label {
 }
 
 
-#buymeacoffee-button{
+#buymeacoffee-button, #jointheteam-button{
     opacity: 0.8;
 }
 
-#buymeacoffee-button:hover{
+#buymeacoffee-button:hover, #jointheteam-button:hover{
     scale: 1.01;
     opacity: 1;
 }

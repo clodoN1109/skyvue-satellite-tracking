@@ -10,156 +10,173 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Oriya:wght@700&display=swap" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<body>
-
-	<header>
-
-		<div class ="header-grid">
-			<div class="header-box">
-				<img id="logo" src="assets/images/iss-earth-astro.png">
-				<div class="header-title">SATELLITE PATH TRACKER</div>
-			</div>
-
-			<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="60px"></a>
-
-            <!-- <div class="warning">All content here is intended only for learning purposes.</div>
-			</div> -->
-
-		</div>
-
-	</header>
-
-	<div class="interface">
+	
+	<body>
 		
-		<div class="data-display" >
-
-			<div class="input-display">
-				<div>Select a satellite:</div>
-				<div class="data-field">
-					<!-- <input id="satellite-field" value="">  -->
-					<select id="satellite-field">
-						<option value="1">ISS (International Space Station)</option>
-					  </select>
+		<video id="video-bg" autoplay muted loop src="./assets/images/bg.mp4"></video>
+		
+		<header>
+			
+			<div class ="header-grid">
+				<div class="header-box">
+					<img id="logo" src="assets/images/iss-earth-astro.png">
+					<div class="header-title">satelliteFinder</div>
 				</div>
+				
+				<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="60px"></a>
+				
+				<!-- <div class="warning">All content here is intended only for learning purposes.</div>
+				</div> -->
+				
 			</div>
-
-			<div class="output-display">
-
-				<div style="display: inline-flex; gap: 5px;">
-					<div class="fetchSign" id="sign"></div>
-					<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-size: 15px;">Fetching Data</div>
-				</div>
-	
-				<div>
-					<div>Latitude</div>
+			
+		</header>
+		
+		<div class="interface">
+			
+			<div class="data-display" >
+				
+				<div class="input-display">
+					<div>Select a satellite:</div>
 					<div class="data-field">
-						<input style="cursor: default;" id="latitude" readonly value="0"> 
-						<div>Deg</div>
+						<!-- <input id="satellite-field" value="">  -->
+						<select id="satellite-field">
+							<option value="1">ISS (International Space Station)</option>
+						</select>
 					</div>
 				</div>
-	
-				<div>
-					<div>Longitude</div>
-					<div class="data-field">
-						<input style="cursor: default;" type="text" id="longitude" readonly class="" value="0">
-						<div> Deg</div>
+				
+				<div class="output-display">
+					
+					<div style="display: inline-flex; gap: 5px;">
+						<div class="fetchSign" id="sign"></div>
+						<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-size: 15px;">Fetching Data</div>
 					</div>
-				</div>
-	
-				<div >
-					<div>Altitude</div>
-					<div class="data-field">
-						<input style="cursor: default;" type="text" id="altitude" readonly class="" value="0">	
-						<div> Km</div>
+					
+					<div class="parameters-display">
+						
+						<div>
+							<div>Latitude</div>
+							<div class="data-field">
+								<input style="cursor: default;" id="latitude" readonly value="0"> 
+								<div>Deg</div>
+							</div>
+						</div>
+						
+						<div>
+							<div>Longitude</div>
+							<div class="data-field">
+								<input style="cursor: default;" type="text" id="longitude" readonly class="" value="0">
+								<div> Deg</div>
+							</div>
+						</div>
+						
+						<div>
+							<div>Altitude</div>
+							<div class="data-field">
+								<input style="cursor: default;" type="text" id="altitude" readonly class="" value="0">	
+								<div> Km</div>
+							</div>
+						</div>
+						
+						<div>
+							<div>Velocity</div>
+							<div class="data-field">
+								<input style="cursor: default;" type="text" id="velocity" readonly class="" value="0">	
+								<div>Km/h</div>
+							</div>
+						</div>
+						
 					</div>
+					
 				</div>
-	
-				<div >
-					<div>Velocity</div>
-					<div class="data-field">
-						<input style="cursor: default;" type="text" id="velocity" readonly class="" value="0">	
-						<div>Km/h</div>
-					</div>
+				
+				<div class="export-box">
+					<button onclick="copyCoordinates()" class="export-button"><img src="./assets/images/export.png" width="25px"> export data</button>
 				</div>
-	
-				<button onclick="copyCoordinates()" class="blue-button"><img src="./assets/images/export.png" width="25px"> export data</button>	
-
+				
+				
 			</div>
-
+			
+			<div class ="map-container">
+				
+				<div id="view-options">
+					<div class="option" id="2D-option">2D</div>
+					<div class="option" id="3D-option" style="opacity: 0.6;">3D</div>
+					<div class="option" id="3D-option" style="opacity: 0.6;">GALLERY</div>
+				</div>
+				<input id="date-painel" type="text" id="time" readonly value="">
+				<div class=	"map" >
+					
+					<img class="satellite" src="assets/images/space_station.png" alt="a mundi map" lang="en">
+					<img class="user-location" src="assets/images/here.png" alt="here" lang="en">
+					<img width="20px" id="location-flag">
+					<div id="location-name"></div>
+					<canvas id="canvas"></canvas>
+					
+					
+				</div>
+				
+			</div>
+			
+			
 		</div>
-
-		<div class ="map-container">
-
-			<div id="view-options">
-				<div class="option" id="2D-option">2D</div>
-				<div class="option" id="3D-option" style="opacity: 0.6;">3D</div>
-				<div class="option" id="3D-option" style="opacity: 0.6;">GALLERY</div>
+		
+		<div class="band-container">
+			<div class="band-display">
+				<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
 			</div>
-			<input id="date-painel" type="text" id="time" readonly value="">
-			<div class=	"map" >
-
-				<img class="satellite" src="assets/images/space_station.png" alt="a mundi map" lang="en">
-				<img class="user-location" src="assets/images/here.png" alt="here" lang="en">
-				<img width="20px" id="location-flag">
-				<div id="location-name"></div>
-				<canvas id="canvas"></canvas>
-
-
-			</div>
-
 		</div>
-
-
-	</div>
-
-	<div class="band-container">
-        <div class="band-display">
-			<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
-        </div>
-    </div>
-
-	<div class="band-container">
-        <div class="band-display">
-            <a id="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-            <div class="inline-flex-container">
-                <h1 id="the-team-title">THE TEAM</h1>
-                <div style="display: inline-flex; flex-wrap: nowrap; gap: 4vh;">
-                    <div class="team-button-container"><a target="_blank" href="" target="_blank"><button class="team-button" id="dev1-button"></button></a><div class="dev-name">Clodomir Vianna</div></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-	<footer>	
-
-		<div class ="footer-grid">
-
-			<a target="_blank" href="https://clodo.me">
-				<div class="footer-box">
-
-					<div style="font-family:courier; font-size: 10px; color: white;"><div style="transition: all 0s"> by Clodo</div></div>
-	
-					<div class="box-image" ></div>
-	
-					<div style="transition: all 0s; color: white;"><div class="clodo-web-address" style="font-size: 0.8rem; transition: all 0s;">clodo.me</div></div> 
-	
+		
+		<div class="band-container">
+			<div class="band-display">
+				<div id="contribute">
+					<a id="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+					<a id="jointheteam-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
 				</div>
-			</a>
-
-			<a target="_blank" href="https://wheretheiss.at/w/developer"><img src="./assets/images/wheretheissat.png" width="200px"></a>
-
+				<div class="inline-flex-container">
+					<h1 id="the-team-title">THE TEAM</h1>
+					<div style="display: inline-flex; flex-wrap: nowrap; gap: 4vh;">
+						<div class="team-button-container"><a target="_blank" href="" target="_blank"><button class="team-button" id="dev1-button"></button></a><div class="dev-name">Clodomir Vianna</div></div>
+					</div>
+				</div>
+			</div>
 		</div>
+		
+		
+		
+		<footer>	
+			
+			<div class ="footer-grid">
+				
+				<a target="_blank" href="https://clodo.me">
+					<div class="footer-box">
+						
+						<div style="font-family:courier; font-size: 10px; color: white;"><div style="transition: all 0s">design by Clodo</div></div>
+						
+						<div class="box-image" ></div>
+						
+						<div style="transition: all 0s; color: white;"><div class="clodo-web-address" style="font-size: 0.8rem; transition: all 0s;">clodo.me</div></div> 
+						
+					</div>
+				</a>
 
-
-	</footer>
+				<a target="_blank" href="https://flagsapi.com/"><img src="https://flagsapi.com/img/logo-countryflags.png" width="200px"></a>
+				
+				<a target="_blank" href="https://wheretheiss.at/w/developer"><img src="./assets/images/wheretheissat.png" width="200px"></a>
+				
+			</div>
+			
+			
+		</footer>
+		
+		<script type="text/javascript" src="./scripts/tracking.js"></script>
+		<script type="text/javascript" src="./scripts/map.js"></script>
+		<script type="text/javascript" src="./scripts/misc.js"></script>
+		<script type="text/javascript" src="./main.js"></script>
+		
+		
+	</body>
 	
-	<script type="text/javascript" src="./scripts/tracking.js"></script>
-	<script type="text/javascript" src="./scripts/map.js"></script>
-	<script type="text/javascript" src="./scripts/misc.js"></script>
-	<script type="text/javascript" src="./main.js"></script>
-
-</body>
-</html>
+	
+	</html>

@@ -27,7 +27,7 @@ function drawPoints(object_path) {
       lat = latitude/scale_fix;
       lon = longitude/scale_fix;
       
-      ctx.fillStyle = "rgba(25, 20, 0, 1)";
+      ctx.fillStyle = "rgba(255, 255, 255, 1)";
       ctx.fillRect(lon, lat, 2, 2);
       
     });
@@ -63,7 +63,7 @@ function setNationalFlag(object_path){
     if (country_code != "??"){
       
       document.getElementById("location-name").textContent = country_code;
-      let flagURL = "https://flagsapi.com/" + country_code + "/flat/64.png";
+      let flagURL = "https://flagsapi.com/" + country_code + "/shiny/64.png";
       document.getElementById("location-flag").src = flagURL;
       
       satellite_picture_width = Number(document.getElementsByClassName("satellite")[0].width); 

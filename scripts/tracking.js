@@ -1,18 +1,16 @@
 function signalFetchingEvent(){
   
   document.getElementById("sign").style.backgroundImage = 
-  'linear-gradient(0deg, rgb(94, 94, 255), rgb(94, 94, 255))';
-  document.getElementById("fetchWarning").style.color = 'white';
-  
+  'linear-gradient(0deg, rgb(255, 255, 255), rgb(255, 255, 255))';
+
   setTimeout(() => {
     
     document.getElementById("sign").style.backgroundImage = '';
-    document.getElementById("fetchWarning").style.color = 'white';
     
   },3000);
   
 }
-
+ 
 function updateDataDisplay(current_state){
   document.getElementById("latitude").value = current_state[0];
   document.getElementById("longitude").value = current_state[1];
@@ -21,7 +19,52 @@ function updateDataDisplay(current_state){
   document.getElementById("date-painel").value = current_state[4];
 }
 
-function fetchData(iss_path){
+function drawPreviousStates(object_path, number_of_positions){
+
+  // https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892,1436029902&units=miles
+
+  function fetchRecursively(object_path, current_time, number_of_positions){
+
+    console.log("number_of_positions: " + number_of_positions);
+    
+    if (number_of_positions < 1) {
+      console.log("entrei");
+      console.log("object_path" + object_path);
+      drawPoints(object_path); 
+      updateObjectPosition(object_path);
+      setNationalFlag(object_path);
+      document.getElementsByClassName("satellite")[0].style.opacity = 1;
+      return
+    }
+  
+    fetch("https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=" + current_time)
+    .then((response) => response.json())
+    .then((data) => {
+  
+      // Signal that fetching process is happening:
+      signalFetchingEvent();
+      
+      //Unit conversion:
+      let time =  timestampToDateConversion(Number(data.timestamp));
+      
+      let current_state = [data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, time];
+      updateDataDisplay(current_state);
+      object_path.unshift(current_state);
+      drawPoints(object_path); 
+
+      setTimeout(() => {
+        fetchRecursively(object_path, Number(current_time)-100, number_of_positions-1);
+      }, 1000);
+      
+    });
+
+  }
+
+  fetchRecursively(object_path, Date.now().toString().slice(0,-3), number_of_positions);
+
+}
+
+function fetchCurrentState(object_path){
   
   // Json response object example: 
   //   {
@@ -42,18 +85,18 @@ function fetchData(iss_path){
   
   fetch("https://api.wheretheiss.at/v1/satellites/25544")
   .then((response) => response.json())
-  .then((iss) => {
+  .then((data) => {
     
     // Signal that fetching process is happening:
     signalFetchingEvent();
     
     //Unit conversion:
-    let time =  timestampToDateConversion(Number(iss.timestamp));
+    let time =  timestampToDateConversion(Number(data.timestamp));
     
-    current_state = [iss.latitude, iss.longitude, iss.altitude, iss.velocity, time];
+    let current_state = [data.latitude, data.longitude, data.altitude, data.velocity, time];
     
     updateDataDisplay(current_state);
-    iss_path.push(current_state);
+    object_path.push(current_state);
     
     
   });
@@ -78,7 +121,7 @@ function showUserLocation(){
         longitude = (Number(longitude) + 180)*(2.2222) - user_picture_width/2;
         
         document.getElementsByClassName("user-location")[0].style.transform = "translate(" + longitude + "px, " + latitude +  "px)";
-      
+        document.getElementsByClassName("user-location")[0].style.opacity = 1;
       },
       // Error callback
       (error) => {
