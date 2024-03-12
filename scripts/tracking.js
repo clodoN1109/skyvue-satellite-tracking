@@ -21,7 +21,7 @@ function updateDataDisplay(current_state){
     document.getElementById("time").value = current_state[4];
 }
 
-function fetchIssData(){
+function fetchData(iss_path){
 
     // Json response object example: 
     //   {
