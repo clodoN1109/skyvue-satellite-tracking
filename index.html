@@ -14,12 +14,11 @@
 <body>
 
 	<header>
-		
 
 		<div class ="header-grid">
 			<div class="header-box">
 				<img id="logo" src="assets/images/iss-earth-astro.png">
-				<div class="header-title">SATELLITE PATH VIEWER</div>
+				<div class="header-title">SATELLITE PATH TRACKER</div>
 			</div>
 
 			<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="60px"></a>
@@ -33,58 +32,75 @@
 
 	<div class="interface">
 		
-		<div class="data_display" >
+		<div class="data-display" >
 
-			<div style="display: inline-flex; gap: 5px;">
-				<div class="fetchSign" id="sign"></div>
-				<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-size: 15px;">Fetching Data</div>
-			</div>
-
-			<div>
-				<div>Latitude</div>
+			<div class="input-display">
+				<div>Select a satellite:</div>
 				<div class="data-field">
-					<input style="cursor: default;" id="latitude" readonly value="0"> 
-					<div>Deg</div>
+					<!-- <input id="satellite-field" value="">  -->
+					<select id="satellite-field">
+						<option value="1">ISS (International Space Station)</option>
+					  </select>
 				</div>
 			</div>
 
-			<div>
-				<div>Longitude</div>
-				<div class="data-field">
-					<input style="cursor: default;" type="text" id="longitude" readonly class="" value="0">
-					<div> Deg</div>
+			<div class="output-display">
+
+				<div style="display: inline-flex; gap: 5px;">
+					<div class="fetchSign" id="sign"></div>
+					<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-size: 15px;">Fetching Data</div>
 				</div>
-			</div>
-
-			<div >
-				<div>Altitude</div>
-				<div class="data-field">
-					<input style="cursor: default;" type="text" id="altitude" readonly class="" value="0">	
-					<div> Km</div>
+	
+				<div>
+					<div>Latitude</div>
+					<div class="data-field">
+						<input style="cursor: default;" id="latitude" readonly value="0"> 
+						<div>Deg</div>
+					</div>
 				</div>
-			</div>
-
-			<div >
-				<div>Velocity</div>
-				<div class="data-field">
-					<input style="cursor: default;" type="text" id="velocity" readonly class="" value="0">	
-					<div>Km/h</div>
+	
+				<div>
+					<div>Longitude</div>
+					<div class="data-field">
+						<input style="cursor: default;" type="text" id="longitude" readonly class="" value="0">
+						<div> Deg</div>
+					</div>
 				</div>
+	
+				<div >
+					<div>Altitude</div>
+					<div class="data-field">
+						<input style="cursor: default;" type="text" id="altitude" readonly class="" value="0">	
+						<div> Km</div>
+					</div>
+				</div>
+	
+				<div >
+					<div>Velocity</div>
+					<div class="data-field">
+						<input style="cursor: default;" type="text" id="velocity" readonly class="" value="0">	
+						<div>Km/h</div>
+					</div>
+				</div>
+	
+				<button onclick="copyCoordinates()" class="blue-button"><img src="./assets/images/export.png" width="25px"> export data</button>	
+
 			</div>
-
-
-			<button onclick="copyCoordinates()" class="blue-button">export data</button>
-
-			
 
 		</div>
 
-		<div class ="map_container">
+		<div class ="map-container">
 
-			<input style="font-family: courier; cursor: default; text-align: center;" type="text" id="time" readonly class="" value="">
+			<div id="view-options">
+				<div class="option" id="2D-option">2D</div>
+				<div class="option" id="3D-option" style="opacity: 0.6;">3D</div>
+				<div class="option" id="3D-option" style="opacity: 0.6;">GALLERY</div>
+			</div>
+			<input id="date-painel" type="text" id="time" readonly value="">
 			<div class=	"map" >
 
 				<img class="satellite" src="assets/images/space_station.png" alt="a mundi map" lang="en">
+				<img class="user-location" src="assets/images/here.png" alt="here" lang="en">
 				<img width="20px" id="location-flag">
 				<div id="location-name"></div>
 				<canvas id="canvas"></canvas>

@@ -3,8 +3,6 @@ function drawPoints(object_path) {
   if(object_path.length === 0){
     return
   }
-  
-  document.getElementsByClassName("satellite")[0].style.opacity = 1;
 
   const ctx = canvas.getContext("2d");
   if (ctx) {
@@ -29,7 +27,7 @@ function drawPoints(object_path) {
       lat = latitude/scale_fix;
       lon = longitude/scale_fix;
       
-      ctx.fillStyle = "rgba(255, 165, 0, 1)";
+      ctx.fillStyle = "rgba(25, 20, 0, 1)";
       ctx.fillRect(lon, lat, 2, 2);
       
     });
@@ -61,7 +59,7 @@ function setNationalFlag(object_path){
   .then((iss) => {
     
     let country_code = iss.country_code;
-    country_code = 'US';
+    // country_code = 'US';
     if (country_code != "??"){
       
       document.getElementById("location-name").textContent = country_code;

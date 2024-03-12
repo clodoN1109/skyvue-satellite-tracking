@@ -36,3 +36,10 @@ function updateWikiInfo(){
   }
   
   function saveas(){}
+
+  const selectElement = document.getElementById("mySelect");
+  const selectedValue = selectElement.value;
+  const selectedText = selectElement.options[selectElement.selectedIndex].text;
+
+  console.log(`Selected value: ${selectedValue}`);
+  console.log(`Selected text: ${selectedText}`);
