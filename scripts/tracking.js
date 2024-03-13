@@ -2,15 +2,15 @@ function signalFetchingEvent(){
   
   document.getElementById("sign").style.backgroundImage = 
   'linear-gradient(0deg, rgb(255, 255, 255), rgb(255, 255, 255))';
-
+  
   setTimeout(() => {
     
     document.getElementById("sign").style.backgroundImage = '';
     
-  },3000);
+  },1500);
   
 }
- 
+
 function updateDataDisplay(current_state){
   document.getElementById("latitude").value = current_state[0];
   document.getElementById("longitude").value = current_state[1];
@@ -20,27 +20,22 @@ function updateDataDisplay(current_state){
 }
 
 function drawPreviousStates(object_path, number_of_positions){
-
+  
   // https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892,1436029902&units=miles
-
+  
   function fetchRecursively(object_path, current_time, number_of_positions){
-
-    console.log("number_of_positions: " + number_of_positions);
     
     if (number_of_positions < 1) {
-      console.log("entrei");
-      console.log("object_path" + object_path);
-      drawPoints(object_path); 
-      updateObjectPosition(object_path);
-      setNationalFlag(object_path);
-      document.getElementsByClassName("satellite")[0].style.opacity = 1;
+      updateMap(object_path); 
+      document.getElementById("satellite").style.opacity = 1;
+      document.getElementById("visibility-radius").style.opacity = 1;
       return
     }
-  
+    
     fetch("https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=" + current_time)
     .then((response) => response.json())
     .then((data) => {
-  
+      
       // Signal that fetching process is happening:
       signalFetchingEvent();
       
@@ -49,19 +44,20 @@ function drawPreviousStates(object_path, number_of_positions){
       
       let current_state = [data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, time];
       updateDataDisplay(current_state);
-      object_path.unshift(current_state);
-      drawPoints(object_path); 
-
+      object_path.push(current_state);
+      updateMap(object_path); 
+      
       setTimeout(() => {
-        fetchRecursively(object_path, Number(current_time)-100, number_of_positions-1);
+        fetchRecursively(object_path, Number(current_time)+100, number_of_positions-1);
       }, 1000);
       
     });
-
+    
   }
-
-  fetchRecursively(object_path, Date.now().toString().slice(0,-3), number_of_positions);
-
+  
+  let current_time = Date.now().toString().slice(0,-3);
+  fetchRecursively(object_path, current_time - (number_of_positions-1)*100, number_of_positions);
+  
 }
 
 function fetchCurrentState(object_path){
@@ -103,7 +99,7 @@ function fetchCurrentState(object_path){
   
 }
 
-function showUserLocation(){
+function showUserLocation(user_location){
   
   // Check if geolocation is supported by the browser
   if ("geolocation" in navigator) {
@@ -114,14 +110,38 @@ function showUserLocation(){
         // Get the user's latitude and longitude coordinates
         let latitude = position.coords.latitude;
         let longitude = position.coords.longitude;
-
-        //Unit conversions, scaling and positional adjustments:
-        user_picture_width = Number(document.getElementsByClassName("user-location")[0].width); 
-        latitude = (Number(latitude) - 90)*(-2.2222) - user_picture_width/2;
-        longitude = (Number(longitude) + 180)*(2.2222) - user_picture_width/2;
         
-        document.getElementsByClassName("user-location")[0].style.transform = "translate(" + longitude + "px, " + latitude +  "px)";
-        document.getElementsByClassName("user-location")[0].style.opacity = 1;
+        user_location[0] = latitude;
+        user_location[1] = longitude;
+        
+        //Unit conversions, scaling and positional adjustments:
+        user_picture_width = Number(document.getElementById("user-location").offsetWidth); 
+        userY = (Number(latitude) - 90)*(-2.2222) - user_picture_width/2;
+        userX = (Number(longitude) + 180)*(2.2222) - user_picture_width/2;
+        
+        document.getElementById("user-location").style.transform = "translate(" + userX + "px, " + userY +  "px)";
+        document.getElementById("user-location").style.opacity = 1;
+
+        fetch("https://api.wheretheiss.at/v1/coordinates/" + user_location[0] + "," + user_location[1])
+        .then((response) => response.json())
+        .then((iss) => {
+          
+          let country_code = iss.country_code;
+          // country_code = 'BR';
+          
+          document.getElementById("user-location-name").textContent = country_code;
+          let flagURL = "https://flagsapi.com/" + country_code + "/shiny/64.png";
+          document.getElementById("user-location-flag").src = flagURL;
+          
+          user_picture_width = Number(document.getElementById("user-location").offsetWidth);
+          positionY = (Number(latitude) - 90)*(-2.2222);
+          positionX = (Number(longitude) + 180)*(2.2222);
+          
+          document.getElementById("user-location-flag").style.transform = "translate(" + (positionX - user_picture_width/2 -8) + "px, " + (positionY - user_picture_width/2 - 10) +  "px)";
+          document.getElementById("user-location-name").style.transform = "translate(" + (positionX + 10) + "px, " + (positionY + 10) +  "px)";
+          
+        });
+
       },
       // Error callback
       (error) => {
@@ -130,9 +150,8 @@ function showUserLocation(){
       }
       );
   } else {
-    // Geolocation is not supported by the browser
-    console.error("Geolocation is not supported by this browser.");
+      // Geolocation is not supported by the browser
+      console.error("Geolocation is not supported by this browser.");
   }
-  
     
 }

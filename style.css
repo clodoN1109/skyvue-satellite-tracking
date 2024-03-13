@@ -79,7 +79,6 @@ header {
 	font-size: 60px; 
 	color: rgb(255, 255, 255);
 
-
 	border-width: 0px;
 	border-radius: 8px; 
 	border-style: solid;
@@ -253,6 +252,8 @@ input {
 	width: 800px; 
 	height: 400px;
 
+	cursor: crosshair;
+
 }
 
 
@@ -264,14 +265,12 @@ canvas {
 
 }
 	
-.satellite {
+#satellite {
 
 	position: absolute;
 
 	width:50px;
 	height:50px;
-
-	transition: all 0s;
 	
 	border-style: solid;
 	border-width: 5px;
@@ -280,13 +279,28 @@ canvas {
 	background-color: rgba(192, 185, 177, 0);
 
 	backdrop-filter: blur(10px);
-	box-shadow: 0.3vw 0.3vw 1vw 0.2vw rgba(229, 235, 255, 0.767);
 
 	opacity: 0;
 
+	transition: all 0s;
+
 }
 
-.user-location {
+#visibility-radius {
+	position: absolute;
+	width: 150px;
+	height: 150px;	
+
+	border-style: dashed;
+	border-width: 2px;
+	border-radius: 50%;
+	border-color: rgba(243, 231, 231, 0.824);
+	background-color: rgba(192, 185, 177, 0);
+
+	opacity: 0;
+}
+
+#user-location {
 
 	position: absolute;
 
@@ -295,14 +309,13 @@ canvas {
 
 	transition: all 0s;
 	
-	border-style: solid;
-	border-width: 4px;
+	border-style:dotted;
+	border-width: 3px;
 	border-radius: 50%;
-	border-color: rgba(255, 255, 255, 0.932);
-	background-color: rgba(255, 255, 255, 0.252);
+	border-color: rgba(255, 255, 255, 0.818);
+	/* background-color: rgba(255, 255, 255, 0.252); */
 
 	backdrop-filter: blur(10px);
-	box-shadow: 0.3vw 0.3vw 1vw 0.2vw rgba(229, 235, 255, 0.767);
 
 	opacity: 0;
 
@@ -606,25 +619,29 @@ label {
 	content: "";
 	width: 15px;
 	height: 15px;
+	margin-right: 4px;
 
 	border-style: solid;
 	border-color: rgb(255, 255, 255);
 	border-width: 1px;
 	border-radius: 50%;
+
+	align-self: center;
+	justify-self: center;
+
 	/*background-image: linear-gradient(0deg, rgba(0, 215, 0, 1.0), rgba(0, 180, 0, 1.0));
 */
 
 }
 
-#location-flag {
+#satellite-location-flag, #user-location-flag {
 
 	position: absolute;
 	opacity: 1;
 
-
 }
 
-#location-name {
+#satellite-location-name, #user-location-name {
 
 	position: absolute;
 	opacity: 1;
@@ -637,7 +654,7 @@ label {
 
 	border-radius: 10%;
 
-	color: rgba(255, 255, 255, 0.932);
+	color: rgb(255, 255, 255);
 
 	font-size: smaller;
 	font-weight: 600;

@@ -14,12 +14,9 @@ const interval_Wiki = setInterval(updateWikiInfo, 10000);
 const interval_ISS = setInterval(() => {
 
     fetchCurrentState(object_path);  
-    drawPoints(object_path); 
-    updateObjectPosition(object_path);
-    setNationalFlag(object_path);
-    document.getElementsByClassName("satellite")[0].style.opacity = 1;
+    updateMap(object_path); 
 
-}, 60000);
+}, 100000);
 
 
  

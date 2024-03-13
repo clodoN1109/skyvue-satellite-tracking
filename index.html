@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>ISS Path Viewer</title>
-	<link rel="icon" href="assets/images/satellite.ico">
+	<link rel="icon" href="assets/images/logo.png">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,13 +13,13 @@
 	
 	<body>
 		
-		<video id="video-bg" autoplay muted loop src="./assets/images/bg.mp4"></video>
+		<video id="video-bg" muted loop src="./assets/images/bg.mp4"></video>
 		
 		<header>
 			
 			<div class ="header-grid">
 				<div class="header-box">
-					<img id="logo" src="assets/images/iss-earth-astro.png">
+					<img id="logo" src="assets/images/logo.png">
 					<div class="header-title">satelliteFinder</div>
 				</div>
 				
@@ -50,7 +50,7 @@
 					
 					<div style="display: inline-flex; gap: 5px;">
 						<div class="fetchSign" id="sign"></div>
-						<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-size: 15px;">Fetching Data</div>
+						<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-size: 15px; text-align: center; text-justify: center;">Collecting Data</div>
 					</div>
 					
 					<div class="parameters-display">
@@ -101,17 +101,23 @@
 			<div class ="map-container">
 				
 				<div id="view-options">
+					<div class="option" id="specs-option" style="opacity: 0.6;">SPECS</div>
 					<div class="option" id="2D-option">2D</div>
 					<div class="option" id="3D-option" style="opacity: 0.6;">3D</div>
-					<div class="option" id="3D-option" style="opacity: 0.6;">GALLERY</div>
+					<div class="option" id="altitude-option" style="opacity: 0.6;">ALTITUDE</div>
+					<div class="option" id="statistics-option" style="opacity: 0.6;">STATISTICS</div>
+					<div class="option" id="statistics-option" style="opacity: 0.6;">FORECAST</div>
 				</div>
 				<input id="date-painel" type="text" id="time" readonly value="">
 				<div class=	"map" >
 					
-					<img class="satellite" src="assets/images/space_station.png" alt="a mundi map" lang="en">
-					<img class="user-location" src="assets/images/here.png" alt="here" lang="en">
-					<img width="20px" id="location-flag">
-					<div id="location-name"></div>
+					<img id="satellite" src="assets/images/space_station.png" alt="a mundi map" lang="en">
+					<div id="visibility-radius"></div>
+					<img id="user-location" src="assets/images/here.png" alt="here" lang="en">
+					<img width="20px" id="user-location-flag">
+					<img width="20px" id="satellite-location-flag">
+					<div id="satellite-location-name"></div>
+					<div id="user-location-name"></div>
 					<canvas id="canvas"></canvas>
 					
 					
