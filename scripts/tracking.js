@@ -19,11 +19,11 @@ function updateDataDisplay(current_state){
   document.getElementById("date-painel").value = current_state[4];
 }
 
-function drawPreviousStates(object_path, number_of_positions){
+function drawPreviousStates(object_path, number_of_positions, query_rate){
   
   // https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892,1436029902&units=miles
   
-  function fetchRecursively(object_path, current_time, number_of_positions){
+  function fetchRecursively(object_path, current_time, number_of_positions, query_rate){
     
     if (number_of_positions < 1) {
       updateMap(object_path); 
@@ -49,14 +49,14 @@ function drawPreviousStates(object_path, number_of_positions){
       
       setTimeout(() => {
         fetchRecursively(object_path, Number(current_time)+100, number_of_positions-1);
-      }, 1000);
+      }, query_rate);
       
     });
     
   }
   
   let current_time = Date.now().toString().slice(0,-3);
-  fetchRecursively(object_path, current_time - (number_of_positions-1)*100, number_of_positions);
+  fetchRecursively(object_path, current_time - (number_of_positions-1)*100, number_of_positions, query_rate);
   
 }
 

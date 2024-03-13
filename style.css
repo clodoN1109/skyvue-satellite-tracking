@@ -190,6 +190,11 @@ input {
 	width: 100%;
 
 	display: inline-flex;
+	align-items: center;
+	align-content: center;
+	justify-items: center;
+	justify-content: center;
+
 	flex-wrap: nowrap;
 
 }
@@ -214,6 +219,82 @@ input {
 	cursor: pointer;
 	text-align: center;
 
+}
+
+
+#view-labels {
+
+	height: fit-content;
+	width: 100%;
+
+	display: inline-flex;
+	align-items: center;
+	align-content: center;
+	justify-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+
+}
+
+.label {
+
+	width: 100%;
+
+	padding: 0;
+
+	color: white;
+	background-color: rgba(58, 50, 50, 0.743);
+	
+	width: fit-content;
+	margin: 10px;
+
+	border-style: solid;
+	border-color: rgba(255, 255, 255, 0.663);
+	border-width: 1px;
+	border-radius: 5px;
+
+	display: inline-flex;
+	align-items: center;
+	align-content: center;
+	justify-items: center;
+	justify-content: center;
+	gap: 0;
+
+	font-family: courier; 
+	cursor: pointer;
+	text-align: center;
+
+}
+
+.label-img {
+	
+	height: 30px;
+
+	padding: 2px;
+
+	border-style: solid;
+	border-width: 0 1px 0 0;
+	border-color: rgba(255, 255, 255, 0.382);
+
+	display: inline-flex;
+	align-items: center;
+	align-content: center;
+	justify-items: center;
+	justify-content: center;
+
+}
+
+.label-text {
+
+	padding: 0 5px 0 5px;
+
+	display: inline-flex;
+	align-items: center;
+	align-content: center;
+	justify-items: center;
+	justify-content: center;
+
+	font-size: 10px;
 }
 
 .map-container {

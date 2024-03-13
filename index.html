@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ISS Path Viewer</title>
-	<link rel="icon" href="assets/images/logo.png">
+	<title>satelliteFinder</title>
+	<link rel="icon" href="assets/images/space_station.png">
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 	
 	<body>
 		
-		<video id="video-bg" muted loop src="./assets/images/bg.mp4"></video>
+		<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
 		
 		<header>
 			
@@ -101,17 +101,17 @@
 			<div class ="map-container">
 				
 				<div id="view-options">
-					<div class="option" id="specs-option" style="opacity: 0.6;">SPECS</div>
+					<div class="option" id="specs-option" style="opacity: 0.2;">SPECIFICATION</div>
 					<div class="option" id="2D-option">2D</div>
-					<div class="option" id="3D-option" style="opacity: 0.6;">3D</div>
-					<div class="option" id="altitude-option" style="opacity: 0.6;">ALTITUDE</div>
-					<div class="option" id="statistics-option" style="opacity: 0.6;">STATISTICS</div>
-					<div class="option" id="statistics-option" style="opacity: 0.6;">FORECAST</div>
+					<div class="option" id="3D-option" style="opacity: 0.2;">3D</div>
+					<div class="option" id="altitude-option" style="opacity: 0.2;">ALTITUDE</div>
+					<div class="option" id="statistics-option" style="opacity: 0.2;">STATISTICS</div>
+					<div class="option" id="statistics-option" style="opacity: 0.2;">FORECAST</div>
 				</div>
 				<input id="date-painel" type="text" id="time" readonly value="">
 				<div class=	"map" >
 					
-					<img id="satellite" src="assets/images/space_station.png" alt="a mundi map" lang="en">
+					<img id="satellite" src="assets/images/satellite.png" alt="a mundi map" lang="en">
 					<div id="visibility-radius"></div>
 					<img id="user-location" src="assets/images/here.png" alt="here" lang="en">
 					<img width="20px" id="user-location-flag">
@@ -120,8 +120,30 @@
 					<div id="user-location-name"></div>
 					<canvas id="canvas"></canvas>
 					
-					
 				</div>
+				<div id="view-labels">
+					<div class="label" id="user-label" style="opacity: 0.9;">
+						<img class="label-img" src="./assets/images/here.png">
+						<div class="label-text">you're here</div>
+					</div>
+					<div class="label" id="satellite-label" style="opacity: 0.9;">
+						<img class="label-img" src="./assets/images/satellite.png">
+						<div class="label-text">sattelite</div>
+					</div>
+					<div class="label" id="dashed-circle-label" style="opacity: 0.9;">
+						<img class="label-img" src="./assets/images/dashed_circle.png">
+						<div class="label-text">visibility</div>
+					</div>
+					<div class="label" id="user-label" style="opacity: 0.9;">
+						<img class="label-img" src="./assets/images/dotted_line.png">
+						<div class="label-text">traveled path</div>
+					</div>
+					<div class="label" id="user-label" style="opacity: 0.9;">
+						<img class="label-img" src="./assets/images/continuous_line.png">
+						<div class="label-text">predicted path</div>
+					</div>
+				</div>
+
 				
 			</div>
 			

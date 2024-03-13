@@ -1,14 +1,10 @@
-// State history of object.
+// Storage for the object's successive states.
 const object_path = [];
 const user_location = [];
 
-setTimeout(() => {
-
-    showUserLocation(user_location);
-    drawPreviousStates(object_path, 10);
+showUserLocation(user_location);
+drawPreviousStates(object_path, 30, 100);
    
-}, 1000);
-
 const interval_Wiki = setInterval(updateWikiInfo, 10000);
 
 const interval_ISS = setInterval(() => {
