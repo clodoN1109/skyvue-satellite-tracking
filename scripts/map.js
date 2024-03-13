@@ -1,7 +1,30 @@
-function updateMap(object_path) {
+// updateMap([path_1, line_detail_level_1], ...)
+function updateMap(paths) {
 
-  if(object_path.length === 0){
-    return
+  function drawArray(path, line_detail_level){
+   
+    if(path.length === 0){
+      return
+    }
+
+    for (let index = path.length - 1; index > 0; index -= line_detail_level) {
+    
+      latitude = path[index][0];
+      longitude = path[index][1];
+      
+      //Unit conversions:
+      latitude = (Number(latitude) - 90)*(-2.2222);
+      longitude = (Number(longitude) + 180)*(2.2222);
+      
+      scale_fix = 2.66;
+      
+      lat = latitude/scale_fix;
+      lon = longitude/scale_fix;
+      
+      ctx.fillStyle = "rgba(255, 255, 255, 1)";
+      ctx.fillRect(lon, lat, 2, 2);
+    }
+
   }
 
   const ctx = canvas.getContext("2d");
@@ -9,33 +32,11 @@ function updateMap(object_path) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    key = 0;
-    object_path.forEach(element => {
-
-      let latitude = element[0];
-      let longitude = element[1];
-      
-      //Unit conversions:
-      latitude = (Number(latitude) - 90)*(-2.2222);
-      longitude = (Number(longitude) + 180)*(2.2222);
-      
-      const canvas = document.getElementById("canvas");
-      
-      
-      let scale_fix = 2.66;
-      
-      lat = latitude/scale_fix;
-      lon = longitude/scale_fix;
-      
-      ctx.fillStyle = "rgba(255, 255, 255, 1)";
-      ctx.fillRect(lon, lat, 2, 2);
-      
+    paths.forEach(path => {
+      drawArray(path[0], path[1]);
     });
+    
   }
-
-  updateObjectPosition(object_path);
-  setNationalFlag(object_path);
-
 }
 
 function updateObjectPosition(object_path){
@@ -57,7 +58,7 @@ function updateObjectPosition(object_path){
 
 }
 
-function setNationalFlag(object_path){
+function updateNationalFlagPosition(object_path){
   
   latitude = object_path[object_path.length-1][0];
   longitude = object_path[object_path.length-1][1];
@@ -67,7 +68,7 @@ function setNationalFlag(object_path){
   .then((iss) => {
     
     let country_code = iss.country_code;
-    // country_code = 'BR';
+    // country_code = 'BR';   
     if (country_code != "??"){
       
       document.getElementById("satellite-location-name").textContent = country_code;

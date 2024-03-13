@@ -13,7 +13,7 @@
 	
 	<body>
 		
-		<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
+		<video id="video-bg" muted loop src="./assets/images/bg.mp4"></video>
 		
 		<header>
 			
@@ -23,7 +23,7 @@
 					<div class="header-title">satelliteFinder</div>
 				</div>
 				
-				<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="60px"></a>
+				<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="45px"></a>
 				
 				<!-- <div class="warning">All content here is intended only for learning purposes.</div>
 				</div> -->
@@ -34,7 +34,7 @@
 		
 		<div class="interface">
 			
-			<div class="data-display" >
+			<div id="data-display" >
 				
 				<div class="input-display">
 					<div>Select a satellite:</div>
@@ -98,15 +98,15 @@
 				
 			</div>
 			
-			<div class ="map-container">
+			<div id ="map-container">
 				
 				<div id="view-options">
-					<div class="option" id="specs-option" style="opacity: 0.2;">SPECIFICATION</div>
-					<div class="option" id="2D-option">2D</div>
-					<div class="option" id="3D-option" style="opacity: 0.2;">3D</div>
-					<div class="option" id="altitude-option" style="opacity: 0.2;">ALTITUDE</div>
-					<div class="option" id="statistics-option" style="opacity: 0.2;">STATISTICS</div>
-					<div class="option" id="statistics-option" style="opacity: 0.2;">FORECAST</div>
+					<div onclick="{selectOption(event)}" class="option" id="specs-option">SPECIFICATION</div>
+					<div onclick="{selectOption(event)}" class="option" id="2D-option">2D</div>
+					<div onclick="{selectOption(event)}" class="option" id="3D-option">3D</div>
+					<div onclick="{selectOption(event)}" class="option" id="altitude-option">ALTITUDE</div>
+					<div onclick="{selectOption(event)}" class="option" id="statistics-option">STATISTICS</div>
+					<div onclick="{selectOption(event)}" class="option" id="statistics-option">FORECAST</div>
 				</div>
 				<input id="date-painel" type="text" id="time" readonly value="">
 				<div class=	"map" >
@@ -143,7 +143,7 @@
 						<div class="label-text">predicted path</div>
 					</div>
 				</div>
-
+				
 				
 			</div>
 			
@@ -188,7 +188,7 @@
 						
 					</div>
 				</a>
-
+				
 				<a target="_blank" href="https://flagsapi.com/"><img src="https://flagsapi.com/img/logo-countryflags.png" width="200px"></a>
 				
 				<a target="_blank" href="https://wheretheiss.at/w/developer"><img src="./assets/images/wheretheissat.png" width="200px"></a>
@@ -201,10 +201,11 @@
 		<script type="text/javascript" src="./scripts/tracking.js"></script>
 		<script type="text/javascript" src="./scripts/map.js"></script>
 		<script type="text/javascript" src="./scripts/misc.js"></script>
+		<script type="text/javascript" src="./scripts/interface.js"></script>
 		<script type="text/javascript" src="./main.js"></script>
 		
 		
 	</body>
 	
 	
-	</html>
+</html>

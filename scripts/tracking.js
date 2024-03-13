@@ -7,7 +7,7 @@ function signalFetchingEvent(){
     
     document.getElementById("sign").style.backgroundImage = '';
     
-  },1500);
+  }, 600);
   
 }
 
@@ -19,14 +19,16 @@ function updateDataDisplay(current_state){
   document.getElementById("date-painel").value = current_state[4];
 }
 
-function drawPreviousStates(object_path, number_of_positions, query_rate){
+function fetchPreviousStates(object_previous_path, number_of_positions, query_rate){
   
   // https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892,1436029902&units=miles
   
-  function fetchRecursively(object_path, current_time, number_of_positions, query_rate){
+  function fetchRecursively(object_previous_path, current_time, number_of_positions, query_rate){
     
     if (number_of_positions < 1) {
-      updateMap(object_path); 
+      updateMap([[object_previous_path, 1]]);
+      updateObjectPosition(object_previous_path);
+      updateNationalFlagPosition(object_previous_path); 
       document.getElementById("satellite").style.opacity = 1;
       document.getElementById("visibility-radius").style.opacity = 1;
       return
@@ -43,12 +45,14 @@ function drawPreviousStates(object_path, number_of_positions, query_rate){
       let time =  timestampToDateConversion(Number(data.timestamp));
       
       let current_state = [data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, time];
+      object_previous_path.push(current_state);
       updateDataDisplay(current_state);
-      object_path.push(current_state);
-      updateMap(object_path); 
+      updateMap([[object_previous_path, 1]]);
+      updateObjectPosition(object_previous_path);
+      updateNationalFlagPosition(object_previous_path); 
       
       setTimeout(() => {
-        fetchRecursively(object_path, Number(current_time)+100, number_of_positions-1);
+        fetchRecursively(object_previous_path, Number(current_time)+100, number_of_positions-1, query_rate);
       }, query_rate);
       
     });
@@ -56,7 +60,7 @@ function drawPreviousStates(object_path, number_of_positions, query_rate){
   }
   
   let current_time = Date.now().toString().slice(0,-3);
-  fetchRecursively(object_path, current_time - (number_of_positions-1)*100, number_of_positions, query_rate);
+  fetchRecursively(object_previous_path, current_time - (number_of_positions-1)*100, number_of_positions, query_rate);
   
 }
 
