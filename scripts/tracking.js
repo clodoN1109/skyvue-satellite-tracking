@@ -1,17 +1,3 @@
-function activityLogging(activityLog){
-
-  document.getElementById("log-loader").style.borderTopColor = "#ffffff";
-  document.getElementById("log").textContent = activityLog;
-  
-  setTimeout(() => {
-
-    document.getElementById("log-loader").style.borderTopColor = "#f3f3f3a0";
-    document.getElementById("log").textContent = "";
-    
-  }, 1000);
-  
-}
-
 function updateDataDisplay(current_state){
   document.getElementById("latitude").value = current_state[0];
   document.getElementById("longitude").value = current_state[1];
@@ -45,7 +31,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
     .then((data) => {
       
       // Signal that fetching process is happening:
-      activityLogging("tracing recent trajectory");
+      activityLogging("tracing recent locations");
       
       //Unit conversion:
       let time =  timestampToDateConversion(Number(data[0].timestamp));
@@ -94,7 +80,7 @@ function fetchCurrentState(object_path){
   .then((data) => {
 
     // Signal that fetching process is happening:
-    activityLogging("collecting current state");
+    activityLogging("updating parameters");
     
     //Unit conversion:
     let time =  timestampToDateConversion(Number(data.timestamp));

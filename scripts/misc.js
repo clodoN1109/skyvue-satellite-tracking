@@ -52,3 +52,25 @@ function makeSameHeightByID(elementA_id, elementB_id){
 // window.addEventListener('load', function() {
 //   document.querySelector('.loader').style.display = 'none';
 // });
+
+function activityLogging(activityLog){
+
+  document.getElementById("log").textContent = activityLog;
+  document.getElementById("log").style.transition = "all 0s";
+  document.getElementById("log").style.opacity = 1;
+
+  document.getElementById("log-loader").style.borderTopColor = "#ffffff";
+  document.getElementById("log-loader").style.animation = "spin 0.1s linear infinite";
+ 
+  
+  setTimeout(() => {
+
+    document.getElementById("log-loader").style.borderTopColor = "#f3f3f3a0";
+    document.getElementById("log-loader").style.animation = "spin 0.1s linear infinite";
+    
+    document.getElementById("log").style.transition = "all 2s";
+    document.getElementById("log").style.opacity = 0;
+    
+  }, 1000);
+  
+}

@@ -34,11 +34,16 @@
 		</header>
 		
 		<div class="interface">
-			
+
 			<div id="data-display" >
+
+				<div id="log-box" >
+					<div class="loader" id="log-loader"></div>
+					<div id="log" >stand by</div>
+				</div>
 				
 				<div class="input-display">
-					<div>Select a satellite:</div>
+					<div>Satellite selection:</div>
 					<div class="data-field">
 						<!-- <input id="satellite-field" value="">  -->
 						<select id="satellite-field">
@@ -49,18 +54,13 @@
 				
 				<div class="output-display">
 					
-					<div id="log-box" >
-						<div class="loader" id="log-loader"></div>
-						<div id="log" >stand by</div>
-					</div>
-					
 					<div class="parameters-display">
 						
 						<div>
 							<div>Latitude</div>
 							<div class="data-field">
 								<input style="cursor: default;" id="latitude" readonly value="0"> 
-								<div class="units">Deg</div>
+								<div class="units">deg</div>
 							</div>
 						</div>
 						
@@ -68,7 +68,7 @@
 							<div>Longitude</div>
 							<div class="data-field">
 								<input style="cursor: default;" type="text" id="longitude" readonly class="" value="0">
-								<div class="units">Deg</div>
+								<div class="units">deg</div>
 							</div>
 						</div>
 						
@@ -181,7 +181,7 @@
 		
 		<div class="band-container">
 			<div class="band-display">
-				<div style="display: flex; flex-direction: column;" >
+				<div style="width: 100%; display: flex; flex-direction: column;" >
 					<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
 					<div style="width: 100%; display: flex; justify-content: center;">
 						<div class="loader" id="wiki-loader"></div>
@@ -245,15 +245,13 @@
 				
 			</div>
 			
-			
 		</footer>
 		
 		<script type="text/javascript" src="./scripts/tracking.js"></script>
 		<script type="text/javascript" src="./scripts/map.js"></script>
 		<script type="text/javascript" src="./scripts/misc.js"></script>
 		<script type="text/javascript" src="./scripts/interface.js"></script>
-		<script type="text/javascript" src="./main.js"></script>
-		
+		<!-- <script type="text/javascript" src="./main.js"></script> -->
 		
 	</body>
 	
