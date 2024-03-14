@@ -48,7 +48,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
       activityLogging("tracing recent trajectory");
       
       //Unit conversion:
-      let time =  timestampToDateConversion(Number(data.timestamp));
+      let time =  timestampToDateConversion(Number(data[0].timestamp));
       
       let current_state = [data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, time, data[0].solar_lat, data[0].solar_lon];
       object_previous_path.push(current_state);
@@ -92,14 +92,14 @@ function fetchCurrentState(object_path){
   fetch("https://api.wheretheiss.at/v1/satellites/25544")
   .then((response) => response.json())
   .then((data) => {
-    
+
     // Signal that fetching process is happening:
     activityLogging("collecting current state");
     
     //Unit conversion:
     let time =  timestampToDateConversion(Number(data.timestamp));
     
-    let current_state = [data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, time, data[0].solar_lat, data[0].solar_lon];
+    let current_state = [data.latitude, data.longitude, data.altitude, data.velocity, time, data.solar_lat, data.solar_lon];
     
     updateDataDisplay(current_state);
     object_path.push(current_state);
