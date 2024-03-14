@@ -1,13 +1,14 @@
-function signalFetchingEvent(){
-  
-  document.getElementById("sign").style.backgroundImage = 
-  'linear-gradient(0deg, rgb(255, 255, 255), rgb(255, 255, 255))';
+function activityLogging(activityLog){
+
+  document.getElementById("log-loader").style.borderTopColor = "#ffffff";
+  document.getElementById("log").textContent = activityLog;
   
   setTimeout(() => {
+
+    document.getElementById("log-loader").style.borderTopColor = "#f3f3f3a0";
+    document.getElementById("log").textContent = "";
     
-    document.getElementById("sign").style.backgroundImage = '';
-    
-  }, 600);
+  }, 1000);
   
 }
 
@@ -17,6 +18,9 @@ function updateDataDisplay(current_state){
   document.getElementById("altitude").value = current_state[2];
   document.getElementById("velocity").value = current_state[3];
   document.getElementById("date-painel").value = current_state[4];
+  document.getElementById("solar-latitude").value = current_state[5];
+  document.getElementById("solar-longitude").value = current_state[6];
+
 }
 
 function fetchPreviousStates(object_previous_path, number_of_positions, query_rate){
@@ -31,6 +35,8 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
       updateNationalFlagPosition(object_previous_path); 
       document.getElementById("satellite").style.opacity = 1;
       document.getElementById("visibility-radius").style.opacity = 1;
+      document.getElementById("satellite-location-flag").style.opacity = 1;
+      document.getElementById("satellite-location-name").style.opacity = 1;
       return
     }
     
@@ -39,12 +45,12 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
     .then((data) => {
       
       // Signal that fetching process is happening:
-      signalFetchingEvent();
+      activityLogging("tracing recent trajectory");
       
       //Unit conversion:
       let time =  timestampToDateConversion(Number(data.timestamp));
       
-      let current_state = [data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, time];
+      let current_state = [data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, time, data[0].solar_lat, data[0].solar_lon];
       object_previous_path.push(current_state);
       updateDataDisplay(current_state);
       updateMap([[object_previous_path, 1]]);
@@ -88,12 +94,12 @@ function fetchCurrentState(object_path){
   .then((data) => {
     
     // Signal that fetching process is happening:
-    signalFetchingEvent();
+    activityLogging("collecting current state");
     
     //Unit conversion:
     let time =  timestampToDateConversion(Number(data.timestamp));
     
-    let current_state = [data.latitude, data.longitude, data.altitude, data.velocity, time];
+    let current_state = [data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, time, data[0].solar_lat, data[0].solar_lon];
     
     updateDataDisplay(current_state);
     object_path.push(current_state);

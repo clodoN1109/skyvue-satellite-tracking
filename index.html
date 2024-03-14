@@ -6,9 +6,6 @@
 	<title>satelliteFinder</title>
 	<link rel="icon" href="assets/images/space_station.png">
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Oriya:wght@700&display=swap" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	
 	<body>
@@ -20,7 +17,11 @@
 			<div class ="header-grid">
 				<div class="header-box">
 					<img id="logo" src="assets/images/logo.png">
-					<div class="header-title">satelliteFinder</div>
+					<div id="header-title-box">
+						<div class="header-text" id="header-title">skylantern</div>
+						<div class="header-text" id="header-subtitle">Satellite Tracking Graphical Interface</div>
+					</div>
+					
 				</div>
 				
 				<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="45px"></a>
@@ -48,9 +49,9 @@
 				
 				<div class="output-display">
 					
-					<div style="display: inline-flex; gap: 5px;">
-						<div class="fetchSign" id="sign"></div>
-						<div id="fetchWarning" style="cursor: default; font-weight: lighter; font-size: 15px; text-align: center; text-justify: center;">Collecting Data</div>
+					<div id="log-box" >
+						<div class="loader" id="log-loader"></div>
+						<div id="log" >stand by</div>
 					</div>
 					
 					<div class="parameters-display">
@@ -59,7 +60,7 @@
 							<div>Latitude</div>
 							<div class="data-field">
 								<input style="cursor: default;" id="latitude" readonly value="0"> 
-								<div>Deg</div>
+								<div class="units">Deg</div>
 							</div>
 						</div>
 						
@@ -67,7 +68,7 @@
 							<div>Longitude</div>
 							<div class="data-field">
 								<input style="cursor: default;" type="text" id="longitude" readonly class="" value="0">
-								<div> Deg</div>
+								<div class="units">Deg</div>
 							</div>
 						</div>
 						
@@ -75,7 +76,7 @@
 							<div>Altitude</div>
 							<div class="data-field">
 								<input style="cursor: default;" type="text" id="altitude" readonly class="" value="0">	
-								<div> Km</div>
+								<div class="units">Km</div>
 							</div>
 						</div>
 						
@@ -83,44 +84,72 @@
 							<div>Velocity</div>
 							<div class="data-field">
 								<input style="cursor: default;" type="text" id="velocity" readonly class="" value="0">	
-								<div>Km/h</div>
+								<div class="units">Km/h</div>
 							</div>
 						</div>
+
+						<div>
+							<div>Solar Latitude</div>
+							<div class="data-field">
+								<input style="cursor: default;" type="text" id="solar-latitude" readonly class="" value="0">	
+								<div class="units">Km</div>
+							</div>
+						</div>
+
+						<div>
+							<div>Solar Longitude</div>
+							<div class="data-field">
+								<input style="cursor: default;" type="text" id="solar-longitude" readonly class="" value="0">	
+								<div class="units">Km</div>
+							</div>
+						</div>
+
+						<br>
 						
 					</div>
 					
 				</div>
 				
 				<div class="export-box">
-					<button onclick="copyCoordinates()" class="export-button"><img src="./assets/images/export.png" width="25px"> export data</button>
+					<button onclick="copyCoordinates()" class="export-button"><img src="./assets/images/export.png" width="20px">download data</button>
 				</div>
-				
 				
 			</div>
 			
-			<div id ="map-container">
+			<div id ="main-window">
 				
 				<div id="view-options">
 					<div onclick="{selectOption(event)}" class="option" id="specs-option">SPECIFICATION</div>
-					<div onclick="{selectOption(event)}" class="option" id="2D-option">2D</div>
-					<div onclick="{selectOption(event)}" class="option" id="3D-option">3D</div>
+					<div onclick="{selectOption(event)}" class="option" id="map2D-option">2D</div>
+					<div onclick="{selectOption(event)}" class="option" id="map3D-option">3D</div>
 					<div onclick="{selectOption(event)}" class="option" id="altitude-option">ALTITUDE</div>
 					<div onclick="{selectOption(event)}" class="option" id="statistics-option">STATISTICS</div>
 					<div onclick="{selectOption(event)}" class="option" id="statistics-option">FORECAST</div>
 				</div>
+
 				<input id="date-painel" type="text" id="time" readonly value="">
-				<div class=	"map" >
+				
+				<div id="screen" >
 					
-					<img id="satellite" src="assets/images/satellite.png" alt="a mundi map" lang="en">
-					<div id="visibility-radius"></div>
-					<img id="user-location" src="assets/images/here.png" alt="here" lang="en">
-					<img width="20px" id="user-location-flag">
-					<img width="20px" id="satellite-location-flag">
-					<div id="satellite-location-name"></div>
-					<div id="user-location-name"></div>
-					<canvas id="canvas"></canvas>
-					
+					<div class="display-system" id="specs-container"></div>
+					<div class="display-system" id="map2D-container">
+						<img id="map2D-img" src="./assets/images/map2D.png">
+						<img id="satellite" src="assets/images/satellite.png" alt="a mundi map" lang="en">
+						<div id="visibility-radius"></div>
+						<img id="user-location" src="assets/images/here.png" alt="here" lang="en">
+						<img width="20px" id="user-location-flag">
+						<img width="20px" id="satellite-location-flag">
+						<div id="satellite-location-name"></div>
+						<div id="user-location-name"></div>
+						<canvas id="canvas"></canvas>
+					</div>
+					<div class="display-system" id="map3D-container"></div>
+					<div class="display-system" id="altitude-container"></div>
+					<div class="display-system" id="statistics-container"></div>
+					<div class="display-system" id="forecast-container"></div>
+
 				</div>
+
 				<div id="view-labels">
 					<div class="label" id="user-label" style="opacity: 0.9;">
 						<img class="label-img" src="./assets/images/here.png">
@@ -152,7 +181,12 @@
 		
 		<div class="band-container">
 			<div class="band-display">
-				<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
+				<div style="display: flex; flex-direction: column;" >
+					<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
+					<div style="width: 100%; display: flex; justify-content: center;">
+						<div class="loader" id="wiki-loader"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 		
@@ -171,7 +205,23 @@
 			</div>
 		</div>
 		
-		
+		<div class="band-container">
+			<div class="band-display">
+				<div class="poem">
+					Lanterns of the Night
+					<br><br><br>
+					In the quiet of twilight, we gather,
+					<br><br>
+					Our hearts like paper lanterns, fragile and light.
+					<br><br>
+					We write our wishes, our secret desires,
+					<br><br>
+					And set them adrift on the canvas of the night.
+					<br><br><br>
+					AI
+				</div>
+			</div>
+		</div>
 		
 		<footer>	
 			

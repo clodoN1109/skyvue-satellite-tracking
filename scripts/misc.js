@@ -48,3 +48,7 @@ function makeSameHeightByID(elementA_id, elementB_id){
   document.getElementById(elementA_id).style.height = sourceValue + "px";
 
 }
+
+// window.addEventListener('load', function() {
+//   document.querySelector('.loader').style.display = 'none';
+// });

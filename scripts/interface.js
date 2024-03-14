@@ -4,7 +4,7 @@ function selectOption(event) {
 
     options = document.getElementsByClassName(elementClass);
 
-    for (let index = 0; index < 6; index++) {
+    for (let index = 0; index < options.length; index++) {
         options[index].style.opacity = 0.5;
         options[index].style.fontWeight = 300;
     }
@@ -12,10 +12,23 @@ function selectOption(event) {
     event.target.style.opacity = 1;
     event.target.style.fontWeight = 700;
 
-    changeInterfaceState(event.target.textContent);
+    changeInterfaceState(event.target.id);
 
 }
 
-function changeInterfaceState(newState){
-    pageStates['interfaceState'] = newState;
+// Possible states: specs, map2D, map3D, altitude, statistics, forecast.
+function changeInterfaceState(option_ID){
+
+    newState = option_ID.substring(0, option_ID.indexOf('-'));
+
+    for (child of document.getElementsByClassName("display-system")) {
+        child.style.display = 'none';
+    }
+
+    document.getElementById(newState + "-container").style.display = 'flex';
+    
+    
+    pageStates['interface_state'] = newState;
+
 }
+
