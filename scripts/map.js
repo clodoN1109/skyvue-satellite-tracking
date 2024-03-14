@@ -9,8 +9,8 @@ function updateMap(paths) {
 
     for (let index = path.length - 1; index > 0; index -= line_detail_level) {
     
-      latitude = path[index][0];
-      longitude = path[index][1];
+      latitude = path[index][2];
+      longitude = path[index][3];
       
       //Unit conversions:
       latitude = (Number(latitude) - 90)*(-2.2222);
@@ -41,8 +41,8 @@ function updateMap(paths) {
 
 function updateObjectPosition(object_path){
   
-  latitude = object_path[object_path.length-1][0];
-  longitude = object_path[object_path.length-1][1];
+  latitude = object_path[object_path.length-1][2];
+  longitude = object_path[object_path.length-1][3];
 
   //Unit conversions, scaling and positional adjustments:
   satellite_picture_width = Number(document.getElementById("satellite").offsetWidth); 
@@ -60,8 +60,8 @@ function updateObjectPosition(object_path){
 
 function updateNationalFlagPosition(object_path){
   
-  latitude = object_path[object_path.length-1][0];
-  longitude = object_path[object_path.length-1][1];
+  latitude = object_path[object_path.length-1][2];
+  longitude = object_path[object_path.length-1][3];
   
   fetch("https://api.wheretheiss.at/v1/coordinates/" + latitude + "," + longitude)
   .then((response) => response.json())

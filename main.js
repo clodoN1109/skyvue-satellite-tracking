@@ -4,6 +4,7 @@ let data_update_rate = 3000;
 let display_framerate = data_update_rate;
 let number_of_previous_positions = 30;
 let previous_states_update_rate = 1000;
+let units = ["kilometers"];
 
 // Storage for the object's collected successive states.
 const pageStates = {interface_state:'2D'};

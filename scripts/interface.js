@@ -1,3 +1,5 @@
+// const pageStates = {interface_state:'2D'};
+
 function selectOption(event) {
 
     elementClass = event.target.className;
@@ -27,8 +29,15 @@ function changeInterfaceState(option_ID){
 
     document.getElementById(newState + "-container").style.display = 'flex';
     
-    
     pageStates['interface_state'] = newState;
 
+    if (pageStates['interface_state'] === "specs") {
+        document.getElementById("view-labels").style.opacity = 0;
+        document.getElementById("date-panel").style.opacity = 0;
+    }
+    else {
+        document.getElementById("view-labels").style.opacity = 1;
+        document.getElementById("date-panel").style.opacity = 1;
+    }
 }
 

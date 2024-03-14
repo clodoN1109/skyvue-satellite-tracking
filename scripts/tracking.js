@@ -1,18 +1,40 @@
 function updateDataDisplay(current_state){
-  document.getElementById("latitude").value = current_state[0];
-  document.getElementById("longitude").value = current_state[1];
-  document.getElementById("altitude").value = current_state[2];
-  document.getElementById("velocity").value = current_state[3];
-  document.getElementById("date-painel").value = current_state[4];
-  document.getElementById("solar-latitude").value = current_state[5];
-  document.getElementById("solar-longitude").value = current_state[6];
+
+    // Json response object example: 
+  //   {
+  //     "name": "iss",
+  //     "id": 25544,
+  //     "latitude": 50.11496269845,
+  //     "longitude": 118.07900427317,
+  //     "altitude": 408.05526028199,
+  //     "velocity": 27635.971970874,
+  //     "visibility": "daylight",
+  //     "footprint": 4446.1877699772,
+  //     "timestamp": 1364069476,
+  //     "daynum": 2456375.3411574,
+  //     "solar_lat": 1.3327003598631,
+  //     "solar_lon": 238.78610691196,
+  //     "units": "kilometers"
+  // }
+
+  document.getElementById("name").value = current_state[0];
+  document.getElementById("id").value = current_state[1];
+  document.getElementById("latitude").value = current_state[2];
+  document.getElementById("longitude").value = current_state[3];
+  document.getElementById("altitude").value = current_state[4];
+  document.getElementById("velocity").value = current_state[5];
+  document.getElementById("visibility").value = current_state[6];
+  document.getElementById("footprint").value = current_state[7];
+  // document.getElementById("timestamp").value = current_state[8];
+  // document.getElementById("daynum").value = current_state[9];
+  document.getElementById("solar-latitude").value = current_state[10];
+  document.getElementById("solar-longitude").value = current_state[11];
+  // document.getElementById("units").value = current_state[12];
 
 }
 
 function fetchPreviousStates(object_previous_path, number_of_positions, query_rate){
-  
-  // https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892,1436029902&units=miles
-  
+    
   function fetchRecursively(object_previous_path, current_time, number_of_positions, query_rate){
     
     if (number_of_positions < 1) {
@@ -25,7 +47,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
       document.getElementById("satellite-location-name").style.opacity = 1;
       return
     }
-    
+    // https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892&units=miles
     fetch("https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=" + current_time)
     .then((response) => response.json())
     .then((data) => {
@@ -36,7 +58,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
       //Unit conversion:
       let time =  timestampToDateConversion(Number(data[0].timestamp));
       
-      let current_state = [data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, time, data[0].solar_lat, data[0].solar_lon];
+      let current_state = [data[0].name, data[0].id, data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, data[0].visibility, data[0].footprint, time, data[0].daynum, data[0].solar_lat, data[0].solar_lon, data[0].units];
       object_previous_path.push(current_state);
       updateDataDisplay(current_state);
       updateMap([[object_previous_path, 1]]);
@@ -74,7 +96,8 @@ function fetchCurrentState(object_path){
   //     "solar_lon": 238.78610691196,
   //     "units": "kilometers"
   // }
-  
+
+  // https://api.wheretheiss.at/v1/satellites/25544?units=miles
   fetch("https://api.wheretheiss.at/v1/satellites/25544")
   .then((response) => response.json())
   .then((data) => {
@@ -85,7 +108,7 @@ function fetchCurrentState(object_path){
     //Unit conversion:
     let time =  timestampToDateConversion(Number(data.timestamp));
     
-    let current_state = [data.latitude, data.longitude, data.altitude, data.velocity, time, data.solar_lat, data.solar_lon];
+    let current_state = [data.name, data.id, data.latitude, data.longitude, data.altitude, data.velocity, data.visibility, data.footprint, time, data.daynum, data.solar_lat, data.solar_lon, data.units];
     
     updateDataDisplay(current_state);
     object_path.push(current_state);

@@ -10,7 +10,7 @@
 
 	<body>
 		
-		<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
+		<video id="video-bg" muted loop src="./assets/images/bg.mp4"></video>
 		
 		<header>
 			
@@ -105,10 +105,7 @@
 						</div>
 						
 						<div>
-							<div>
-								<div class="spec-info-mini" title="The visibility of a satellite depends on its altitude. It determines the area from which the satellite is visible from an Earth station.">?</div>
-								Visibility
-							</div>
+							<div>Visibility</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="visibility" readonly class="" value="0"></output> 	
 								<div class="units"></div>
@@ -116,10 +113,7 @@
 						</div>
 						
 						<div>
-							<div>
-								<div class="spec-info-mini" title="The footprint of a communications satellite is the ground area that its transponders offer coverage, and determines the satellite dish diameter required to receive each transponder's signal.">?</div>
-								 Footprint
-							</div>
+							<div>Footprint</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="footprint" readonly class="" value="0"></output> 	
 								<div class="units">Km</div>
@@ -158,15 +152,15 @@
 					<div class="display-system" id="specs-container">
 						<div class="spec">
 							<div style="display: inline-flex; gap: 5px;">
-								<div class="spec-info" title="Name of the object currently being tracked.">?</div>
+								<div class="spec-info">?</div>
 								<div class="spec-name">name: </div>	
 							</div>
 							<output class="spec-value" id="name" type="text" readonly value="0">
 						</div>
 						<div class="spec">
 							<div style="display: inline-flex; gap: 5px;">
-								<div class="spec-info" title="The NORAD Catalog Number, also known as the SATCAT, is a nine-digit sequential identifier assigned by the United States Space Command (USSPACECOM) to all artificial objects in Earth’s orbit and those that have left Earth’s orbit. It represents the order of launch or discovery and is used to track satellites and other space objects.">?</div>
-								<div class="spec-id">NORAD catalog number:</div>	
+								<div class="spec-info">?</div>
+								<div class="spec-id">id <a href="https://celestrak.org/NORAD/elements/">(NORAD catalog):</a> </div>	
 							</div>
 							<output class="spec-value" id="id" type="text" readonly value="0">
 						</div>
