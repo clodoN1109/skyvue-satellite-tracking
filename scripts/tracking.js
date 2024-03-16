@@ -25,7 +25,7 @@ function updateDataDisplay(current_state){
   document.getElementById("velocity").value = current_state[5];
   document.getElementById("visibility").value = current_state[6];
   document.getElementById("footprint").value = current_state[7];
-  // document.getElementById("timestamp").value = current_state[8];
+  document.getElementById("date-panel").value = current_state[8];
   // document.getElementById("daynum").value = current_state[9];
   document.getElementById("solar-latitude").value = current_state[10];
   document.getElementById("solar-longitude").value = current_state[11];
@@ -53,7 +53,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
     .then((data) => {
       
       // Signal that fetching process is happening:
-      activityLogging("tracing recent locations");
+      activityLogging("tracing past locations");
       
       //Unit conversion:
       let time =  timestampToDateConversion(Number(data[0].timestamp));

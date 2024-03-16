@@ -7,17 +7,37 @@ let previous_states_update_rate = 1000;
 let units = ["kilometers"];
 
 // Storage for the object's collected successive states.
-const pageStates = {interface_state:'2D'};
+const pageStates = {interface_state:'2D', data_display:'output'};
 const object_previous_path = [];
 const object_path = [];
 const user_location = [];
 
-// Making data-display and main-window elements have the same height.
-makeSameHeightByID("data-display", "main-window");
 
-changeInterfaceState("map2D-option");
-document.getElementById('map2D-option').style.opacity = 1;
-document.getElementById('map2D-option').style.fontWeight = 700;
+function initializeInterfaceState(){
+    
+    changeInterfaceState("map2D-tab");
+    document.getElementById('map2D-tab').style.opacity = 0.9;
+    document.getElementById('map2D-tab').style.borderBottomStyle = "dashed";
+    document.getElementById('map2D-tab').style.borderWidth = "3px 3px 0.1px 3px";
+    document.getElementById('map2D-tab').style.fontWeight = 500;
+
+    changeDataDisplayState("output-tab");
+    document.getElementById('output-tab').style.opacity = 0.9;
+    document.getElementById('output-tab').style.borderBottomStyle = "dashed";
+    document.getElementById('output-tab').style.borderWidth = "3px 3px 0.1px 3px";
+    document.getElementById('output-tab').style.fontWeight = 500;
+    
+    // Making data-display and main-window elements have the same height.
+    window.onload = function() {
+        makeSameHeightByID("data-display", "main-window");
+    };
+    window.onresize = function() {
+        makeSameHeightByID("data-display", "main-window");
+    };
+
+}
+initializeInterfaceState();
+
 
 showUserLocation(user_location);
 

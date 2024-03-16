@@ -39,7 +39,7 @@ function exportData(){}
 
 // const selectElement = document.getElementById("mySelect");
 // const selectedValue = selectElement.value;
-// const selectedText = selectElement.options[selectElement.selectedIndex].text;
+// const selectedText = selectElement.tabs[selectElement.selectedIndex].text;
 
 // Making an element A inherit the height value from an element B .
 function makeSameHeightByID(elementA_id, elementB_id){
