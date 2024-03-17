@@ -7,10 +7,13 @@
 	<link rel="icon" href="assets/images/space_station.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="./css//base.css" rel="stylesheet" type="text/css"/>
+	<link href="./css/earth_sun.css" rel="stylesheet" type="text/css" />
+	
+
 
 	<body>
-		
-		<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
+		<video id="video-bg" muted loop src="./assets/images/bg.mp4"></video>
 		
 		<header>
 			
@@ -233,7 +236,13 @@
 						<div id="user-location-name"></div>
 						<canvas id="canvas"></canvas>
 					</div>
-					<div class="display-system" id="map3D-container"></div>
+					<div class="display-system" id="map3D-container">
+									
+						<div class="padding_wrapper"><div class="es_space_drawer_container" id="es_earth_sunlight"></div></div>
+						<div class="es_date" id="es_earth_sunlight_date_slider_container"></div>
+						<div class="es_time" id="es_earth_sunlight_time_slider_container"></div>
+
+					</div>
 					<div class="display-system" id="altitude-container">ALTITUDE</div>
 					<div class="display-system SOON" id="statistics-container">
 						
@@ -363,6 +372,8 @@
 		<script type="text/javascript" src="./scripts/map.js"></script>
 		<script type="text/javascript" src="./scripts/misc.js"></script>
 		<script type="text/javascript" src="./scripts/interface.js"></script>
+		<script type="text/javascript" src="./js/base.js"></script>
+		<script type="text/javascript" src="./js/earth_sun.js"></script>
 		<script type="text/javascript" src="./main.js"></script>
 		
 	</body>

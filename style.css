@@ -527,10 +527,13 @@ input, .data-field output  {
 
 #map3D-container {
 
-	background-image: url(assets/images/map3D.png); 
-	background-size:cover; 
-	width: 800px; 
-	height: 400px;
+	/* background-image: url(assets/images/map3D.png);  */
+	/* background-size:cover;  */
+	height: inherit;
+	width: inherit;
+
+	overflow-y: hidden;
+	overflow-x: hidden;
 
 	cursor: crosshair;
 }
@@ -1090,6 +1093,7 @@ label {
 	opacity: 0.9; 
     font-size: 8vh; 
     margin: 0 0 0 0;
+	color: rgba(255, 255, 255, 0.685);
 }
 
 
