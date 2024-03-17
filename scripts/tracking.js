@@ -1,3 +1,11 @@
+function updateEarthIlumination(timestamp){
+        //Time unit conversion to compute Earth's ilumination:
+      // returns [year, month, day, hour, minutes]
+      ymdhm = timestampToArray(timestamp);
+      // Computing and updating Earth's ilumination:
+      updateSunlightDirection(ymdhm);
+}
+
 function updateDataDisplay(current_state){
 
     // Json response object example: 
@@ -33,6 +41,8 @@ function updateDataDisplay(current_state){
 
 }
 
+
+
 function fetchPreviousStates(object_previous_path, number_of_positions, query_rate){
     
   function fetchRecursively(object_previous_path, current_time, number_of_positions, query_rate){
@@ -54,9 +64,13 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
       
       // Signal that fetching process is happening:
       activityLogging("tracing past locations");
-      
-      //Unit conversion:
+
+      // Updates Earth's ilumination state (so far only for the 3D view):
+      updateEarthIlumination(Number(data[0].timestamp));
+
+      //Time unit conversion to display on the date panel:
       let time =  timestampToDateConversion(Number(data[0].timestamp));
+      
       
       let current_state = [data[0].name, data[0].id, data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, data[0].visibility, data[0].footprint, time, data[0].daynum, data[0].solar_lat, data[0].solar_lon, data[0].units];
       object_previous_path.push(current_state);
@@ -66,7 +80,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
       updateNationalFlagPosition(object_previous_path); 
       
       setTimeout(() => {
-        fetchRecursively(object_previous_path, Number(current_time)+100, number_of_positions-1, query_rate);
+        fetchRecursively(object_previous_path, Number(current_time)+previous_path_step, number_of_positions-1, query_rate);
       }, query_rate);
       
     });
@@ -74,7 +88,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
   }
   
   let current_time = Date.now().toString().slice(0,-3);
-  fetchRecursively(object_previous_path, current_time - (number_of_positions-1)*100, number_of_positions, query_rate);
+  fetchRecursively(object_previous_path, current_time - (number_of_positions-1)*previous_path_step, number_of_positions, query_rate);
   
 }
 
@@ -105,6 +119,10 @@ function fetchCurrentState(object_path){
     // Signal that fetching process is happening:
     activityLogging("updating parameters");
     
+      
+    // Updates Earth's ilumination state (so far only for the 3D view):
+    updateEarthIlumination(Number(data.timestamp));
+
     //Unit conversion:
     let time =  timestampToDateConversion(Number(data.timestamp));
     

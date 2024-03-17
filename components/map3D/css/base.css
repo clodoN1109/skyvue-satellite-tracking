@@ -143,7 +143,7 @@ body {
 #social a div {
     width: 34px;
     height: 34px;
-    background: url('./images/social/icons.png') center no-repeat;
+    background: url('./components/map3D/images/social/icons.png') center no-repeat;
     background-size: 160px 32px;
 }
 
@@ -448,7 +448,7 @@ blockquote {
     left: -12px;
     top: 0px;
     height: 23px;
-    background-image: url('./images/sqrt.svg');
+    background-image: url('./components/map3D/images/sqrt.svg');
 }
 
 .drawer_container {
@@ -666,7 +666,7 @@ span.equation_div_symbol {
     height: 44px;
     bottom: 0px;
     left: 0px;
-    background-image: url('./images/play_pause.png');
+    background-image: url('./components/map3D/images/play_pause.png');
     background-repeat: no-repeat;
     background-size: 132px 44px;
     background-position: -44px 0px;
@@ -677,14 +677,14 @@ span.equation_div_symbol {
 }
 
 .undo_button {
-    background-image: url('./images/undo.png');
+    background-image: url('./components/map3D/images/undo.png');
     background-size: 44px 44px;
     background-position: 0px 0px;
 }
 
 .play_pause_button.white,
 .restart_button.white {
-    background-image: url('./images/play_pause_white.png');
+    background-image: url('./components/map3D/images/play_pause_white.png');
     background-color: rgba(255, 255, 255, 0.05);
 }
 

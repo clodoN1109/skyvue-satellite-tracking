@@ -89,7 +89,7 @@ function GLDrawer(scale, ready_callback) {
         for (var i = 0; i < mip_levels; i++) {
             var image = new Image();
             assets[j].push(image);
-            image.src = "./images/earth_sun/" + name + i + ".jpg";
+            image.src = "./components/map3D/images/earth_sun/" + name + i + ".jpg";
             image.onload = asset_loaded;
         }
     }
@@ -320,11 +320,11 @@ function SpaceDrawer(gl, scale, container, mode) {
 
     var canvas;
 
-    var year = 2019,
-        month = '0o1',
-        day = '0o1',
-        hour = 12,
-        minute = '0o1';
+    let year = 2019,
+        month = 1,
+        day = 1,
+        hour = 1,
+        minute = 1;
     var L_p, R_p, fake_L_p, fake_R_p;
     var e = 0.0167086;
     var fake_e = 0.4;
@@ -608,11 +608,6 @@ function SpaceDrawer(gl, scale, container, mode) {
     var self = this;
     this.on_resize = function() {
 
-
-        console.dir(wrapper);
-        console.log(wrapper.clientWidth);
-        console.log(wrapper.clientHeight);
-
         width = Math.max(wrapper.clientWidth, 400);
         height = Math.max(wrapper.clientHeight, 400);
 
@@ -672,17 +667,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
         return [h, m]
     }
 
-    new Slider(document.getElementById("es_earth_sunlight_date_slider_container"), function(x) {
-        var ymd = t_to_date(x);
-        sunlight_drawer.set_date(ymd[0], ymd[1], ymd[2]);
-    }, undefined);
+    updateSunlightDirection = function(timeArray) {
+        sunlight_drawer.set_date(timeArray[0], timeArray[1], timeArray[2]);
+        sunlight_drawer.set_time(timeArray[3], timeArray[4]);
+    }
 
-    new Slider(document.getElementById("es_earth_sunlight_time_slider_container"), function(x) {
-        var hm = t_to_time(x);
-        sunlight_drawer.set_time(hm[0], hm[1]);
-    }, undefined, 0.25);
+    // new Slider(document.getElementById("es_earth_sunlight_date_slider_container"), function(x) {
+    //     var ymd = t_to_date(x);
+    //     sunlight_drawer.set_date(ymd[0], ymd[1], ymd[2]);
+    // }, undefined);
 
-
+    // new Slider(document.getElementById("es_earth_sunlight_time_slider_container"), function(x) {
+    //     var hm = t_to_time(x);
+    //     sunlight_drawer.set_time(hm[0], hm[1]);
+    // }, undefined, 0.25);
 
 
 });

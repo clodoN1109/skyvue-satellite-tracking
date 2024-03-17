@@ -26,7 +26,7 @@
     max-width: 100%;
 
 
-    background-image: url("./images/earth_sun/border_a.png");
+    background-image: url("./components/map3D/images/earth_sun/border_a.png");
     background-size: 1000px 150px;
     background-position: calc(50vw - 1000px) 0px;
     background-repeat: repeat-x;
@@ -37,7 +37,7 @@
 }
 
 .dark_earth_sun_bg_grad_bottom {
-    background-image: url("./images/earth_sun/border_b.png");
+    background-image: url("./components/map3D/images/earth_sun/border_b.png");
 }
 
 .es_space_drawer_container {

@@ -13,12 +13,29 @@ function updateWikiInfo(){
   
 function timestampToDateConversion(timestamp){
 
-  let epoch = Math.floor(new Date().getTime(timestamp)/1000.0); 
-  var myDate = new Date( epoch *1000);
-  myDate.toGMTString()+"<br>"+myDate.toLocaleString();  
+  const utcSeconds = timestamp; // Example epoch time in seconds
+  const date = new Date(0); // The 0 sets the date to the epoch
+  date.setUTCSeconds(utcSeconds);
+  date.toGMTString()+"<br>"+date.toLocaleString();  
 
-  return myDate;
+  return date;
 
+}
+
+function timestampToArray(timestamp) {
+
+  const utcSeconds = timestamp; // Example epoch time in seconds
+  const date = new Date(0); // The 0 sets the date to the epoch
+  date.setUTCSeconds(utcSeconds);
+  const year = date.getUTCFullYear();
+  const month = date.getUTCMonth();
+  const day = date.getUTCDate();
+  const hour = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+ 
+  timeArray = [year, month, day, hour, minutes];
+
+  return timeArray;
 }
 
 function copyCoordinates(){

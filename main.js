@@ -2,8 +2,9 @@
 let wiki_update_rate = 1000;
 let data_update_rate = 3000;
 let display_framerate = data_update_rate;
+let previous_path_step = 100;
 let number_of_previous_positions = 30;
-let previous_states_update_rate = 1000;
+let previous_states_update_rate = 2000;
 let units = ["kilometers"];
 
 // Storage for the object's collected successive states.
@@ -36,8 +37,8 @@ function initializeInterfaceState(){
     };
 
 }
-initializeInterfaceState();
 
+initializeInterfaceState();
 
 showUserLocation(user_location);
 
