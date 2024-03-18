@@ -6,14 +6,15 @@
 	<title>skylantern</title>
 	<link rel="icon" href="assets/images/space_station.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<link href="./components/map3D/css/base.css" rel="stylesheet" type="text/css"/>
-	<link href="./components/map3D/css/base.css" rel="stylesheet" type="text/css" />
+	<link href="./components/map3D/css/style.css" rel="stylesheet" type="text/css"/>
+	<link href="./components/integerSelector/style.css" rel="stylesheet" type="text/css" />
 	
 
 
 	<body>
-		<video id="video-bg" muted loop src="./assets/images/bg.mp4"></video>
+		<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
 		
 		<header>
 			
@@ -70,7 +71,7 @@
 							<div>Latitude</div>
 							<div class="data-field">
 								<output style="cursor: default;" id="latitude" readonly value="0"></output> 
-								<div class="units">deg</div>
+								<div class="units coordinates-unit">deg</div>
 							</div>
 						</div>
 						
@@ -78,7 +79,7 @@
 							<div>Longitude</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="longitude" readonly class="" value="0"></output> 
-								<div class="units">deg</div>
+								<div class="units coordinates-unit">deg</div>
 							</div>
 						</div>
 						
@@ -86,7 +87,7 @@
 							<div>Altitude</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="altitude" readonly class="" value="0"></output> 
-								<div class="units">Km</div>
+								<div class="units distance-unit">Km</div>
 							</div>
 						</div>
 						
@@ -94,7 +95,7 @@
 							<div>Velocity</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="velocity" readonly class="" value="0"></output> 
-								<div class="units">Km/h</div>
+								<div class="units velocity-unit">Km/h</div>
 							</div>
 						</div>
 
@@ -102,7 +103,7 @@
 							<div>Solar Latitude</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="solar-latitude" readonly class="" value="0"></output> 	
-								<div class="units">Km</div>
+								<div class="units distance-unit">Km</div>
 							</div>
 						</div>
 
@@ -110,7 +111,7 @@
 							<div>Solar Longitude</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="solar-longitude" readonly class="" value="0"></output> 	
-								<div class="units">Km</div>
+								<div class="units distance-unit">Km</div>
 							</div>
 						</div>
 						
@@ -151,22 +152,35 @@
 								<div class="spec-info-mini" title="Interval between queries.">?</div>
 								Data update time
 							</div>
-							<div class="data-field">
-								<input style="cursor: default;" type="text" id="data-update-time" class="" value="0"> 	
-								<div class="units"></div>
-							</div>
+
+							<div class="data-field input-box">
+								<input type="text" id="data-update-time" class="input-field" value="1.0">
+								<div class="units time-unit">s</div>
+								<div class="updown-button-pair">
+									<button onclick="increment('data-update-time')" class="updown-button">▲</button>
+									<button onclick="decrement('data-update-time')" class="updown-button">▼</button>	
+								</div>
+							</div>	
 						</div>
-	
+
+						
 						<div>
 							<div>
-								<div class="spec-info-mini" title="Interval between screen renderings.">?</div>
-								Screen refresh time
+								<div class="spec-info-mini" title="Interval between queries.">?</div>
+								Display refresh time
 							</div>
-							<div class="data-field">
-								<input style="cursor: default;" type="text" id="screen-refresh-time" class="" value="0"> 	
-								<div class="units"></div>
-							</div>
+
+							<div class="data-field input-box">
+								<input type="text" id="display-update-time" class="input-field" value="1.0">
+								<div class="units time-unit">s</div>
+								<div class="updown-button-pair">
+									<button onclick="increment('display-update-time')" class="updown-button">▲</button>
+									<button onclick="decrement('display-update-time')" class="updown-button">▼</button>	
+								</div>
+							</div>	
 						</div>
+	
+
 						
 						<div>
 							<div>
@@ -174,9 +188,9 @@
 								 Units
 							</div>
 							<div class="data-field">
-								<select style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475);"  id="satellite-field">
+								<select onchange="{updateUnits(event)}" title="units selection" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475); width: 160px;"  id="satellite-field">
 									<option value="Kilometers">Kilometers</option>
-									<option value="Kilometers">Miles</option>
+									<option value="Miles">Miles</option>
 								</select>						
 							</div>
 						</div>
@@ -368,6 +382,7 @@
 			
 		</footer>
 		
+		<script type="text/javascript" src="./components/integerSelector/script.js"></script>
 		<script type="text/javascript" src="./scripts/tracking.js"></script>
 		<script type="text/javascript" src="./scripts/map.js"></script>
 		<script type="text/javascript" src="./scripts/misc.js"></script>

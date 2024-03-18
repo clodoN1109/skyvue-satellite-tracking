@@ -58,7 +58,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
       return
     }
     // https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892&units=miles
-    fetch("https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=" + current_time)
+    fetch("https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=" + current_time + "&units=" + units[0])
     .then((response) => response.json())
     .then((data) => {
       
@@ -112,7 +112,7 @@ function fetchCurrentState(object_path){
   // }
 
   // https://api.wheretheiss.at/v1/satellites/25544?units=miles
-  fetch("https://api.wheretheiss.at/v1/satellites/25544")
+  fetch("https://api.wheretheiss.at/v1/satellites/25544" + "?units=" + units[0])
   .then((response) => response.json())
   .then((data) => {
 

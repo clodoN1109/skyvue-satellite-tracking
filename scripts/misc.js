@@ -10,6 +10,12 @@ function updateWikiInfo(){
   document.getElementsByClassName("wikiInfo")[0].textContent = infoList[Math.floor(Math.random() * infoList.length)];
   
 }
+
+function updateUnits(event){
+
+  units[0] = (event.target.value).toLowerCase();
+  
+}
   
 function timestampToDateConversion(timestamp){
 

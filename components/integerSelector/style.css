@@ -1,0 +1,29 @@
+
+
+.updown-button-pair {
+    display: inline-flex;
+    gap: 0;
+    padding: 0;
+    margin: 3px;
+
+    border-style: solid;
+	border-color: rgb(255, 255, 255);
+	border-width: 1px;
+	border-radius: 5px; 
+}
+
+.updown-button {
+
+    background-color: transparent;
+    color: white;
+
+    height: fit-content;
+    line-height:normal;
+
+}
+
+.input-field {
+
+    max-width: 100px;
+
+}
