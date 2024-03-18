@@ -14,7 +14,34 @@ function updateWikiInfo(){
 function updateUnits(event){
 
   units[0] = (event.target.value).toLowerCase();
+
+  distance_unit_elements =  document.getElementsByClassName('distance-unit');
+  velocity_unit_elements =  document.getElementsByClassName('velocity-unit');;
+
+  if (units[0] === 'miles') {
+
+    for (let index = 0; index < distance_unit_elements.length; index++) {
+      distance_unit_elements[index].textContent = "miles";
+    }
+
+    for (let index = 0; index < velocity_unit_elements.length; index++) {
+      velocity_unit_elements[index].textContent = "mph";
+    }
+
+  } else {
+    if (units[0] = 'kilometers') {
+
+      for (let index = 0; index < distance_unit_elements.length; index++) {
+        distance_unit_elements[index].textContent = "Km";
+      }
+
+      for (let index = 0; index < velocity_unit_elements.length; index++) {
+        velocity_unit_elements[index].textContent = "km/h";
+      }
   
+    }
+  }
+
 }
   
 function timestampToDateConversion(timestamp){

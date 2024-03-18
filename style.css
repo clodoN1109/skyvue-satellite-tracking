@@ -913,7 +913,7 @@ p{
 .parameters-display {
 
 	height: 210px;
-	width: fit-content;
+	width: 100%;
 	overflow-y: auto;
 
 	padding: 5px;

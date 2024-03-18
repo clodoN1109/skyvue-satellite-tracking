@@ -103,7 +103,7 @@
 							<div>Solar Latitude</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="solar-latitude" readonly class="" value="0"></output> 	
-								<div class="units distance-unit">Km</div>
+								<div class="units coordinates-unit">deg</div>
 							</div>
 						</div>
 
@@ -111,7 +111,7 @@
 							<div>Solar Longitude</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="solar-longitude" readonly class="" value="0"></output> 	
-								<div class="units distance-unit">Km</div>
+								<div class="units coordinates-unit">deg</div>
 							</div>
 						</div>
 						
@@ -133,7 +133,7 @@
 							</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="footprint" readonly class="" value="0"></output> 	
-								<div class="units">Km</div>
+								<div class="units distance-unit">Km</div>
 							</div>
 						</div>
 
@@ -154,7 +154,7 @@
 							</div>
 
 							<div class="data-field input-box">
-								<input type="text" id="data-update-time" class="input-field" value="1.0">
+								<input type="text" id="data-update-time" readonly class="input-field" style="cursor: default;" value="3.0">
 								<div class="units time-unit">s</div>
 								<div class="updown-button-pair">
 									<button onclick="increment('data-update-time')" class="updown-button">▲</button>
@@ -171,7 +171,7 @@
 							</div>
 
 							<div class="data-field input-box">
-								<input type="text" id="display-update-time" class="input-field" value="1.0">
+								<input type="text" id="display-update-time" readonly class="input-field" style="cursor: default;" value="3.0">
 								<div class="units time-unit">s</div>
 								<div class="updown-button-pair">
 									<button onclick="increment('display-update-time')" class="updown-button">▲</button>
@@ -189,8 +189,8 @@
 							</div>
 							<div class="data-field">
 								<select onchange="{updateUnits(event)}" title="units selection" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475); width: 160px;"  id="satellite-field">
-									<option value="Kilometers">Kilometers</option>
-									<option value="Miles">Miles</option>
+									<option value="Kilometers">metric</option>
+									<option value="Miles">imperial</option>
 								</select>						
 							</div>
 						</div>

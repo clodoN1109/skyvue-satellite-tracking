@@ -64,6 +64,8 @@ setTimeout(() => {
         updateNationalFlagPosition(object_path);
 
     }, display_framerate);
+
+    let intervals = [interval_UpdateData, interval_UpdateDataDisplay];
     
 }, (number_of_previous_positions) * previous_states_update_rate);
 
