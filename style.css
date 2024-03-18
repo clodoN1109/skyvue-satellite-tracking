@@ -215,6 +215,7 @@ input, .data-field output  {
 	color: white;
 	background-color: rgba(31, 28, 28, 0.754);
 	width: 100%;
+	min-height: 25px;
 
 	border-style: solid;
 	border-color: rgb(255, 255, 255);

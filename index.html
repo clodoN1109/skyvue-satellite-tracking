@@ -154,7 +154,7 @@
 							</div>
 
 							<div class="data-field input-box">
-								<input type="text" id="data-update-time" readonly class="input-field" style="cursor: default;" value="3.0">
+								<input type="text" id="data-update-time" readonly class="input-field" style="cursor: default;" value="5.0">
 								<div class="units time-unit">s</div>
 								<div class="updown-button-pair">
 									<button onclick="increment('data-update-time')" class="updown-button">▲</button>
@@ -163,10 +163,26 @@
 							</div>	
 						</div>
 
+						<div>
+							<div>
+								<div class="spec-info-mini" title="Path plot point density.">?</div>
+								Plot detail level
+							</div>
+
+							<div class="data-field input-box">
+								<input type="text" id="line-level-detail" readonly class="input-field" style="cursor: default;" value="5">
+								<div class="units time-unit">%</div>
+								<div class="updown-button-pair">
+									<button onclick="increment('line-level-detail')" class="updown-button">▲</button>
+									<button onclick="decrement('line-level-detail')" class="updown-button">▼</button>	
+								</div>
+							</div>	
+						</div>
+
 						
 						<div>
 							<div>
-								<div class="spec-info-mini" title="Interval between queries.">?</div>
+								<div class="spec-info-mini" title="Interval for re-rendering the map canvas.">?</div>
 								Display refresh time
 							</div>
 

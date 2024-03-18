@@ -120,7 +120,7 @@ function activityLogging(activityLog){
     
     document.getElementById("log").style.transition = "all 2s";
     document.getElementById("log").style.opacity = 0;
-    
-  }, 1000);
+
+  }, loader_time);
   
 }

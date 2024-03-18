@@ -1,13 +1,15 @@
-// updateMap([path_1, line_detail_level_1], ...)
+// updateMap([path_1, line_level_detail_1], ...)
 function updateMap(paths) {
 
-  function drawArray(path, line_detail_level){
+  function drawArray(path, detail_level){
    
     if(path.length === 0){
       return
     }
 
-    for (let index = path.length - 1; index > 0; index -= line_detail_level) {
+    let step = Math.floor(100/detail_level);
+
+    for (let index = 0; index < path.length - 1; index += step) {
     
       latitude = path[index][2];
       longitude = path[index][3];

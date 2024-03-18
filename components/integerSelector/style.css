@@ -8,7 +8,7 @@
 
     border-style: solid;
 	border-color: rgb(255, 255, 255);
-	border-width: 1px;
+	border-width: 3px;
 	border-radius: 5px; 
 }
 
@@ -17,6 +17,7 @@
     background-color: transparent;
     color: white;
 
+    border-style: none;
     height: fit-content;
     line-height:normal;
 

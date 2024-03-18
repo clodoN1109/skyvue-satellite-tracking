@@ -1,11 +1,13 @@
 // Configuration parameters.
 let wiki_update_rate = 1000;
-let data_update_rate = 3000;
+let data_update_rate = 5000;
 let display_framerate = data_update_rate;
+let line_level_detail = 5;
 let previous_path_step = 100;
 let number_of_previous_positions = 10;
 let previous_states_update_rate = 1000;
 let units = ["kilometers"];
+let loader_time = 1000;
 
 // Storage for the object's collected successive states.
 const pageStates = {interface_state:'2D', data_display:'output'};
@@ -53,20 +55,23 @@ setTimeout(() => {
     // Starts data collection asynchronous loop.
     const interval_UpdateData = setInterval(() => {
 
-    fetchCurrentState(object_path);  
+        fetchCurrentState(object_path);  
 
-}, data_update_rate);
+    }, data_update_rate);
 
     const interval_UpdateDataDisplay = setInterval(() => {
 
-        updateMap([[object_previous_path, 1], [object_path.slice(0, -10), 25]]); 
+        // Parameter to cut avoid ploting points immediately  bellow the satellite's figure,
+        // and responsive to the selected value for the data_update_rate parameter.
+
+        updateMap([[object_previous_path, 100], [object_path.slice(0, -3), line_level_detail]]); 
         updateObjectPosition(object_path);
         updateNationalFlagPosition(object_path);
 
     }, display_framerate);
 
-    let intervals = [interval_UpdateData, interval_UpdateDataDisplay];
-    
+    intervals = [interval_UpdateData, interval_UpdateDataDisplay];
+
 }, (number_of_previous_positions) * previous_states_update_rate);
 
 

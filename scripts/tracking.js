@@ -48,7 +48,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
   function fetchRecursively(object_previous_path, current_time, number_of_positions, query_rate){
     
     if (number_of_positions < 1) {
-      updateMap([[object_previous_path, 1]]);
+      updateMap([[object_previous_path, 100]]);
       updateObjectPosition(object_previous_path);
       updateNationalFlagPosition(object_previous_path); 
       document.getElementById("satellite").style.opacity = 1;
@@ -75,7 +75,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
       let current_state = [data[0].name, data[0].id, data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, data[0].visibility, data[0].footprint, time, data[0].daynum, data[0].solar_lat, data[0].solar_lon, data[0].units];
       object_previous_path.push(current_state);
       updateDataDisplay(current_state);
-      updateMap([[object_previous_path, 1]]);
+      updateMap([[object_previous_path, 100]]);
       updateObjectPosition(object_previous_path);
       updateNationalFlagPosition(object_previous_path); 
       
