@@ -1,4 +1,24 @@
-// const pageStates = {interface_state:'2D'};
+function initializeInterfaceWindows(){
+    
+    changeInterfaceState("map2D-tab");
+    document.getElementById('map2D-tab').style.opacity = 0.9;
+    document.getElementById('map2D-tab').style.borderBottomStyle = "dashed";
+    document.getElementById('map2D-tab').style.borderWidth = "3px 3px 0.1px 3px";
+    document.getElementById('map2D-tab').style.fontWeight = 500;
+
+    changeDataDisplayState("output-tab");
+    document.getElementById('output-tab').style.opacity = 0.9;
+    document.getElementById('output-tab').style.borderBottomStyle = "dashed";
+    document.getElementById('output-tab').style.borderWidth = "3px 3px 0.1px 3px";
+    document.getElementById('output-tab').style.fontWeight = 500;
+    
+    // Making data-display and main-window elements have the same height.
+    makeSameHeightByID("data-display", "main-window");
+    window.onresize = function() {
+        makeSameHeightByID("data-display", "main-window");
+    };
+
+}
 
 function selectTab(event) {
 

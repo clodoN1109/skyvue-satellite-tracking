@@ -63,9 +63,8 @@ function updateObjectPosition(object_path){
 function updateNationalFlagPosition(object_path){
   
   latitude = object_path[object_path.length-1][2];
-  longitude = object_path[object_path.length-1][3];
-  
-  fetch("https://api.wheretheiss.at/v1/coordinates/" + latitude + "," + longitude)
+  longitude = object_path[object_path.length-1][3]; 
+  fetch(source_URL + "v1/coordinates/" + latitude + "," + longitude)
   .then((response) => response.json())
   .then((iss) => {
     

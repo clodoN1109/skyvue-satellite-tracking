@@ -210,6 +210,10 @@ input, .data-field output  {
 	width: 100%;
 }
 
+#units-system-field {
+	width: 100%;
+}
+
 #date-panel	 {
 
 	color: white;

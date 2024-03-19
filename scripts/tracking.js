@@ -1,3 +1,98 @@
+function resetInterface(){
+
+    // Reset output variables, intervals and canvas.
+    
+  intervals.forEach(element => { 
+    clearInterval(element);    
+  });
+  
+  setTimeout(() => {
+    intervals.length = 0;
+  }, 1000);
+
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+  }
+  
+  object_previous_path.length = 0;
+  object_path.length = 0;
+  document.getElementById('satellite').style.opacity = 0; 
+  document.getElementById('satellite-location-name').style.opacity = 0; 
+  document.getElementById('satellite-location-flag').style.opacity = 0; 
+  document.getElementById('visibility-radius').style.opacity = 0; 
+
+  //Cleaning the Data Manager.
+  let table = document.getElementById('data-table');
+  let data_row_containers = table.getElementsByClassName('data-row-container'); 
+  while (data_row_containers.length > 1){
+    data_row_containers[1].remove();
+  }
+
+  // Cleaning all interface output fields.
+  document.getElementById('source-meta').textContent = '';
+  document.getElementById('name-meta').textContent = '';
+  document.getElementById('id-meta').textContent = '';
+  document.getElementById('units-meta').textContent = '';
+  document.getElementById('rows-meta').textContent = '';
+  document.getElementById('columns-meta').textContent = '';
+
+  document.getElementById("name").value = '';
+  document.getElementById("id").value = '';
+  document.getElementById("latitude").value = ''; 
+  document.getElementById("longitude").value = '';  
+  document.getElementById("altitude").value = ''; 
+  document.getElementById("velocity").value = ''; 
+  document.getElementById("visibility").value = ''; 
+  document.getElementById("footprint").value = ''; 
+  document.getElementById("date-panel").value = ''; 
+  // document.getElementById("daynum").value = ''; 
+  document.getElementById("solar-latitude").value = ''; 
+  document.getElementById("solar-longitude").value = ''; 
+  // document.getElementById("units").value = ''; 
+
+}
+
+function startTracking(event){
+
+  resetInterface();
+  if (event.target.value === 'reset'){
+    return
+  }
+
+  let object_ID = event.target.value;
+  object_ID = object_ID.substring(object_ID.indexOf('-') + 1, object_ID.length);
+
+  fetchPreviousStates(object_previous_path, number_of_previous_positions, previous_states_update_rate);
+
+  // Starts data display update asynchronous loop.
+  setTimeout(() => {
+
+      // Starts data collection asynchronous loop.
+      const interval_UpdateData = setInterval(() => {
+
+          fetchCurrentState(object_path);  
+
+      }, data_update_rate);
+
+      const interval_UpdateDataDisplay = setInterval(() => {
+
+          // Parameter to cut avoid ploting points immediately  bellow the satellite's figure,
+          // and responsive to the selected value for the data_update_rate parameter.
+
+          updateMap([[object_previous_path, 100], [object_path.slice(0, -3), line_level_detail]]); 
+          updateObjectPosition(object_path);
+          updateNationalFlagPosition(object_path);
+
+      }, display_framerate);
+
+      intervals = [interval_UpdateData, interval_UpdateDataDisplay];
+
+  }, (number_of_previous_positions) * previous_states_update_rate);
+    
+}
+
 function updateEarthIlumination(timestamp){
         //Time unit conversion to compute Earth's ilumination:
       // returns [year, month, day, hour, minutes]
@@ -58,7 +153,7 @@ function fetchPreviousStates(object_previous_path, number_of_positions, query_ra
       return
     }
     // https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892&units=miles
-    fetch("https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=" + current_time + "&units=" + units[0])
+    fetch(source_URL + "v1/satellites/25544/positions?timestamps=" + current_time + "&units=" + units[0])
     .then((response) => response.json())
     .then((data) => {
       
@@ -112,7 +207,7 @@ function fetchCurrentState(object_path){
   // }
 
   // https://api.wheretheiss.at/v1/satellites/25544?units=miles
-  fetch("https://api.wheretheiss.at/v1/satellites/25544" + "?units=" + units[0])
+  fetch(source_URL + "v1/satellites/25544" + "?units=" + units[0])
   .then((response) => response.json())
   .then((data) => {
 
@@ -159,7 +254,7 @@ function showUserLocation(user_location){
         document.getElementById("user-location").style.transform = "translate(" + userX + "px, " + userY +  "px)";
         document.getElementById("user-location").style.opacity = 1;
 
-        fetch("https://api.wheretheiss.at/v1/coordinates/" + user_location[0] + "," + user_location[1])
+        fetch(source_URL + "v1/coordinates/" + user_location[0] + "," + user_location[1])
         .then((response) => response.json())
         .then((iss) => {
           

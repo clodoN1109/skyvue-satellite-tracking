@@ -28,15 +28,37 @@ function updateDataManager(object_path){
     
 
     // object_path[i] = [name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units];
-    data_row.getElementsByClassName('time' + '-data-manager')[0].textContent = object_path[object_path.length - 1][8];
+  
+    // Creating new data row: 
+    data_row.getElementsByClassName('index' + '-data-manager')[0].textContent = object_path.length - 1;
     data_row.getElementsByClassName('latitude' + '-data-manager')[0].textContent = object_path[object_path.length - 1][2];
     data_row.getElementsByClassName('longitude' + '-data-manager')[0].textContent = object_path[object_path.length - 1][3];
     data_row.getElementsByClassName('altitude' + '-data-manager')[0].textContent = object_path[object_path.length - 1][4];
     data_row.getElementsByClassName('velocity' + '-data-manager')[0].textContent = object_path[object_path.length - 1][5];
     data_row.getElementsByClassName('visibility' + '-data-manager')[0].textContent = object_path[object_path.length - 1][6];
     data_row.getElementsByClassName('footprint' + '-data-manager')[0].textContent = object_path[object_path.length - 1][7];
+    data_row.getElementsByClassName('time' + '-data-manager')[0].textContent = object_path[object_path.length - 1][8];
     data_row.getElementsByClassName('solar-latitude' + '-data-manager')[0].textContent = object_path[object_path.length - 1][10];
     data_row.getElementsByClassName('solar-longitude' + '-data-manager')[0].textContent = object_path[object_path.length - 1][11];
 
+    // Updating metadata:
+    document.getElementById('source-meta').textContent = source_URL;
+    document.getElementById('name-meta').textContent =  object_path[object_path.length - 1][0];
+    document.getElementById('id-meta').textContent =  object_path[object_path.length - 1][1];
+    
+
+    let units_options = document.getElementById('units-system-field').getElementsByTagName('option');
+    for (let index = 0; index < units_options.length; index++) {
+        const element = units_options[index];
+        if (element.selected == true) {
+            document.getElementById('units-meta').textContent = element.textContent;
+        }
+        
+    }
+    
+    
+    document.getElementById('rows-meta').textContent =  document.getElementsByClassName('data-row').length - 4;
+    document.getElementById('columns-meta').textContent = document.getElementById('data-row-header').getElementsByClassName('data-manager-header-field').length;
 
 }
+

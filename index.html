@@ -24,7 +24,7 @@
 				</div>
 			
 				<div id="data-manager-title-container">
-					<div id="data-manager-title">Data Manager</div>
+					<div id="data-manager-title"><img src="./assets/images/data.png" width="60px">Data Manager</div>
 				</div>
 
 				<div id="download-button-container">
@@ -36,8 +36,9 @@
 				<div class="data-table-container">
 					<div id="data-table">
 
-						<div class="data-row-container" id="data-header">
-							<div class="data-row">
+						<div class="header-row-container" id="data-header">
+							<div class="data-row" id="data-row-header">
+								<div class="index-data-manager data-manager-header-field">#</div>
 								<div class="time-data-manager data-manager-header-field">TIME</div>
 								<div class="latitude-data-manager data-manager-header-field">LATITUDE</div>
 								<div class="longitude-data-manager data-manager-header-field">LONGITUDE</div>
@@ -49,13 +50,33 @@
 								<div class="footprint-data-manager data-manager-header-field">FOOTPRINT</div>
 							</div>
 							<div class="data-row-gadgets" style="opacity: 0;">
-								<img style="cursor: default;" src="./components/dataManager/assets/copy.png" class="binButton data-manager-row-button">
-								<img style="cursor: default;" src="./components/dataManager/assets/bin.png" class="copyButton data-manager-row-button">
+								<img style="cursor: default;" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
+								<img style="cursor: default;" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button">
+							</div>
+						</div>
+
+						<div class="units-row-container" id="data-header-units">
+							<div class="data-row" id="data-row-header-units">
+								<div class="index-data-manager data-manager-header-field-units">&nbsp;</div>
+								<div class="time-data-manager data-manager-header-field-units">(GMT)</div>
+								<div class="latitude-data-manager data-manager-header-field-units">(degrees)</div>
+								<div class="longitude-data-manager data-manager-header-field-units">(degrees)</div>
+								<div class="altitude-data-manager data-manager-header-field-units">(<div class="data-manager-table-units distance-unit">Km</div>)</div>
+								<div class="velocity-data-manager data-manager-header-field-units">(<div class="data-manager-table-units velocity-unit">Km/h</div>)</div>
+								<div class="solar-latitude-data-manager data-manager-header-field-units">(degrees)</div>
+								<div class="solar-longitude-data-manager data-manager-header-field-units">(degrees)</div>
+								<div class="visibility-data-manager data-manager-header-field-units">&nbsp;</div>
+								<div class="footprint-data-manager data-manager-header-field-units">(<div class="data-manager-table-units distance-unit">Km</div>)</div>
+							</div>
+							<div class="data-row-gadgets" style="opacity: 0;">
+								<img style="cursor: default;" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
+								<img style="cursor: default;" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button">
 							</div>
 						</div>
 
 						<div class="data-row-container" id="data-row-template">
 							<div class="data-row">
+								<div class="index-data-manager data-manager-data-field"></div>
 								<div class="time-data-manager data-manager-data-field"></div>
 								<div class="latitude-data-manager data-manager-data-field"></div>
 								<div class="longitude-data-manager data-manager-data-field"></div>
@@ -67,18 +88,47 @@
 								<div class="footprint-data-manager data-manager-data-field"></div>
 							</div>
 							<div class="data-row-gadgets">
-								<img onclick="deleteRow(event)" src="./components/dataManager/assets/copy.png" class="binButton data-manager-row-button">
-								<img onclick="copyRowData(event)" src="./components/dataManager/assets/bin.png" class="copyButton data-manager-row-button">
+								<img onclick="copyRowData(event)" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
+								<img onclick="deleteRow(event)" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button">
 							</div>
 						</div>
 						
 					</div>
 				</div>
 
+				<div class="metadata-container">
+					<div id="metadata">
+						<div class="meta-field">
+							<div class="meta-field-title">source: </div>
+							<div id="source-meta"></div>
+						</div>
+						<div class="meta-field">
+							<div class="meta-field-title">name: </div>
+							<div id="name-meta"></div>
+						</div>
+						<div class="meta-field">
+							<div class="meta-field-title">id: </div>
+							<div id="id-meta"></div>
+						</div>
+						<div class="meta-field">
+							<div class="meta-field-title">units: </div>
+							<div id="units-meta"></div>
+						</div>
+						<div class="meta-field">
+							<div class="meta-field-title">rows: </div>
+							<div id="rows-meta"></div>
+						</div>
+						<div class="meta-field">
+							<div class="meta-field-title">columns: </div>
+							<div id="columns-meta"></div>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 
-		<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
+		<video id="video-bg" muted loop src="./assets/images/bg.mp4"></video>
 		
 		<header>
 			
@@ -86,7 +136,7 @@
 				<div class="header-box">
 					<img id="logo" src="assets/images/logo.png">
 					<div id="header-title-box">
-						<div class="header-text" id="header-title">skylantern</div>
+						<div class="header-text" id="header-title">Sky Lantern</div>
 						<div class="header-text" id="header-subtitle">Satellite Tracking Graphical Interface</div>
 					</div>
 					
@@ -113,10 +163,10 @@
 				<div class="input-display">
 					<div>Satellite selection:</div>
 					<div class="data-field">
-						<!-- <input id="satellite-field" value="">  -->
-						<select style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475);"  id="satellite-field">
-							<option value="id-25544">ISS (International Space Station)</option>
-							<option value="id-25544">Fermi Gamma-ray Space Telescope</option>
+						<select onchange="{startTracking(event)}" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475);"  id="satellite-field">
+							<option value="reset"></option>
+							<option value="noradID-25544">ISS (International Space Station)</option>
+							<option value="noradID-25544">Fermi Gamma-ray Space Telescope</option>
 						</select>
 					</div>
 				</div>
@@ -186,7 +236,7 @@
 							</div>
 							<div class="data-field">
 								<output style="cursor: default;" type="text" id="visibility" readonly class="" value="0"></output> 	
-								<div class="units"></div>
+								<div class="units">&nbsp;</div>
 							</div>
 						</div>
 						
@@ -255,7 +305,7 @@
 							</div>
 
 							<div class="data-field input-box">
-								<input type="text" id="display-update-time" readonly class="input-field" style="cursor: default;" value="5.0">
+								<input type="text" id="display-update-time" readonly class="input-field" style="cursor: default;" value="1.0">
 								<div class="units time-unit">s</div>
 								<div class="updown-button-pair">
 									<button onclick="increment('display-update-time')" class="updown-button">▲</button>
@@ -272,7 +322,7 @@
 								 Units
 							</div>
 							<div class="data-field">
-								<select onchange="{updateUnits(event)}" title="units selection" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475); width: 160px;"  id="satellite-field">
+								<select onchange="{updateUnits(event)}" title="units selection" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475); width: 160px;"  id="units-system-field">
 									<option value="Kilometers">metric</option>
 									<option value="Miles">imperial</option>
 								</select>						
