@@ -1,4 +1,5 @@
 // Configuration parameters.
+let object_ID = 25544;
 let wiki_update_rate = 1000;
 let data_update_rate = 5000;
 let display_framerate = data_update_rate;

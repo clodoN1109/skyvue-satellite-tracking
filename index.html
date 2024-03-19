@@ -10,10 +10,74 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="./components/map3D/css/style.css" rel="stylesheet" type="text/css"/>
 	<link href="./components/integerSelector/style.css" rel="stylesheet" type="text/css" />
+	<link href="./components/dataManager/style.css" rel="stylesheet" type="text/css" />
 	
 
 
 	<body>
+
+		<div id="data-manager-container">
+			<div id="data-manager">
+
+				<div id="close-button-container">
+					<div onclick="closeDataManager()" class="close-button" id="data-manager-close-button">x</div>
+				</div>
+			
+				<div id="data-manager-title-container">
+					<div id="data-manager-title">Data Manager</div>
+				</div>
+
+				<div id="download-button-container">
+					<div class="download-button-box">
+						<button onclick="downloadData()" class="download-button"><img src="./assets/images/export.png" width="30px">DOWNLOAD DATA</button>
+					</div>
+				</div>
+
+				<div class="data-table-container">
+					<div id="data-table">
+
+						<div class="data-row-container" id="data-header">
+							<div class="data-row">
+								<div class="time-data-manager data-manager-header-field">TIME</div>
+								<div class="latitude-data-manager data-manager-header-field">LATITUDE</div>
+								<div class="longitude-data-manager data-manager-header-field">LONGITUDE</div>
+								<div class="altitude-data-manager data-manager-header-field">ALTIDUDE</div>
+								<div class="velocity-data-manager data-manager-header-field">VELOCITY</div>
+								<div class="solar-latitude-data-manager data-manager-header-field">SOLAR LAT.</div>
+								<div class="solar-longitude-data-manager data-manager-header-field">SOLAT LON.</div>
+								<div class="visibility-data-manager data-manager-header-field">VISIBILITY</div>
+								<div class="footprint-data-manager data-manager-header-field">FOOTPRINT</div>
+							</div>
+							<div class="data-row-gadgets" style="opacity: 0;">
+								<img style="cursor: default;" src="./components/dataManager/assets/copy.png" class="binButton data-manager-row-button">
+								<img style="cursor: default;" src="./components/dataManager/assets/bin.png" class="copyButton data-manager-row-button">
+							</div>
+						</div>
+
+						<div class="data-row-container" id="data-row-template">
+							<div class="data-row">
+								<div class="time-data-manager data-manager-data-field"></div>
+								<div class="latitude-data-manager data-manager-data-field"></div>
+								<div class="longitude-data-manager data-manager-data-field"></div>
+								<div class="altitude-data-manager data-manager-data-field"></div>
+								<div class="velocity-data-manager data-manager-data-field"></div>
+								<div class="solar-latitude-data-manager data-manager-data-field"></div>
+								<div class="solar-longitude-data-manager data-manager-data-field"></div>
+								<div class="visibility-data-manager data-manager-data-field"></div>
+								<div class="footprint-data-manager data-manager-data-field"></div>
+							</div>
+							<div class="data-row-gadgets">
+								<img onclick="deleteRow(event)" src="./components/dataManager/assets/copy.png" class="binButton data-manager-row-button">
+								<img onclick="copyRowData(event)" src="./components/dataManager/assets/bin.png" class="copyButton data-manager-row-button">
+							</div>
+						</div>
+						
+					</div>
+				</div>
+
+			</div>
+		</div>
+
 		<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
 		
 		<header>
@@ -140,6 +204,10 @@
 						<br>
 						
 					</div>
+
+					<div class="data-manager-box">
+						<button onclick="openDataManager()" class="data-manager-button"><img src="./assets/images/data.png" width="30px">DATA MANAGER</button>
+					</div>
 					
 				</div>
 
@@ -187,7 +255,7 @@
 							</div>
 
 							<div class="data-field input-box">
-								<input type="text" id="display-update-time" readonly class="input-field" style="cursor: default;" value="3.0">
+								<input type="text" id="display-update-time" readonly class="input-field" style="cursor: default;" value="5.0">
 								<div class="units time-unit">s</div>
 								<div class="updown-button-pair">
 									<button onclick="increment('display-update-time')" class="updown-button">▲</button>
@@ -215,10 +283,6 @@
 						
 					</div>
 
-				</div>
-				
-				<div class="export-box">
-					<button onclick="copyCoordinates()" class="export-button"><img src="./assets/images/export.png" width="20px">download data</button>
 				</div>
 				
 			</div>
@@ -405,6 +469,7 @@
 		<script type="text/javascript" src="./scripts/interface.js"></script>
 		<script type="text/javascript" src="./components/map3D/js/base.js"></script>
 		<script type="text/javascript" src="./components/map3D/js/earth_sun.js"></script>
+		<script type="text/javascript" src="./components/dataManager/script.js"></script>
 		<script type="text/javascript" src="./main.js"></script>
 		
 	</body>

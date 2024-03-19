@@ -742,21 +742,26 @@ p{
 
 }
 
-.export-box {
+.data-manager-box {
 	width: 100%;
 	height: fit-content;
 
-	margin: 10px 0;
-	padding	: 0px 10px;
+	margin: 10px 0 0 0;
+	padding: 10px 0 0 0;
 
 	display: inline-flex;
 	justify-content: flex-end;
 	justify-items: center;
 	align-content: center;
 	align-items: center;
+
+	border-style: solid;
+	border-color: rgba(255, 255, 255, 0.788);
+	border-width: 0.5px 0 0 0;
+	border-radius: 0;
 }
 
-.export-button {
+.data-manager-button {
     
 	height: fit-content;
 	width: fit-content;
@@ -784,7 +789,7 @@ p{
 	color: white;
 }
 
-.export-button:hover {
+.data-manager-button:hover {
 	border-color: rgba(255, 255, 255, 0.667);
 } 
 
@@ -822,16 +827,15 @@ p{
 	min-height: 200px;
 	width: 100%;
 
-
 	padding: 10px 10px 10px 10px;
 
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	justify-items: center;
+	justify-content: flex-start;
+	justify-items: flex-start;
 	align-items: center;
 	align-content: center;
-	gap: 30px;
+	gap: 10px;
 
 	color: white; 
 	font-family: monospace; 	
@@ -913,7 +917,7 @@ p{
 
 .parameters-display {
 
-	height: 210px;
+	height: auto;
 	width: 100%;
 	overflow-y: auto;
 
@@ -957,7 +961,7 @@ label {
 	font-weight: bolder;
 }
 
-.copyButton:hover {
+.copyButton:hover, .binButton:hover {
 
 	cursor: pointer;
 

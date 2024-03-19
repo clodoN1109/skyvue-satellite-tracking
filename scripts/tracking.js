@@ -130,7 +130,7 @@ function fetchCurrentState(object_path){
     
     updateDataDisplay(current_state);
     object_path.push(current_state);
-    
+    updateDataManager(object_path);
     
   });
   
