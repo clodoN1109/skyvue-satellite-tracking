@@ -1,4 +1,5 @@
 function openDataManager(){
+    prepareDownloadButton();
     document.getElementById('data-manager-container').style.display = 'flex';
 }
 
@@ -62,3 +63,26 @@ function updateDataManager(object_path){
 
 }
 
+function prepareDownloadButton(){
+
+    // object_path[i] = [name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units];
+    let header = [['name', 'id', 'latitude', 'longitude', 'altitude', 'velocity', 'visibility', 'footprint', 'time', 'daynum', 'solar_lat', 'solar_lon', 'units']];
+    
+    // Concatenate the arrays (creates a new array)
+    var combinedArray = header.concat(object_path);
+    
+    for (let i = 0; i < combinedArray.length; i++) {
+        for (let j = 0; j < combinedArray[i].length; j++) {
+            combinedArray[i][j] = combinedArray[i][j].toString();
+        }
+    }
+      
+    const csvContent = combinedArray.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    
+    downloadButton =  document.getElementById('download-button');
+    downloadButton.href = URL.createObjectURL(blob);
+    downloadButton.download = document.getElementById('name-meta').textContent + '.csv';
+    
+    
+}

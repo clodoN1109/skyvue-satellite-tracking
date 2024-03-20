@@ -16,7 +16,8 @@ let loader_time = 1000;
 
 // Output/Storage for the object's collected successive states.
 const object_previous_path = [];
-const object_path = [];
+// object_path[i] = [name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units];
+const object_path = []; 
 const user_location = [];
 
 

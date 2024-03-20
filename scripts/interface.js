@@ -55,7 +55,7 @@ function changeInterfaceState(tab_ID){
     
     pageStates['interface_state'] = newState;
 
-    if (["specs", "statistics", "forecast"].includes(pageStates['interface_state'])) {
+    if (["specs", "statistics", "forecast", "altitude"].includes(pageStates['interface_state'])) {
 
         for (child of document.getElementsByClassName("label")) {
             child.style.opacity = 0;

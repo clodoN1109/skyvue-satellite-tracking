@@ -93,13 +93,6 @@ function startTracking(event){
     
 }
 
-function updateEarthIlumination(timestamp){
-        //Time unit conversion to compute Earth's ilumination:
-      // returns [year, month, day, hour, minutes]
-      ymdhm = timestampToArray(timestamp);
-      // Computing and updating Earth's ilumination:
-      updateSunlightDirection(ymdhm);
-}
 
 function updateDataDisplay(current_state){
 
@@ -214,7 +207,6 @@ function fetchCurrentState(object_path){
     // Signal that fetching process is happening:
     activityLogging("updating parameters");
     
-      
     // Updates Earth's ilumination state (so far only for the 3D view):
     updateEarthIlumination(Number(data.timestamp));
 
@@ -231,59 +223,3 @@ function fetchCurrentState(object_path){
   
 }
 
-function showUserLocation(user_location){
-  
-  // Check if geolocation is supported by the browser
-  if ("geolocation" in navigator) {
-    // Prompt the user for permission to access their location
-    navigator.geolocation.getCurrentPosition(
-      // Success callback
-      (position) => {
-        // Get the user's latitude and longitude coordinates
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
-        
-        user_location[0] = latitude;
-        user_location[1] = longitude;
-        
-        //Unit conversions, scaling and positional adjustments:
-        user_picture_width = Number(document.getElementById("user-location").offsetWidth); 
-        userY = (Number(latitude) - 90)*(-2.2222) - user_picture_width/2;
-        userX = (Number(longitude) + 180)*(2.2222) - user_picture_width/2;
-        
-        document.getElementById("user-location").style.transform = "translate(" + userX + "px, " + userY +  "px)";
-        document.getElementById("user-location").style.opacity = 1;
-
-        fetch(source_URL + "v1/coordinates/" + user_location[0] + "," + user_location[1])
-        .then((response) => response.json())
-        .then((iss) => {
-          
-          let country_code = iss.country_code;
-          // country_code = 'BR';
-          
-          document.getElementById("user-location-name").textContent = country_code;
-          let flagURL = "https://flagsapi.com/" + country_code + "/shiny/64.png";
-          document.getElementById("user-location-flag").src = flagURL;
-          
-          user_picture_width = Number(document.getElementById("user-location").offsetWidth);
-          positionY = (Number(latitude) - 90)*(-2.2222);
-          positionX = (Number(longitude) + 180)*(2.2222);
-          
-          document.getElementById("user-location-flag").style.transform = "translate(" + (positionX - user_picture_width/2 -8) + "px, " + (positionY - user_picture_width/2 - 10) +  "px)";
-          document.getElementById("user-location-name").style.transform = "translate(" + (positionX + 10) + "px, " + (positionY + 10) +  "px)";
-          
-        });
-
-      },
-      // Error callback
-      (error) => {
-        // Handle errors (e.g., if the user denied location sharing permissions)
-        console.error("Error getting user location:", error);
-      }
-      );
-  } else {
-      // Geolocation is not supported by the browser
-      console.error("Geolocation is not supported by this browser.");
-  }
-    
-}

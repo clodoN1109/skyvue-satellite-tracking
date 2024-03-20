@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>skylantern</title>
+	<title>Constellation</title>
 	<link rel="icon" href="assets/images/space_station.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	
@@ -11,8 +11,7 @@
 	<link href="./components/map3D/css/style.css" rel="stylesheet" type="text/css"/>
 	<link href="./components/integerSelector/style.css" rel="stylesheet" type="text/css" />
 	<link href="./components/dataManager/style.css" rel="stylesheet" type="text/css" />
-	
-
+	<link href="./components/checkbox/style.css" rel="stylesheet" type="text/css" />
 
 	<body>
 
@@ -27,9 +26,9 @@
 					<div id="data-manager-title"><img src="./assets/images/data.png" width="60px">Data Manager</div>
 				</div>
 
-				<div id="download-button-container">
+				<div onmouseover="prepareDownloadButton()" id="download-button-container">
 					<div class="download-button-box">
-						<button onclick="downloadData()" class="download-button"><img src="./assets/images/export.png" width="30px">DOWNLOAD DATA</button>
+						<a id="download-button" class="download-button"><img src="./assets/images/export.png" width="30px">DOWNLOAD DATA</a>
 					</div>
 				</div>
 
@@ -52,6 +51,7 @@
 							<div class="data-row-gadgets" style="opacity: 0;">
 								<img style="cursor: default;" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
 								<img style="cursor: default;" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button">
+
 							</div>
 						</div>
 
@@ -89,7 +89,10 @@
 							</div>
 							<div class="data-row-gadgets">
 								<img onclick="copyRowData(event)" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
-								<img onclick="deleteRow(event)" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button">
+								<!-- <img onclick="deleteRow(event)" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button"> -->
+								<label class="bin-b	utton data-manager-row-button" for="myCheckbox">
+									<input checked type="checkbox" id="myCheckbox" name="myCheckbox">
+								</label>
 							</div>
 						</div>
 						
@@ -128,7 +131,7 @@
 			</div>
 		</div>
 
-		<video id="video-bg" muted loop src="./assets/images/bg.mp4"></video>
+		<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
 		
 		<header>
 			
@@ -136,7 +139,7 @@
 				<div class="header-box">
 					<img id="logo" src="assets/images/logo.png">
 					<div id="header-title-box">
-						<div class="header-text" id="header-title">Sky Lantern</div>
+						<div class="header-text" id="header-title">Constellation</div>
 						<div class="header-text" id="header-subtitle">Satellite Tracking Graphical Interface</div>
 					</div>
 					
@@ -166,7 +169,6 @@
 						<select onchange="{startTracking(event)}" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475);"  id="satellite-field">
 							<option value="reset"></option>
 							<option value="noradID-25544">ISS (International Space Station)</option>
-							<option value="noradID-25544">Fermi Gamma-ray Space Telescope</option>
 						</select>
 					</div>
 				</div>
@@ -387,7 +389,16 @@
 						<div class="es_time" id="es_earth_sunlight_time_slider_container"></div>
 
 					</div>
-					<div class="display-system" id="altitude-container">ALTITUDE</div>
+					<div class="display-system SOON" id="altitude-container">
+						
+						<div>IN DEVELOPMENT</div>
+
+						<div id="contribute">
+							<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+							<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+						</div>
+		
+					</div>
 					<div class="display-system SOON" id="statistics-container">
 						
 						<div>IN DEVELOPMENT</div>
@@ -455,7 +466,7 @@
 			<div class="band-display">
 				<div id="contribute">
 					<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-					<a class="jointheteam-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+					<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
 				</div>
 				<div class="inline-flex-container">
 					<h1 id="the-team-title">THE TEAM</h1>
@@ -519,8 +530,12 @@
 		<script type="text/javascript" src="./scripts/interface.js"></script>
 		<script type="text/javascript" src="./components/map3D/js/base.js"></script>
 		<script type="text/javascript" src="./components/map3D/js/earth_sun.js"></script>
+		<script type="text/javascript" src="./components/map3D/js/clodo.js"></script>
 		<script type="text/javascript" src="./components/dataManager/script.js"></script>
+		<script type="text/javascript" src="./components/checkbox/script.js"></script>
 		<script type="text/javascript" src="./main.js"></script>
+		
+
 		
 	</body>
 	
