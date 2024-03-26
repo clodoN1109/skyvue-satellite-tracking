@@ -908,3 +908,10 @@ span.equation_div_symbol {
         max-width: 260px;
     }
 }
+
+#es_earth_sunlight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

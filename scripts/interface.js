@@ -1,16 +1,10 @@
-function initializeInterfaceWindows(){
-    
-    changeInterfaceState("map2D-tab");
-    document.getElementById('map2D-tab').style.opacity = 0.9;
-    document.getElementById('map2D-tab').style.borderBottomStyle = "dashed";
-    document.getElementById('map2D-tab').style.borderWidth = "3px 3px 0.1px 3px";
-    document.getElementById('map2D-tab').style.fontWeight = 500;
+function initializeInterface(){
 
-    changeDataDisplayState("output-tab");
-    document.getElementById('output-tab').style.opacity = 0.9;
-    document.getElementById('output-tab').style.borderBottomStyle = "dashed";
-    document.getElementById('output-tab').style.borderWidth = "3px 3px 0.1px 3px";
-    document.getElementById('output-tab').style.fontWeight = 500;
+    const interval_Wiki = setInterval(updateWikiInfo, 10000);
+
+    // Selecting default tabs for each window.
+    selectViewerTab(document.getElementById("map2D-tab"));
+    selectDataTab(document.getElementById("source-tab"));
     
     // Making data-display and main-window elements have the same height.
     makeSameHeightByID("data-display", "main-window");
@@ -18,11 +12,28 @@ function initializeInterfaceWindows(){
         makeSameHeightByID("data-display", "main-window");
     };
 
+    // Initialize 3D map Sun ilumination.
+    let timestamp = (new Date()).getTime().toString().substring(0, 10);
+    updateEarthIlumination(timestamp);
+
+    gradualOpacity('interface', 1500);    
+    map2DGradualAppearance(3000);
+    
 }
 
-function selectTab(event) {
+function selectViewerTab(element) {
 
-    elementClass = event.target.className;
+    function changeViewerState(element){
+
+        tab_ID = element.id;
+    
+        newState = tab_ID.substring(0, tab_ID.indexOf('-'));
+
+        mountedApp.viewer_state = newState;
+    
+    }
+
+    elementClass = element.className;
 
     tabs = document.getElementsByClassName(elementClass);
 
@@ -33,55 +44,28 @@ function selectTab(event) {
         tabs[index].style.fontWeight = 300;
     }
 
-    event.target.style.opacity = 0.9;
-    event.target.style.borderBottomStyle = "dashed";
-    event.target.style.borderWidth = "3px 3px 0.1px 3px";
-    event.target.style.fontWeight = 500;
+    element.style.opacity = 0.9;
+    element.style.borderBottomStyle = "dashed";
+    element.style.borderWidth = "3px 3px 0.1px 3px";
+    element.style.fontWeight = 500;
 
-    changeInterfaceState(event.target.id);
+    changeViewerState(element);
 
 }
 
-// Possible states: specs, map2D, map3D, altitude, statistics, forecast.
-function changeInterfaceState(tab_ID){
+function selectDataTab(element) {
 
-    newState = tab_ID.substring(0, tab_ID.indexOf('-'));
+    function changeDataDisplayState(element){
 
-    for (child of document.getElementsByClassName("display-system")) {
-        child.style.display = 'none';
-    }
-
-    document.getElementById(newState + "-container").style.display = 'flex';
+        tab_ID = element.id;
     
-    pageStates['interface_state'] = newState;
+        newState = tab_ID.substring(0, tab_ID.indexOf('-'));
 
-    if (["specs", "statistics", "forecast", "altitude"].includes(pageStates['interface_state'])) {
+        mountedApp.data_display_state = newState;
 
-        for (child of document.getElementsByClassName("label")) {
-            child.style.opacity = 0;
-        }
-
-        document.getElementById("date-panel").style.color = "transparent";
-        document.getElementById("date-panel").style.backgroundColor = "transparent";
-        document.getElementById("date-panel").style.borderWidth = "0 3px 0 3px";
-    }
-    else {
-
-        for (child of document.getElementsByClassName("label")) {
-            child.style.opacity = 1;
-        }
-
-        document.getElementById("date-panel").style.color = "rgb(255,255,255)";
-        document.getElementById("date-panel").style.backgroundColor = "rgba(31, 28, 28, 0.754)";
-        document.getElementById("date-panel").style.borderWidth = "0 3px 2px 3px";
     }
 
-
-}
-
-function selectDataTab(event) {
-
-    elementClass = event.target.className;
+    elementClass = element.className;
 
     tabs = document.getElementsByClassName(elementClass);
 
@@ -92,27 +76,14 @@ function selectDataTab(event) {
         tabs[index].style.fontWeight = 300;
     }
 
-    event.target.style.opacity = 0.9;
-    event.target.style.borderBottomStyle = "dashed";
-    event.target.style.borderWidth = "3px 3px 0.1px 3px";
-    event.target.style.fontWeight = 500;
-
-    changeDataDisplayState(event.target.id);
-
-}
-
-function changeDataDisplayState(tab_ID){
-
-    newState = tab_ID.substring(0, tab_ID.indexOf('-'));
-
-    for (child of document.getElementsByClassName("data-container")) {
-        child.style.display = 'none';
-    }
-
-    document.getElementById(newState + "-container").style.display = 'flex';
-    
-    pageStates['data_display'] = newState;
+    element.style.opacity = 0.9;
+    element.style.borderBottomStyle = "dashed";
+    element.style.borderWidth = "3px 3px 0.1px 3px";
+    element.style.fontWeight = 500;
 
 
+    changeDataDisplayState(element);
 
 }
+
+

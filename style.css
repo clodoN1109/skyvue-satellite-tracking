@@ -173,6 +173,8 @@ header {
 	align-items: center;
 	align-content: center;
 	justify-content: center;
+
+	opacity: 0;
 	
 }
 
@@ -223,7 +225,7 @@ input, .data-field output  {
 
 	border-style: solid;
 	border-color: rgb(255, 255, 255);
-	border-width: 0 3px 2px 3px;
+	border-width: 0 0 2px 0;
 	border-radius: 0;
 
 	font-family: courier; 
@@ -317,7 +319,7 @@ input, .data-field output  {
 
 	border-style: solid;
 	border-color: rgba(255, 255, 255, 0.888);
-	border-width: 0px 3px 0px 3px;
+	border-width: 0px 0px 0px 0px;
 	border-radius: 5px;
 
 }
@@ -386,7 +388,7 @@ input, .data-field output  {
 #main-window {
 
 	height: fit-content;
-	max-width: 80%;
+	width: fit-content;
 
 	display: flex;
 	flex-direction: column;
@@ -417,13 +419,13 @@ input, .data-field output  {
 
 	border-style: solid;
 	border-color: rgb(255, 255, 255);
-	border-width: 0px 3px 0px 3px;
+	border-width: 0px 0px 0px 0px;
 	border-radius: 0px;
 
 }
 
 .display-system {
-	display: none;
+	/* display: none; */
 }
 
 #specs-container {
@@ -436,7 +438,6 @@ input, .data-field output  {
 	margin: 0;
 	padding: 40px;
 
-	display: flex;
 	flex-direction: column;
 	align-items: center;
 	align-content: center;
@@ -525,10 +526,13 @@ input, .data-field output  {
 
 #map2D-container {
 
-	/* background-image: url(assets/images/mapmundi.png); 
-	background-size:cover;  */
+	/* width: 800px;  */
 	width: 800px; 
-	height: 400px;
+	height: 0;
+
+	object-fit: contain;
+
+	overflow-y: hidden;
 
 	cursor: crosshair;
 }
@@ -537,8 +541,9 @@ input, .data-field output  {
 
 	position: absolute;
 	z-index: 0;
-	height: inherit;
 	width: inherit;
+	height: inherit;
+	
 
 }
 
@@ -561,8 +566,8 @@ canvas {
 	z-index: 1;
 	width: inherit;
 	height: inherit;
-	/* border: 1px solid black; */
 
+	transition: 'width 3s';
 }
 	
 #satellite {
@@ -746,7 +751,7 @@ p{
 
 }
 
-.data-manager-box {
+.button-box {
 	width: 100%;
 	height: fit-content;
 
@@ -765,7 +770,7 @@ p{
 	border-radius: 0;
 }
 
-.data-manager-button {
+.button {
     
 	height: fit-content;
 	width: fit-content;
@@ -793,11 +798,11 @@ p{
 	color: white;
 }
 
-.data-manager-button:hover {
+.button:hover {
 	border-color: rgba(255, 255, 255, 0.667);
 } 
 
-.input-display {
+#source-display {
 
 	height: fit-content;
 	width: 100%;
@@ -818,7 +823,7 @@ p{
 
 	border-style: solid;
 	border-color: rgba(255, 255, 255, 0.788);
-	border-width: 1px 0 0 0;
+	border-width: 0px 0 0 0;
 	border-radius: 0px;
 
 	backdrop-filter: blur(20px);
@@ -1241,6 +1246,6 @@ a {
 a:hover{
 	color: rgb(255, 255, 255);
 	font-weight: bolder;
-	scale: 1.1;	
+	scale: 1.03;	
 }
 

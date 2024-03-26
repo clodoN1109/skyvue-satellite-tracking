@@ -13,12 +13,12 @@ function updateWikiInfo(){
 
 function updateUnits(event){
 
-  units[0] = (event.target.value).toLowerCase();
+  mountedApp.units = (event.target.value).toLowerCase();
 
   distance_unit_elements =  document.getElementsByClassName('distance-unit');
   velocity_unit_elements =  document.getElementsByClassName('velocity-unit');;
 
-  if (units[0] === 'miles') {
+  if (mountedApp.units === 'miles') {
 
     for (let index = 0; index < distance_unit_elements.length; index++) {
       distance_unit_elements[index].textContent = "miles";
@@ -29,7 +29,7 @@ function updateUnits(event){
     }
 
   } else {
-    if (units[0] = 'kilometers') {
+    if (mountedApp.units = 'kilometers') {
 
       for (let index = 0; index < distance_unit_elements.length; index++) {
         distance_unit_elements[index].textContent = "Km";
@@ -84,12 +84,6 @@ function copyCoordinates(){
   alert("Copied the coordinates: " + copyInfo);
 
 }
-
-function exportData(){}
-
-// const selectElement = document.getElementById("mySelect");
-// const selectedValue = selectElement.value;
-// const selectedText = selectElement.tabs[selectElement.selectedIndex].text;
 
 // Making an element A inherit the height value from an element B .
 function makeSameHeightByID(elementA_id, elementB_id){
@@ -181,3 +175,40 @@ function showUserLocation(user_location){
   }
     
 }
+
+function gradualOpacity(className, timeToAppear){
+
+  elementsOfClass = document.getElementsByClassName(className);
+ 
+  for (let index = 0; index < elementsOfClass.length; index++) {
+  
+    elementsOfClass[index].style.transition = 'opacity 0s'; 
+    elementsOfClass[index].style.opacity = 0;
+      
+  }
+ 
+  setTimeout(() => {
+    
+  for (let index = 0; index < elementsOfClass.length; index++) {
+  
+    elementsOfClass[index].style.transition = 'opacity 3s'; 
+    elementsOfClass[index].style.opacity = 1;
+      
+  }
+  }, timeToAppear);
+  
+}
+
+function map2DGradualAppearance(timeToAppear){
+
+  setTimeout(() => {
+    document.getElementById('map2D-container').style.transition = 'height 1.5s';  
+    document.getElementById('map2D-container').style.height = '400px';  
+
+    setTimeout(() => {
+      showUserLocation(user_location);
+    }, 3000);
+  }, timeToAppear);
+  
+}
+

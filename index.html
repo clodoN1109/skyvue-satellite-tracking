@@ -9,521 +9,551 @@
 	
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="./components/map3D/css/style.css" rel="stylesheet" type="text/css"/>
-	<link href="./components/integerSelector/style.css" rel="stylesheet" type="text/css" />
+	<link href="./components/numberSelector/style.css" rel="stylesheet" type="text/css" />
 	<link href="./components/dataManager/style.css" rel="stylesheet" type="text/css" />
 	<link href="./components/checkbox/style.css" rel="stylesheet" type="text/css" />
 
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
 	<body>
 
-		<div id="data-manager-container">
-			<div id="data-manager">
+		<div id="app">
 
-				<div id="close-button-container">
-					<div onclick="closeDataManager()" class="close-button" id="data-manager-close-button">x</div>
-				</div>
-			
-				<div id="data-manager-title-container">
-					<div id="data-manager-title"><img src="./assets/images/data.png" width="60px">Data Manager</div>
-				</div>
-
-				<div onmouseover="prepareDownloadButton()" id="download-button-container">
-					<div class="download-button-box">
-						<a id="download-button" class="download-button"><img src="./assets/images/export.png" width="30px">DOWNLOAD DATA</a>
-					</div>
-				</div>
-
-				<div class="data-table-container">
-					<div id="data-table">
-
-						<div class="header-row-container" id="data-header">
-							<div class="data-row" id="data-row-header">
-								<div class="index-data-manager data-manager-header-field">#</div>
-								<div class="time-data-manager data-manager-header-field">TIME</div>
-								<div class="latitude-data-manager data-manager-header-field">LATITUDE</div>
-								<div class="longitude-data-manager data-manager-header-field">LONGITUDE</div>
-								<div class="altitude-data-manager data-manager-header-field">ALTIDUDE</div>
-								<div class="velocity-data-manager data-manager-header-field">VELOCITY</div>
-								<div class="solar-latitude-data-manager data-manager-header-field">SOLAR LAT.</div>
-								<div class="solar-longitude-data-manager data-manager-header-field">SOLAT LON.</div>
-								<div class="visibility-data-manager data-manager-header-field">VISIBILITY</div>
-								<div class="footprint-data-manager data-manager-header-field">FOOTPRINT</div>
-							</div>
-							<div class="data-row-gadgets" style="opacity: 0;">
-								<img style="cursor: default;" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
-								<img style="cursor: default;" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button">
-
-							</div>
-						</div>
-
-						<div class="units-row-container" id="data-header-units">
-							<div class="data-row" id="data-row-header-units">
-								<div class="index-data-manager data-manager-header-field-units">&nbsp;</div>
-								<div class="time-data-manager data-manager-header-field-units">(GMT)</div>
-								<div class="latitude-data-manager data-manager-header-field-units">(degrees)</div>
-								<div class="longitude-data-manager data-manager-header-field-units">(degrees)</div>
-								<div class="altitude-data-manager data-manager-header-field-units">(<div class="data-manager-table-units distance-unit">Km</div>)</div>
-								<div class="velocity-data-manager data-manager-header-field-units">(<div class="data-manager-table-units velocity-unit">Km/h</div>)</div>
-								<div class="solar-latitude-data-manager data-manager-header-field-units">(degrees)</div>
-								<div class="solar-longitude-data-manager data-manager-header-field-units">(degrees)</div>
-								<div class="visibility-data-manager data-manager-header-field-units">&nbsp;</div>
-								<div class="footprint-data-manager data-manager-header-field-units">(<div class="data-manager-table-units distance-unit">Km</div>)</div>
-							</div>
-							<div class="data-row-gadgets" style="opacity: 0;">
-								<img style="cursor: default;" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
-								<img style="cursor: default;" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button">
-							</div>
-						</div>
-
-						<div class="data-row-container" id="data-row-template">
-							<div class="data-row">
-								<div class="index-data-manager data-manager-data-field"></div>
-								<div class="time-data-manager data-manager-data-field"></div>
-								<div class="latitude-data-manager data-manager-data-field"></div>
-								<div class="longitude-data-manager data-manager-data-field"></div>
-								<div class="altitude-data-manager data-manager-data-field"></div>
-								<div class="velocity-data-manager data-manager-data-field"></div>
-								<div class="solar-latitude-data-manager data-manager-data-field"></div>
-								<div class="solar-longitude-data-manager data-manager-data-field"></div>
-								<div class="visibility-data-manager data-manager-data-field"></div>
-								<div class="footprint-data-manager data-manager-data-field"></div>
-							</div>
-							<div class="data-row-gadgets">
-								<img onclick="copyRowData(event)" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
-								<!-- <img onclick="deleteRow(event)" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button"> -->
-								<label class="bin-b	utton data-manager-row-button" for="myCheckbox">
-									<input checked type="checkbox" id="myCheckbox" name="myCheckbox">
-								</label>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-
-				<div class="metadata-container">
-					<div id="metadata">
-						<div class="meta-field">
-							<div class="meta-field-title">source: </div>
-							<div id="source-meta"></div>
-						</div>
-						<div class="meta-field">
-							<div class="meta-field-title">name: </div>
-							<div id="name-meta"></div>
-						</div>
-						<div class="meta-field">
-							<div class="meta-field-title">id: </div>
-							<div id="id-meta"></div>
-						</div>
-						<div class="meta-field">
-							<div class="meta-field-title">units: </div>
-							<div id="units-meta"></div>
-						</div>
-						<div class="meta-field">
-							<div class="meta-field-title">rows: </div>
-							<div id="rows-meta"></div>
-						</div>
-						<div class="meta-field">
-							<div class="meta-field-title">columns: </div>
-							<div id="columns-meta"></div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-		<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
-		
-		<header>
-			
-			<div class ="header-grid">
-				<div class="header-box">
-					<img id="logo" src="assets/images/logo.png">
-					<div id="header-title-box">
-						<div class="header-text" id="header-title">Constellation</div>
-						<div class="header-text" id="header-subtitle">Satellite Tracking Graphical Interface</div>
-					</div>
-					
-				</div>
-				
-				<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="45px"></a>
-				
-				<!-- <div class="warning">All content here is intended only for learning purposes.</div>
-				</div> -->
-				
-			</div>
-			
-		</header>
-		
-		<div class="interface">
-
-			<div id="data-display" >
-
-				<div id="log-box" >
-					<div class="loader" id="log-loader"></div>
-					<div id="log" >stand by</div>
-				</div>
-				
-				<div class="input-display">
-					<div>Satellite selection:</div>
-					<div class="data-field">
-						<select onchange="{startTracking(event)}" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475);"  id="satellite-field">
-							<option value="reset"></option>
-							<option value="noradID-25544">ISS (International Space Station)</option>
-						</select>
-					</div>
-				</div>
-
-				<div id="data-tabs">
-					<div onclick="{selectDataTab(event)}" class="data-tab" id="output-tab">DATA</div>
-					<div onclick="{selectDataTab(event)}" class="data-tab" id="input-tab">CONFIG.</div>
-				</div>
-
-				
-				<div class="data-container" id="output-container">
-					
-					<div class="parameters-display">
-						
-						<div>
-							<div>Latitude</div>
-							<div class="data-field">
-								<output style="cursor: default;" id="latitude" readonly value="0"></output> 
-								<div class="units coordinates-unit">deg</div>
-							</div>
-						</div>
-						
-						<div>
-							<div>Longitude</div>
-							<div class="data-field">
-								<output style="cursor: default;" type="text" id="longitude" readonly class="" value="0"></output> 
-								<div class="units coordinates-unit">deg</div>
-							</div>
-						</div>
-						
-						<div>
-							<div>Altitude</div>
-							<div class="data-field">
-								<output style="cursor: default;" type="text" id="altitude" readonly class="" value="0"></output> 
-								<div class="units distance-unit">Km</div>
-							</div>
-						</div>
-						
-						<div>
-							<div>Velocity</div>
-							<div class="data-field">
-								<output style="cursor: default;" type="text" id="velocity" readonly class="" value="0"></output> 
-								<div class="units velocity-unit">Km/h</div>
-							</div>
-						</div>
-
-						<div>
-							<div>Solar Latitude</div>
-							<div class="data-field">
-								<output style="cursor: default;" type="text" id="solar-latitude" readonly class="" value="0"></output> 	
-								<div class="units coordinates-unit">deg</div>
-							</div>
-						</div>
-
-						<div>
-							<div>Solar Longitude</div>
-							<div class="data-field">
-								<output style="cursor: default;" type="text" id="solar-longitude" readonly class="" value="0"></output> 	
-								<div class="units coordinates-unit">deg</div>
-							</div>
-						</div>
-						
-						<div>
-							<div>
-								<div class="spec-info-mini" title="The visibility of a satellite depends on its altitude. It determines the area from which the satellite is visible from an Earth station.">?</div>
-								Visibility
-							</div>
-							<div class="data-field">
-								<output style="cursor: default;" type="text" id="visibility" readonly class="" value="0"></output> 	
-								<div class="units">&nbsp;</div>
-							</div>
-						</div>
-						
-						<div>
-							<div>
-								<div class="spec-info-mini" title="The footprint of a communications satellite is the ground area that its transponders offer coverage, and determines the satellite dish diameter required to receive each transponder's signal.">?</div>
-								 Footprint
-							</div>
-							<div class="data-field">
-								<output style="cursor: default;" type="text" id="footprint" readonly class="" value="0"></output> 	
-								<div class="units distance-unit">Km</div>
-							</div>
-						</div>
-
-						<br>
-						
-					</div>
-
-					<div class="data-manager-box">
-						<button onclick="openDataManager()" class="data-manager-button"><img src="./assets/images/data.png" width="30px">DATA MANAGER</button>
-					</div>
-					
-				</div>
-
-				<div class="data-container" id="input-container">
-					
-					<div class="parameters-display">
-
-						<div>
-							<div>
-								<div class="spec-info-mini" title="Interval between queries.">?</div>
-								Data update time
-							</div>
-
-							<div class="data-field input-box">
-								<input type="text" id="data-update-time" readonly class="input-field" style="cursor: default;" value="5.0">
-								<div class="units time-unit">s</div>
-								<div class="updown-button-pair">
-									<button onclick="increment('data-update-time')" class="updown-button">▲</button>
-									<button onclick="decrement('data-update-time')" class="updown-button">▼</button>	
-								</div>
-							</div>	
-						</div>
-
-						<div>
-							<div>
-								<div class="spec-info-mini" title="Path plot point density.">?</div>
-								Plot detail level
-							</div>
-
-							<div class="data-field input-box">
-								<input type="text" id="line-level-detail" readonly class="input-field" style="cursor: default;" value="5">
-								<div class="units time-unit">%</div>
-								<div class="updown-button-pair">
-									<button onclick="increment('line-level-detail')" class="updown-button">▲</button>
-									<button onclick="decrement('line-level-detail')" class="updown-button">▼</button>	
-								</div>
-							</div>	
-						</div>
-
-						
-						<div>
-							<div>
-								<div class="spec-info-mini" title="Interval for re-rendering the map canvas.">?</div>
-								Display refresh time
-							</div>
-
-							<div class="data-field input-box">
-								<input type="text" id="display-update-time" readonly class="input-field" style="cursor: default;" value="1.0">
-								<div class="units time-unit">s</div>
-								<div class="updown-button-pair">
-									<button onclick="increment('display-update-time')" class="updown-button">▲</button>
-									<button onclick="decrement('display-update-time')" class="updown-button">▼</button>	
-								</div>
-							</div>	
-						</div>
+			<div id="data-manager-container">
+				<div id="data-manager">
 	
-
-						
-						<div>
-							<div>
-								<div class="spec-info-mini" title="">?</div>
-								 Units
-							</div>
-							<div class="data-field">
-								<select onchange="{updateUnits(event)}" title="units selection" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475); width: 160px;"  id="units-system-field">
-									<option value="Kilometers">metric</option>
-									<option value="Miles">imperial</option>
-								</select>						
-							</div>
-						</div>
-						
-						<br>
-						
+					<div id="close-button-container">
+						<div onclick="closeDataManager()" class="close-button" id="data-manager-close-button">x</div>
 					</div>
-
-				</div>
 				
-			</div>
-			
-			<div id ="main-window">
-				
-				<div id="view-tabs">
-					<div onclick="{selectTab(event)}" class="tab" id="specs-tab">ID</div>
-					<div onclick="{selectTab(event); updateObjectPosition(object_path);}" class="tab" id="map2D-tab">2D VIEW</div>
-					<div onclick="{selectTab(event)}" class="tab" id="map3D-tab">3D VIEW</div>
-					<div onclick="{selectTab(event)}" class="tab" id="altitude-tab">ALTITUDE</div>
-					<div onclick="{selectTab(event)}" class="tab" id="statistics-tab">STATISTICS</div>
-					<div onclick="{selectTab(event)}" class="tab" id="forecast-tab">FORECAST</div>
-				</div>
-
-				<output id="date-panel" type="text" readonly value=""></output>
-				
-				<div id="screen" >
-					
-					<div class="display-system" id="specs-container">
-						<div class="spec">
-							<div style="display: inline-flex; gap: 5px;">
-								<div class="spec-info" title="Name of the object currently being tracked.">?</div>
-								<div class="spec-name">name: </div>	
+					<div id="data-manager-title-container">
+						<div id="data-manager-title"><img src="./assets/images/data.png" width="60px">Data Manager</div>
+					</div>
+	
+					<div onmouseover="prepareDownloadButton()" id="download-button-container">
+						<div class="download-button-box">
+							<a id="download-button" class="download-button"><img src="./assets/images/export.png" width="30px">DOWNLOAD DATA</a>
+						</div>
+					</div>
+	
+					<div class="data-table-container">
+						<div id="data-table">
+	
+							<div class="header-row-container" id="data-header">
+								<div class="data-row" id="data-row-header">
+									<div class="index-data-manager data-manager-header-field">#</div>
+									<div class="time-data-manager data-manager-header-field">TIME</div>
+									<div class="latitude-data-manager data-manager-header-field">LATITUDE</div>
+									<div class="longitude-data-manager data-manager-header-field">LONGITUDE</div>
+									<div class="altitude-data-manager data-manager-header-field">ALTIDUDE</div>
+									<div class="velocity-data-manager data-manager-header-field">VELOCITY</div>
+									<div class="solar-latitude-data-manager data-manager-header-field">SOLAR LAT.</div>
+									<div class="solar-longitude-data-manager data-manager-header-field">SOLAT LON.</div>
+									<div class="visibility-data-manager data-manager-header-field">VISIBILITY</div>
+									<div class="footprint-data-manager data-manager-header-field">FOOTPRINT</div>
+								</div>
+								<div class="data-row-gadgets" style="opacity: 0;">
+									<img style="cursor: default;" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
+									<img style="cursor: default;" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button">
+	
+								</div>
 							</div>
-							<output class="spec-value" id="name" type="text" readonly value="0">
-						</div>
-						<div class="spec">
-							<div style="display: inline-flex; gap: 5px;">
-								<div class="spec-info" title="The NORAD Catalog Number, also known as the SATCAT, is a nine-digit sequential identifier assigned by the United States Space Command (USSPACECOM) to all artificial objects in Earth’s orbit and those that have left Earth’s orbit. It represents the order of launch or discovery and is used to track satellites and other space objects.">?</div>
-								<div class="spec-id">NORAD catalog number:</div>	
+	
+							<div class="units-row-container" id="data-header-units">
+								<div class="data-row" id="data-row-header-units">
+									<div class="index-data-manager data-manager-header-field-units">&nbsp;</div>
+									<div class="time-data-manager data-manager-header-field-units">(GMT)</div>
+									<div class="latitude-data-manager data-manager-header-field-units">(degrees)</div>
+									<div class="longitude-data-manager data-manager-header-field-units">(degrees)</div>
+									<div class="altitude-data-manager data-manager-header-field-units">(<div class="data-manager-table-units distance-unit">Km</div>)</div>
+									<div class="velocity-data-manager data-manager-header-field-units">(<div class="data-manager-table-units velocity-unit">Km/h</div>)</div>
+									<div class="solar-latitude-data-manager data-manager-header-field-units">(degrees)</div>
+									<div class="solar-longitude-data-manager data-manager-header-field-units">(degrees)</div>
+									<div class="visibility-data-manager data-manager-header-field-units">&nbsp;</div>
+									<div class="footprint-data-manager data-manager-header-field-units">(<div class="data-manager-table-units distance-unit">Km</div>)</div>
+								</div>
+								<div class="data-row-gadgets" style="opacity: 0;">
+									<img style="cursor: default;" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
+									<img style="cursor: default;" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button">
+								</div>
 							</div>
-							<output class="spec-value" id="id" type="text" readonly value="0">
-						</div>
-					</div>
-
-					<div class="display-system" id="map2D-container">
-						<img id="map2D-img" src="./assets/images/map2D.png">
-						<img id="satellite" src="assets/images/satellite.png" alt="a mundi map" lang="en">
-						<div id="visibility-radius"></div>
-						<img id="user-location" src="assets/images/here.png" alt="here" lang="en">
-						<img width="20px" id="user-location-flag">
-						<img width="20px" id="satellite-location-flag">
-						<div id="satellite-location-name"></div>
-						<div id="user-location-name"></div>
-						<canvas id="canvas"></canvas>
-					</div>
-					<div class="display-system" id="map3D-container">
-									
-						<div class="padding_wrapper"><div class="es_space_drawer_container" id="es_earth_sunlight"></div></div>
-						<div class="es_date" id="es_earth_sunlight_date_slider_container"></div>
-						<div class="es_time" id="es_earth_sunlight_time_slider_container"></div>
-
-					</div>
-					<div class="display-system SOON" id="altitude-container">
-						
-						<div>IN DEVELOPMENT</div>
-
-						<div id="contribute">
-							<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-							<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
-						</div>
-		
-					</div>
-					<div class="display-system SOON" id="statistics-container">
-						
-						<div>IN DEVELOPMENT</div>
-
-						<div id="contribute">
-							<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-							<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
-						</div>
-		
-					</div>
-					<div class="display-system SOON" id="forecast-container">
-
-						<div>IN DEVELOPMENT</div>
-
-						<div id="contribute">
-							<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-							<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
-						</div>
+	
+							<div class="data-row-container" id="data-row-template">
+								<div class="data-row">
+									<div class="index-data-manager data-manager-data-field"></div>
+									<div class="time-data-manager data-manager-data-field"></div>
+									<div class="latitude-data-manager data-manager-data-field"></div>
+									<div class="longitude-data-manager data-manager-data-field"></div>
+									<div class="altitude-data-manager data-manager-data-field"></div>
+									<div class="velocity-data-manager data-manager-data-field"></div>
+									<div class="solar-latitude-data-manager data-manager-data-field"></div>
+									<div class="solar-longitude-data-manager data-manager-data-field"></div>
+									<div class="visibility-data-manager data-manager-data-field"></div>
+									<div class="footprint-data-manager data-manager-data-field"></div>
+								</div>
+								<div class="data-row-gadgets">
+									<img onclick="copyRowData(event)" src="./components/dataManager/assets/copy.png" class="copyButton data-manager-row-button">
+									<!-- <img onclick="deleteRow(event)" src="./components/dataManager/assets/bin.png" class="binButton data-manager-row-button"> -->
+									<label class="bin-b	utton data-manager-row-button" for="myCheckbox">
+										<input checked type="checkbox" id="myCheckbox" name="myCheckbox">
+									</label>
+								</div>
+							</div>
 							
+						</div>
 					</div>
-
-				</div>
-
-				<div id="view-labels">
-					<div class="label" id="user-label" style="opacity: 0.9;">
-						<img class="label-img" src="./assets/images/here.png">
-						<div class="label-text">you're here</div>
-					</div>
-					<div class="label" id="satellite-label" style="opacity: 0.9;">
-						<img class="label-img" src="./assets/images/satellite.png">
-						<div class="label-text">sattelite</div>
-					</div>
-					<div class="label" id="dashed-circle-label" style="opacity: 0.9;">
-						<img class="label-img" src="./assets/images/dashed_circle.png">
-						<div class="label-text">visibility</div>
-					</div>
-					<div class="label" id="user-label" style="opacity: 0.9;">
-						<img class="label-img" src="./assets/images/dotted_line.png">
-						<div class="label-text">traveled path</div>
-					</div>
-					<div class="label" id="user-label" style="opacity: 0.9;">
-						<img class="label-img" src="./assets/images/continuous_line.png">
-						<div class="label-text">predicted path</div>
-					</div>
-				</div>
-				
-				
-			</div>
-			
-			
-		</div>
-		
-		<div class="band-container">
-			<div class="band-display">
-				<div style="width: 100%; display: flex; flex-direction: column;" >
-					<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
-					<div style="width: 100%; display: flex; justify-content: center;">
-						<div class="loader" id="wiki-loader"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="band-container">
-			<div class="band-display">
-				<div id="contribute">
-					<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-					<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
-				</div>
-				<div class="inline-flex-container">
-					<h1 id="the-team-title">THE TEAM</h1>
-					<div style="display: inline-flex; flex-wrap: nowrap; gap: 4vh;">
-						<div class="team-button-container"><a target="_blank" href="" target="_blank"><button class="team-button" id="dev1-button"></button></a><div class="dev-name">Clodomir Vianna</div></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="band-container">
-			<div class="band-display">
-				<div class="poem">
-					Lanterns of the Night
-					<br><br><br>
-					In the quiet of twilight, we gather,
-					<br><br>
-					Our hearts like paper lanterns, fragile and light.
-					<br><br>
-					We write our wishes, our secret desires,
-					<br><br>
-					And set them adrift on the canvas of the night.
-					<br>
-				</div>
-			</div>
-		</div>
-		
-		<footer>	
-			
-			<div class ="footer-grid">
-				
-				<a target="_blank" href="https://clodo.me">
-					<div class="footer-box">
-						
-						<div style="font-family:courier; font-size: 10px; color: white;"><div style="transition: all 0s">design by Clodo</div></div>
-						
-						<div class="box-image" ></div>
-						
-						<div style="transition: all 0s; color: white;"><div class="clodo-web-address" style="font-size: 0.8rem; transition: all 0s;">clodo.me</div></div> 
-						
-					</div>
-				</a>
-
-				<div class="powered-by">
-					<div>Powerd by</div>
-				
-					<a target="_blank" href="https://wheretheiss.at/w/developer"><img src="./assets/images/wheretheissat.png" width="200px"></a>
 	
-					<a target="_blank" href="https://flagsapi.com/"><img src="https://flagsapi.com/img/logo-countryflags.png" width="200px" style="border-radius: 2%; background-color: rgba(255, 255, 255, 0.205);"></a>
+					<div class="metadata-container">
+						<div id="metadata">
+							<div class="meta-field">
+								<div class="meta-field-title">source: </div>
+								<div id="source-meta"></div>
+							</div>
+							<div class="meta-field">
+								<div class="meta-field-title">name: </div>
+								<div id="name-meta"></div>
+							</div>
+							<div class="meta-field">
+								<div class="meta-field-title">id: </div>
+								<div id="id-meta"></div>
+							</div>
+							<div class="meta-field">
+								<div class="meta-field-title">units: </div>
+								<div id="units-meta">{{ units }}</div>
+							</div>
+							<div class="meta-field">
+								<div class="meta-field-title">rows: </div>
+								<div id="rows-meta"></div>
+							</div>
+							<div class="meta-field">
+								<div class="meta-field-title">columns: </div>
+								<div id="columns-meta"></div>
+							</div>
+						</div>
+					</div>
+	
+				</div>
+			</div>
+	
+			<video id="video-bg" muted autoplay loop src="./assets/images/bg.mp4"></video>
+			
+			<header>
+				
+				<div class ="header-grid">
+					<div class="header-box">
+						<img id="logo" src="assets/images/logo.png">
+						<div id="header-title-box">
+							<div class="header-text" id="header-title">skyVue</div>
+							<div class="header-text" id="header-subtitle">Satellite Tracking Graphical Interface</div>
+						</div>
+						
+					</div>
+					
+					<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="45px"></a>
+					
+					<!-- <div class="warning">All content here is intended only for learning purposes.</div>
+					</div> -->
+					
+				</div>
+				
+			</header>
+			
+			<div class="interface">
+	
+				<div id="data-display" >
+	
+					<div id="log-box" >
+						<div class="loader" id="log-loader"></div>
+						<div id="log" ></div>
+					</div>
+	
+					<div id="data-tabs">
+						<div onclick="{selectDataTab(event.target)}" class="data-tab" id="source-tab">SOURCE</div>
+						<div onclick="{selectDataTab(event.target)}" class="data-tab" id="data-tab">DATA</div>
+						<div onclick="{selectDataTab(event.target)}" class="data-tab" id="config-tab">CONFIG.</div>
+					</div>
+	
+					<div class="data-container" id="source-container" v-show="data_display_state === 'source'">
+						
+						<div class="parameters-display">
+							<div id="source-display">
+								
+								<div>Satellite selection:</div>
+								<div class="data-field">
+									<select onchange="{selectSatellite(event)}" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475);"  id="satellite-field">
+										<option value="reset"></option>
+										<option v-for="sat in satellites" :value="sat.norad_number">{{sat['name']}}</option>
+									</select>
+								</div>
+	
+							</div>
+						</div>
+
+						<div v-if="!tracking" class="button-box">
+							<button onclick="startTracking(mountedApp.selected_satellite)" class="button">
+								<img src="./assets/images/start_tracking.png" width="30px">
+								START TRACKING
+							</button>
+						</div>
+
+						<div v-if="tracking" class="button-box">
+							<button onclick="stopTracking()" class="button">
+								<img src="./assets/images/start_tracking.png" width="30px">
+								STOP TRACKING
+							</button>
+						</div>
+
+					</div>
+					
+					<div class="data-container" id="output-container" v-show="data_display_state === 'data'">
+						
+						<div class="parameters-display">
+							
+							<div>
+								<div>Latitude</div>
+								<div class="data-field">
+									<output style="cursor: default;" id="latitude" readonly value="0"></output> 
+									<div class="units coordinates-unit">deg</div>
+								</div>
+							</div>
+							
+							<div>
+								<div>Longitude</div>
+								<div class="data-field">
+									<output style="cursor: default;" type="text" id="longitude" readonly class="" value="0"></output> 
+									<div class="units coordinates-unit">deg</div>
+								</div>
+							</div>
+							
+							<div>
+								<div>Altitude</div>
+								<div class="data-field">
+									<output style="cursor: default;" type="text" id="altitude" readonly class="" value="0"></output> 
+									<div class="units distance-unit">Km</div>
+								</div>
+							</div>
+							
+							<div>
+								<div>Velocity</div>
+								<div class="data-field">
+									<output style="cursor: default;" type="text" id="velocity" readonly class="" value="0"></output> 
+									<div class="units velocity-unit">Km/h</div>
+								</div>
+							</div>
+	
+							<div>
+								<div>Solar Latitude</div>
+								<div class="data-field">
+									<output style="cursor: default;" type="text" id="solar-latitude" readonly class="" value="0"></output> 	
+									<div class="units coordinates-unit">deg</div>
+								</div>
+							</div>
+	
+							<div>
+								<div>Solar Longitude</div>
+								<div class="data-field">
+									<output style="cursor: default;" type="text" id="solar-longitude" readonly class="" value="0"></output> 	
+									<div class="units coordinates-unit">deg</div>
+								</div>
+							</div>
+							
+							<div>
+								<div>
+									<div class="spec-info-mini" title="The visibility of a satellite depends on its altitude. It determines the area from which the satellite is visible from an Earth station.">?</div>
+									Visibility
+								</div>
+								<div class="data-field">
+									<output style="cursor: default;" type="text" id="visibility" readonly class="" value="0"></output> 	
+									<div class="units">&nbsp;</div>
+								</div>
+							</div>
+							
+							<div>
+								<div>
+									<div class="spec-info-mini" title="The footprint of a communications satellite is the ground area that its transponders offer coverage, and determines the satellite dish diameter required to receive each transponder's signal.">?</div>
+									 Footprint
+								</div>
+								<div class="data-field">
+									<output style="cursor: default;" type="text" id="footprint" readonly class="" value="0"></output> 	
+									<div class="units distance-unit">Km</div>
+								</div>
+							</div>
+	
+							<br>
+							
+						</div>
+	
+						<div class="button-box">
+							<button onclick="openDataManager()" class="button"><img src="./assets/images/data.png" width="30px">DATA MANAGER</button>
+						</div>
+						
+					</div>
+	
+					<div class="data-container" id="input-container" v-show="data_display_state === 'config'">
+						
+						<div class="parameters-display">
+	
+							<div>
+								<div>
+									<div class="spec-info-mini" title="Interval between queries.">?</div>
+									Data update time
+								</div>
+	
+								<div class="data-field input-box">
+									<input type="text" id="data-update-time" readonly class="input-field" style="cursor: default;" value="5.0">
+									<div class="units time-unit">s</div>
+									<div class="updown-button-pair">
+										<button onclick="increment('data-update-time')" class="updown-button">▲</button>
+										<button onclick="decrement('data-update-time')" class="updown-button">▼</button>	
+									</div>
+								</div>	
+							</div>
+	
+							<div>
+								<div>
+									<div class="spec-info-mini" title="Path plot point density.">?</div>
+									Plot detail level
+								</div>
+	
+								<div class="data-field input-box">
+									<input type="text" id="line-level-detail" readonly class="input-field" style="cursor: default;" value="5">
+									<div class="units time-unit">%</div>
+									<div class="updown-button-pair">
+										<button onclick="increment('line-level-detail')" class="updown-button">▲</button>
+										<button onclick="decrement('line-level-detail')" class="updown-button">▼</button>	
+									</div>
+								</div>	
+							</div>
+	
+							
+							<div>
+								<div>
+									<div class="spec-info-mini" title="Interval for re-rendering the map canvas.">?</div>
+									Display refresh time
+								</div>
+	
+								<div class="data-field input-box">
+									<input type="text" id="display-update-time" readonly class="input-field" style="cursor: default;" value="1.0">
+									<div class="units time-unit">s</div>
+									<div class="updown-button-pair">
+										<button onclick="increment('display-update-time')" class="updown-button">▲</button>
+										<button onclick="decrement('display-update-time')" class="updown-button">▼</button>	
+									</div>
+								</div>	
+							</div>
+		
+	
+							
+							<div>
+								<div>
+									<div class="spec-info-mini" title="">?</div>
+									 Units
+								</div>
+								<div class="data-field">
+									<select onchange="{updateUnits(event)}" title="units selection" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475); width: 160px;"  id="units-system-field">
+										<option value="Kilometers">metric</option>
+										<option value="Miles">imperial</option>
+									</select>						
+								</div>
+							</div>
+							
+							<br>
+							
+						</div>
+	
+					</div>
+					
+				</div>
+				
+				<div id ="main-window">
+					
+					<div id="view-tabs">
+						<div onclick="{selectViewerTab(event.target)}" class="tab" id="specs-tab">SPECS</div>
+						<div onclick="{selectViewerTab(event.target); updateObjectPosition(object_path);}" class="tab" id="map2D-tab">2D VIEW</div>
+						<div onclick="{selectViewerTab(event.target)}" class="tab" id="map3D-tab">3D VIEW</div>
+						<div onclick="{selectViewerTab(event.target)}" class="tab" id="altitude-tab">ALTITUDE</div>
+						<div onclick="{selectViewerTab(event.target)}" class="tab" id="statistics-tab">STATISTICS</div>
+						<div onclick="{selectViewerTab(event.target)}" class="tab" id="forecast-tab">FORECAST</div>
+					</div>
+	
+					<output id="date-panel" type="text" readonly value=""></output>
+					
+					<div id="screen" >
+						
+						<div class="display-system" id="specs-container" v-show="viewer_state === 'specs'">
+							<div class="spec">
+								<div style="display: inline-flex; gap: 5px;">
+									<div class="spec-info" title="Name of the object currently being tracked.">?</div>
+									<div class="spec-name">name: </div>	
+								</div>
+								<output class="spec-value" id="name" type="text" readonly value="0">
+							</div>
+							<div class="spec">
+								<div style="display: inline-flex; gap: 5px;">
+									<div class="spec-info" title="The NORAD Catalog Number, also known as the SATCAT, is a nine-digit sequential identifier assigned by the United States Space Command (USSPACECOM) to all artificial objects in Earth’s orbit and those that have left Earth’s orbit. It represents the order of launch or discovery and is used to track satellites and other space objects.">?</div>
+									<div class="spec-id">NORAD catalog number:</div>	
+								</div>
+								<output class="spec-value" id="id" type="text" readonly value="0">
+							</div>
+						</div>
+	
+						<div class="display-system" id="map2D-container" v-show="viewer_state === 'map2D'">
+							<img id="map2D-img" src="./assets/images/map2D.png">
+							<img id="satellite" src="assets/images/satellite.png" alt="a mundi map" lang="en">
+							<div id="visibility-radius"></div>
+							<img id="user-location" src="assets/images/here.png" alt="here" lang="en">
+							<img width="20px" id="user-location-flag">
+							<img width="20px" id="satellite-location-flag">
+							<div id="satellite-location-name"></div>
+							<div id="user-location-name"></div>
+							<canvas id="canvas"></canvas>
+						</div>
+						<div class="display-system" id="map3D-container" v-show="viewer_state === 'map3D'">
+										
+							<div class="padding_wrapper"><div class="es_space_drawer_container" id="es_earth_sunlight"></div></div>
+							<div class="es_date" id="es_earth_sunlight_date_slider_container"></div>
+							<div class="es_time" id="es_earth_sunlight_time_slider_container"></div>
+	
+						</div>
+						<div class="display-system SOON" id="altitude-container" v-show="viewer_state === 'altitude'">
+							
+							<div>IN DEVELOPMENT</div>
+	
+							<div id="contribute">
+								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+							</div>
+			
+						</div>
+						<div class="display-system SOON" id="statistics-container" v-show="viewer_state === 'statistics'">
+							
+							<div>IN DEVELOPMENT</div>
+	
+							<div id="contribute">
+								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+							</div>
+			
+						</div>
+						<div class="display-system SOON" id="forecast-container" v-show="viewer_state === 'forecast'">
+	
+							<div>IN DEVELOPMENT</div>
+	
+							<div id="contribute">
+								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+							</div>
+								
+						</div>
+	
+					</div>
+	
+					<div id="view-labels">
+						<div class="label" id="user-label" style="opacity: 0.9;">
+							<img class="label-img" src="./assets/images/here.png">
+							<div class="label-text">you're here</div>
+						</div>
+						<div class="label" id="satellite-label" style="opacity: 0.9;">
+							<img class="label-img" src="./assets/images/satellite.png">
+							<div class="label-text">sattelite</div>
+						</div>
+						<div class="label" id="dashed-circle-label" style="opacity: 0.9;">
+							<img class="label-img" src="./assets/images/dashed_circle.png">
+							<div class="label-text">footprint</div>
+						</div>
+						<div class="label" id="user-label" style="opacity: 0.9;">
+							<img class="label-img" src="./assets/images/dotted_line.png">
+							<div class="label-text">traveled path</div>
+						</div>
+						<div class="label" id="user-label" style="opacity: 0.9;">
+							<img class="label-img" src="./assets/images/continuous_line.png">
+							<div class="label-text">predicted path</div>
+						</div>
+					</div>
+					
+					
 				</div>
 				
 				
 			</div>
 			
-		</footer>
+			<div class="band-container">
+				<div class="band-display">
+					<div style="width: 100%; display: flex; flex-direction: column;" >
+						<div class="wikiInfo" style="font-weight: bolder; cursor: default;"> "The International Space Station (ISS) is the largest modular space station currently in low Earth orbit." </div>
+						<div style="width: 100%; display: flex; justify-content: center;">
+							<div class="loader" id="wiki-loader"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="band-container">
+				<div class="band-display">
+					<div id="contribute">
+						<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+						<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+					</div>
+					<div class="inline-flex-container">
+						<h1 id="the-team-title">THE TEAM</h1>
+						<div style="display: inline-flex; flex-wrap: nowrap; gap: 4vh;">
+							<div class="team-button-container"><a target="_blank" href="" target="_blank"><button class="team-button" id="dev1-button"></button></a><div class="dev-name">Clodomir Vianna</div></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="band-container">
+				<div class="band-display">
+					<div class="poem">
+						Lanterns of the Night
+						<br><br><br>
+						In the quiet of twilight, we gather,
+						<br><br>
+						Our hearts like paper lanterns, fragile and light.
+						<br><br>
+						We write our wishes, our secret desires,
+						<br><br>
+						And set them adrift on the canvas of the night.
+						<br>
+					</div>
+				</div>
+			</div>
+			
+			<footer>	
+				
+				<div class ="footer-grid">
+					
+					<a target="_blank" href="https://clodo.me">
+						<div class="footer-box">
+							
+							<div style="font-family:courier; font-size: 10px; color: white;"><div style="transition: all 0s">design by Clodo</div></div>
+							
+							<div class="box-image" ></div>
+							
+							<div style="transition: all 0s; color: white;"><div class="clodo-web-address" style="font-size: 0.8rem; transition: all 0s;">clodo.me</div></div> 
+							
+						</div>
+					</a>
+	
+					<div class="powered-by">
+						<div>Powerd by</div>
+					
+						<a target="_blank" href="https://wheretheiss.at/w/developer"><img src="./assets/images/wheretheissat.png" width="200px"></a>
 		
-		<script type="text/javascript" src="./components/integerSelector/script.js"></script>
+						<a target="_blank" href="https://flagsapi.com/"><img src="https://flagsapi.com/img/logo-countryflags.png" width="200px" style="border-radius: 2%; background-color: rgba(255, 255, 255, 0.205);"></a>
+					</div>
+					
+					
+				</div>
+				
+			</footer>
+			
+
+
+		</div>
+
+		<script type="text/javascript" src="./components/numberSelector/script.js"></script>
 		<script type="text/javascript" src="./scripts/tracking.js"></script>
 		<script type="text/javascript" src="./scripts/map.js"></script>
 		<script type="text/javascript" src="./scripts/misc.js"></script>
@@ -534,8 +564,7 @@
 		<script type="text/javascript" src="./components/dataManager/script.js"></script>
 		<script type="text/javascript" src="./components/checkbox/script.js"></script>
 		<script type="text/javascript" src="./main.js"></script>
-		
-
+	
 		
 	</body>
 	

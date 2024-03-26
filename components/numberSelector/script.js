@@ -53,8 +53,8 @@ function updateConfigurationParameters(id, value){
 
     const interval_UpdateData = setInterval(() => {
 
-        fetchCurrentState(object_path);  
-    
+        fetchCurrentState(mountedApp.selected_satellite, object_path);  
+        
     }, data_update_rate);
     intervals.push(interval_UpdateData);
 
