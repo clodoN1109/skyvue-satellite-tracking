@@ -5,6 +5,13 @@ body {
 
 }
 
+.calligraffitti-regular {
+	font-family: "Calligraffitti", cursive;
+	font-weight: 400;
+	font-style: normal;
+}
+  
+
 /* body::before{
 
 	position: fixed;
@@ -32,7 +39,7 @@ body {
 header {
 
 	height:20vh;
-	font-family: 'Noto Serif Oriya', serif;
+	font-family: 'Courier New', Courier, monospace;
 	padding: 30px 0 50px 0;
 	margin: 0 0 5px 0;
 	
@@ -99,19 +106,18 @@ header {
 
 #header-title{
 
-	font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-	font-size: 40px;
+	/* font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+	font-size: 55px;
 	font-weight: 400;
 
 }
 
 #header-subtitle{
 
-	margin-left: 20px;
-
-	font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-	font-size: 20px;
-	font-weight: 400;
+	margin-left: 0px;
+	font-size: 13px;
+	font-weight: 100;
+	color: rgba(255, 255, 255, 0.562);
 	
 }
 
@@ -216,7 +222,7 @@ input, .data-field output  {
 	width: 100%;
 }
 
-#date-panel	 {
+#time	 {
 
 	color: white;
 	background-color: rgba(31, 28, 28, 0.754);
@@ -586,8 +592,6 @@ canvas {
 
 	backdrop-filter: blur(10px);
 
-	opacity: 0;
-
 	transition: all 0s;
 
 }
@@ -603,7 +607,6 @@ canvas {
 	border-color: rgba(243, 231, 231, 0.824);
 	background-color: rgba(192, 185, 177, 0);
 
-	opacity: 0;
 }
 
 #user-location {
@@ -1014,7 +1017,6 @@ label {
 
 	position: absolute;
 	z-index: 2;
-	opacity: 0;
 
 }
 
@@ -1030,7 +1032,6 @@ label {
 
 	position: absolute;
 	z-index: 2;
-	opacity: 0;
 	padding: 0.5px;
 
 	/* background-color: white; */
@@ -1115,26 +1116,31 @@ label {
     color: azure;
 }
 
-#the-team-title{
-    text-align: right; 
-    text-justify: center; 
-    font-family: monospace; 
-	opacity: 0.9; 
-    font-size: 8vh; 
-    margin: 0 0 0 0;
-	color: rgba(255, 255, 255, 0.685);
-}
-
-
 .inline-flex-container{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: center;
-    justify-content: flex-start;
-    justify-items: center;
     gap: 4vh;
+}
+
+#the-team-title{
+	height: 140px;
+
+	display: inline-flex;
+	align-items: center;
+
+    text-align: right; 
+    text-justify: center; 
+    font-family: 'Courier New', Courier, monospace;
+	font-weight: 300; 
+	opacity: 0.9; 
+    font-size: 5vh; 
+    margin: 0 0 0 0;
+	padding: 0 1vw 0 0;
+	color: rgba(255, 255, 255, 0.685);
+
+	border-style: solid;
+	border-width:  0 1px 0 0;
+	border-color: rgba(255, 255, 255, 0.205);
 }
 
 .team-button-container{

@@ -60,7 +60,7 @@ function updateConfigurationParameters(id, value){
 
     const interval_UpdateDataDisplay = setInterval(() => {
 
-        updateMap([[object_previous_path, 100], [object_path.slice(0, -3), line_level_detail]]); 
+        updateMap([[object_path.slice(0, -3), line_level_detail]]); 
         updateObjectPosition(object_path);
         updateNationalFlagPosition(object_path);
 

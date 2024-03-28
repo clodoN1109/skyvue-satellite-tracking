@@ -11,8 +11,8 @@ function updateMap(paths) {
 
     for (let index = 0; index < path.length - 1; index += step) {
     
-      latitude = path[index][2];
-      longitude = path[index][3];
+      latitude = path[index]['latitude'];
+      longitude = path[index]['longitude'];
       
       //Unit conversions:
       latitude = (Number(latitude) - 90)*(-2.2222);
@@ -43,8 +43,8 @@ function updateMap(paths) {
 
 function updateObjectPosition(object_path){
   
-  latitude = object_path[object_path.length-1][2];
-  longitude = object_path[object_path.length-1][3];
+  latitude = object_path[object_path.length-1]['latitude'];
+  longitude = object_path[object_path.length-1]['longitude'];
 
   //Unit conversions, scaling and positional adjustments:
   satellite_picture_width = Number(document.getElementById("satellite").offsetWidth); 
@@ -62,8 +62,8 @@ function updateObjectPosition(object_path){
 
 function updateNationalFlagPosition(object_path){
   
-  latitude = object_path[object_path.length-1][2];
-  longitude = object_path[object_path.length-1][3]; 
+  latitude = object_path[object_path.length-1]['latitude'];
+  longitude = object_path[object_path.length-1]['longitude']; 
   fetch(source_URL + "v1/coordinates/" + latitude + "," + longitude)
   .then((response) => response.json())
   .then((iss) => {

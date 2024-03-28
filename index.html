@@ -13,6 +13,10 @@
 	<link href="./components/dataManager/style.css" rel="stylesheet" type="text/css" />
 	<link href="./components/checkbox/style.css" rel="stylesheet" type="text/css" />
 
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap" rel="stylesheet">
+
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 	<body>
@@ -143,7 +147,7 @@
 					<div class="header-box">
 						<img id="logo" src="assets/images/logo.png">
 						<div id="header-title-box">
-							<div class="header-text" id="header-title">skyVue</div>
+							<div class="header-text calligraffitti-regular" id="header-title">skyVue</div>
 							<div class="header-text" id="header-subtitle">Satellite Tracking Graphical Interface</div>
 						</div>
 						
@@ -376,7 +380,7 @@
 						<div onclick="{selectViewerTab(event.target)}" class="tab" id="forecast-tab">FORECAST</div>
 					</div>
 	
-					<output id="date-panel" type="text" readonly value=""></output>
+					<output id="time" type="text" readonly value=""></output>
 					
 					<div id="screen" >
 						
@@ -399,12 +403,12 @@
 	
 						<div class="display-system" id="map2D-container" v-show="viewer_state === 'map2D'">
 							<img id="map2D-img" src="./assets/images/map2D.png">
-							<img id="satellite" src="assets/images/satellite.png" alt="a mundi map" lang="en">
-							<div id="visibility-radius"></div>
+							<img v-if="tracking" id="satellite" src="assets/images/satellite.png" alt="a mundi map" lang="en">
+							<div v-if="tracking" id="visibility-radius"></div>
 							<img id="user-location" src="assets/images/here.png" alt="here" lang="en">
 							<img width="20px" id="user-location-flag">
-							<img width="20px" id="satellite-location-flag">
-							<div id="satellite-location-name"></div>
+							<img v-if="tracking" width="20px" id="satellite-location-flag">
+							<div v-if="tracking" id="satellite-location-name"></div>
 							<div id="user-location-name"></div>
 							<canvas id="canvas"></canvas>
 						</div>
@@ -497,16 +501,16 @@
 					<div class="inline-flex-container">
 						<h1 id="the-team-title">THE TEAM</h1>
 						<div style="display: inline-flex; flex-wrap: nowrap; gap: 4vh;">
-							<div class="team-button-container"><a target="_blank" href="" target="_blank"><button class="team-button" id="dev1-button"></button></a><div class="dev-name">Clodomir Vianna</div></div>
+							<div class="team-button-container"><a target="_blank" href="https://github.com/clodoN1109" target="_blank"><button class="team-button" id="dev1-button"></button></a><div class="dev-name">Clodomir Vianna</div></div>
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			<div class="band-container">
-				<div class="band-display">
-					<div class="poem">
-						Lanterns of the Night
+			<div class="band-display">
+				<div class="poem">
+					Lanterns of the Night
+					<div class="band-container">
 						<br><br><br>
 						In the quiet of twilight, we gather,
 						<br><br>

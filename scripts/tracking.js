@@ -12,20 +12,15 @@ function resetInterface(){
   
   setTimeout(() => {
     intervals.length = 0;
+    timeouts.length = 0;
   }, 1000);
 
   const ctx = canvas.getContext("2d");
   if (ctx) {
-
     ctx.clearRect(0, 0, canvas.width, canvas.height)
   }
   
-  object_previous_path.length = 0;
   object_path.length = 0;
-  document.getElementById('satellite').style.opacity = 0; 
-  document.getElementById('satellite-location-name').style.opacity = 0; 
-  document.getElementById('satellite-location-flag').style.opacity = 0; 
-  document.getElementById('visibility-radius').style.opacity = 0; 
 
   //Cleaning the Data Manager.
   let table = document.getElementById('data-table');
@@ -50,13 +45,16 @@ function resetInterface(){
   document.getElementById("velocity").value = ''; 
   document.getElementById("visibility").value = ''; 
   document.getElementById("footprint").value = ''; 
-  document.getElementById("date-panel").value = ''; 
+  document.getElementById("time").value = ''; 
   // document.getElementById("daynum").value = ''; 
   document.getElementById("solar-latitude").value = ''; 
   document.getElementById("solar-longitude").value = ''; 
   // document.getElementById("units").value = ''; 
 
-  mountedApp.tracking = false;
+  setTimeout(() => {
+    mountedApp.tracking = false;  
+  }, 500);
+  
 
 }
 
@@ -73,45 +71,27 @@ function selectSatellite(event) {
 
 function startTracking(norad_number){
 
-  if (norad_number == 33053) {
+  fetchCurrentState(norad_number, object_path);  
 
-  }
-  else{
-    fetchPreviousStates(norad_number, object_previous_path, number_of_previous_positions, previous_states_update_rate);
-  }
+  // Starts data collection asynchronous loop.
+  const interval_UpdateData = setInterval(() => {
 
-  // Starts data display update asynchronous loop.
-  timeout_current_tracking = setTimeout(() => {
+    fetchCurrentState(norad_number, object_path);  
 
-    document.getElementById("satellite").style.opacity = 1;
-    document.getElementById("visibility-radius").style.opacity = 1;
-    document.getElementById("satellite-location-flag").style.opacity = 1;
-    document.getElementById("satellite-location-name").style.opacity = 1;
+  }, data_update_rate);
 
-    // Starts data collection asynchronous loop.
-    const interval_UpdateData = setInterval(() => {
+  const interval_UpdateDataDisplay = setInterval(() => {
 
-      fetchCurrentState(norad_number, object_path);  
+    // Parameter to cut avoid ploting points immediately  bellow the satellite's figure,
+    // and responsive to the selected value for the data_update_rate parameter.
 
-    }, data_update_rate);
+    updateMap([[object_path.slice(0, -3), line_level_detail]]); 
+    updateObjectPosition(object_path);
+    updateNationalFlagPosition(object_path);
 
-    const interval_UpdateDataDisplay = setInterval(() => {
+  }, display_framerate);
 
-      // Parameter to cut avoid ploting points immediately  bellow the satellite's figure,
-      // and responsive to the selected value for the data_update_rate parameter.
-
-      updateMap([[object_previous_path, 100], [object_path.slice(0, -3), line_level_detail]]); 
-      updateObjectPosition(object_path);
-      updateNationalFlagPosition(object_path);
-
-    }, display_framerate);
-
-    intervals = [interval_UpdateData, interval_UpdateDataDisplay];
-
-  }, (number_of_previous_positions) * previous_states_update_rate);
-    
-  timeouts.push(timeout_current_tracking);
-
+  intervals.push(interval_UpdateData, interval_UpdateDataDisplay);
   mountedApp.tracking = true;
 
 }
@@ -119,89 +99,39 @@ function startTracking(norad_number){
 
 function updateDataDisplay(current_state){
 
-    // Json response object example: 
-  //   {
-  //     "name": "iss",
-  //     "id": 25544,
-  //     "latitude": 50.11496269845,
-  //     "longitude": 118.07900427317,
-  //     "altitude": 408.05526028199,
-  //     "velocity": 27635.971970874,
-  //     "visibility": "daylight",
-  //     "footprint": 4446.1877699772,
-  //     "timestamp": 1364069476,
-  //     "daynum": 2456375.3411574,
-  //     "solar_lat": 1.3327003598631,
-  //     "solar_lon": 238.78610691196,
-  //     "units": "kilometers"
+  // current_state object structure:
+  // {
+  //   'name':  name,
+  //   'id': id,
+  //   'latitude': latitude,
+  //   'longitude': longitude,
+  //   'velocity': velocity,
+  //   'visibility': visibility,
+  //   'footprint': footprint,
+  //   'time': time,
+  //   'daynum': daynum,
+  //   'solar-latitude': solar_lat,
+  //   'solar-longitude': solar_lon,
+  //   'units': units
   // }
 
-  document.getElementById("name").value = current_state[0];
-  document.getElementById("id").value = current_state[1];
-  document.getElementById("latitude").value = current_state[2];
-  document.getElementById("longitude").value = current_state[3];
-  document.getElementById("altitude").value = current_state[4];
-  document.getElementById("velocity").value = current_state[5];
-  document.getElementById("visibility").value = current_state[6];
-  document.getElementById("footprint").value = current_state[7];
-  document.getElementById("date-panel").value = current_state[8];
-  // document.getElementById("daynum").value = current_state[9];
-  document.getElementById("solar-latitude").value = current_state[10];
-  document.getElementById("solar-longitude").value = current_state[11];
-  // document.getElementById("units").value = current_state[12];
-
-}
-
-function fetchPreviousStates(norad_number, object_previous_path, number_of_positions, query_rate){
+  Object.keys(current_state).forEach(key => {
     
-  function fetchRecursively(object_previous_path, current_time, number_of_positions, query_rate){
-    
-    if (number_of_positions < 1) {
-      updateMap([[object_previous_path, 100]]);
-      updateObjectPosition(object_previous_path);
-      updateNationalFlagPosition(object_previous_path); 
-      return
+    data_field_element = document.getElementById(key);
+    value = current_state[key];
+
+    if ((value != undefined) && (data_field_element != undefined)){
+      data_field_element.textContent = value;
     }
-    // https://api.wheretheiss.at/v1/satellites/25544/positions?timestamps=1436029892&units=miles
-    fetch(source_URL + "v1/satellites/" + norad_number + "/positions?timestamps=" + current_time + "&units=" + mountedApp.units)
-    .then((response) => response.json())
-    .then((data) => {
-      
-      // Signal that fetching process is happening:
-      activityLogging("tracing past locations");
-
-      // Updates Earth's ilumination state (so far only for the 3D view):
-      updateEarthIlumination(Number(data[0].timestamp));
-
-      //Time unit conversion to display on the date panel:
-      let time =  timestampToDateConversion(Number(data[0].timestamp));
-      
-      
-      let current_state = [data[0].name, data[0].id, data[0].latitude, data[0].longitude, data[0].altitude, data[0].velocity, data[0].visibility, data[0].footprint, time, data[0].daynum, data[0].solar_lat, data[0].solar_lon, data[0].units];
-      object_previous_path.push(current_state);
-      updateDataDisplay(current_state);
-      updateMap([[object_previous_path, 100]]);
-      updateObjectPosition(object_previous_path);
-      updateNationalFlagPosition(object_previous_path); 
-      
-      timeout_previous_tracking = setTimeout(() => {
-        fetchRecursively(object_previous_path, Number(current_time)+previous_path_step, number_of_positions-1, query_rate);
-      }, query_rate);
-
-      timeouts.push(timeout_previous_tracking);
-      
-    });
     
-  }
-  
-  let current_time = Date.now().toString().slice(0,-3);
-  fetchRecursively(object_previous_path, current_time - (number_of_positions-1)*previous_path_step, number_of_positions, query_rate);
-  
+    if ((value === undefined) && (data_field_element != undefined)){
+      data_field_element.textContent = '-';
+  }    
+});
+
 }
 
 function fetchCurrentState(norad_number, object_path){
-
-  console.log(norad_number);
 
   if (norad_number == 33053){
 
@@ -226,32 +156,44 @@ function fetchCurrentState(norad_number, object_path){
     //   ]
     // }
 
-    API_URL = "https://api.n2yo.com/rest/v1/satellite/positions/33053/0/0/0/1/&apiKey=34YEMD-WM7TGE-EJ9F7X-58E9";
+    API_URL = "https://sky-vue-api.onrender.com/";
 
-  fetch(API_URL)
-  .then((response) => response.json())
-  .then((data) => {
+    fetch(API_URL)
+    .then((response) => response.json())
+    .then((data) => {
 
-    console.log(data);
-    console.log(data.positions);
-    console.log(data.info);
+      // Signal that fetching process is happening:
+      activityLogging("updating parameters");
+      
+      // Updates Earth's ilumination state (so far only for the 3D view):
+      updateEarthIlumination(Number(data.positions[0].timestamp));
 
-    // Signal that fetching process is happening:
-    activityLogging("updating parameters");
-    
-    // Updates Earth's ilumination state (so far only for the 3D view):
-    updateEarthIlumination(Number(data.positions.timestamp));
+      //Unit conversion:
+      let time =  timestampToDateConversion(Number(data.positions[0].timestamp));
 
-    //Unit conversion:
-    let time =  timestampToDateConversion(Number(data.timestamp));
-    
-    let current_state = [data.info.satname, data.info.satid, data.positions[0].satlatitude, data.positions[0].satlongitude, data.positions[0].sataltitude, 'missing', data.positions[0].eclipsed, 'missing', time, 'missing', 'missing', 'missing', 'kilometers'];
-    
-    updateDataDisplay(current_state);
-    object_path.push(current_state);
-    updateDataManager(object_path);
-    
-  }); 
+      let current_state = {
+
+        'name':  data.info.satname,
+        'id': data.info.satid,
+        'latitude': data.positions[0].satlatitude,
+        'longitude': data.positions[0].satlongitude,
+        'altitude': data.positions[0].sataltitude,
+        'velocity': data.velocity,
+        'visibility': data.positions[0].eclipsed,
+        'footprint': data.footprint,
+        'time': time,
+        'daynum': data.daynum,
+        'solar-latitude': data.solar_lat,
+        'solar-longitude': data.solar_lon,
+        'units': data.units
+      
+      }
+
+      updateDataDisplay(current_state);
+      object_path.push(current_state);
+      updateDataManager(object_path);
+      
+    }); 
   }
 
   if (norad_number == 25544) {
@@ -287,9 +229,25 @@ function fetchCurrentState(norad_number, object_path){
 
     //Unit conversion:
     let time =  timestampToDateConversion(Number(data.timestamp));
+        
+    let current_state = {
+
+      'name':  data.name,
+      'id': data.id,
+      'latitude': data.latitude,
+      'longitude': data.longitude,
+      'altitude': data.altitude,
+      'velocity': data.velocity,
+      'visibility': data.visibility,
+      'footprint': data.footprint,
+      'time': time,
+      'daynum': data.daynum,
+      'solar-latitude': data.solar_lat,
+      'solar-longitude': data.solar_lon,
+      'units': data.units
     
-    let current_state = [data.name, data.id, data.latitude, data.longitude, data.altitude, data.velocity, data.visibility, data.footprint, time, data.daynum, data.solar_lat, data.solar_lon, data.units];
-    
+    }
+
     updateDataDisplay(current_state);
     object_path.push(current_state);
     updateDataManager(object_path);
