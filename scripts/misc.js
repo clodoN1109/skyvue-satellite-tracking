@@ -115,7 +115,7 @@ function activityLogging(activityLog){
     document.getElementById("log").style.transition = "all 2s";
     document.getElementById("log").style.opacity = 0;
 
-  }, loader_time);
+  }, mountedApp.loader_time);
   
 }
 
@@ -142,7 +142,7 @@ function showUserLocation(user_location){
         document.getElementById("user-location").style.transform = "translate(" + userX + "px, " + userY +  "px)";
         document.getElementById("user-location").style.opacity = 1;
 
-        fetch(source_URL + "v1/coordinates/" + user_location[0] + "," + user_location[1])
+        fetch(mountedApp.source_URL + "v1/coordinates/" + user_location[0] + "," + user_location[1])
         .then((response) => response.json())
         .then((iss) => {
           
@@ -206,7 +206,7 @@ function map2DGradualAppearance(timeToAppear){
     document.getElementById('map2D-container').style.height = '400px';  
 
     setTimeout(() => {
-      showUserLocation(user_location);
+      showUserLocation(mountedApp.user_location);
     }, 3000);
   }, timeToAppear);
   

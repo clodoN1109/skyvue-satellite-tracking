@@ -1,26 +1,3 @@
-function initializeInterface(){
-
-    const interval_Wiki = setInterval(updateWikiInfo, 10000);
-
-    // Selecting default tabs for each window.
-    selectViewerTab(document.getElementById("map2D-tab"));
-    selectDataTab(document.getElementById("source-tab"));
-    
-    // Making data-display and main-window elements have the same height.
-    makeSameHeightByID("data-display", "main-window");
-    window.onresize = function() {
-        makeSameHeightByID("data-display", "main-window");
-    };
-
-    // Initialize 3D map Sun ilumination.
-    let timestamp = (new Date()).getTime().toString().substring(0, 10);
-    updateEarthIlumination(timestamp);
-
-    gradualOpacity('interface', 1500);    
-    map2DGradualAppearance(3000);
-    
-}
-
 function selectViewerTab(element) {
 
     function changeViewerState(element){

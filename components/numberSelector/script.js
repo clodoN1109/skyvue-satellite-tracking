@@ -30,40 +30,40 @@ function updateConfigurationParameters(id, value){
 
     if (id === 'data-update-time')
     { 
-        data_update_rate = value * 1000;
+        mountedApp.data_update_rate = value * 1000;
 
-        if (value == 1) {loader_time = 500;}
+        if (value == 1) {mountedApp.loader_time = 500;}
         // Parameter to cut avoid ploting points near the satellite's figure,
         // and responsive to the selected value for the data_update_rate parameter.
-        else {loader_time = 1000;}
+        else {mountedApp.loader_time = 1000;}
     }
 
     if (id === 'display-update-time'){ 
-        display_framerate = value * 1000; 
+        mountedApp.display_framerate = value * 1000; 
     }
 
     if (id === 'line-level-detail'){ 
-        line_level_detail = value; 
+        mountedApp.line_level_detail = value; 
     }
 
-    intervals.forEach(element => {
+    mountedApp.intervals.forEach(element => {
         clearInterval(element);    
     });
-    intervals.length = 0;
+    mountedApp.intervals.length = 0;
 
     const interval_UpdateData = setInterval(() => {
 
         fetchCurrentState(mountedApp.selected_satellite, object_path);  
         
-    }, data_update_rate);
-    intervals.push(interval_UpdateData);
+    }, mountedApp.data_update_rate);
+    mountedApp.intervals.push(interval_UpdateData);
 
     const interval_UpdateDataDisplay = setInterval(() => {
 
-        updateMap([[object_path.slice(0, -3), line_level_detail]]); 
-        updateObjectPosition(object_path);
-        updateNationalFlagPosition(object_path);
+        updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]); 
+        updateObjectPosition(mountedApp.object_path);
+        updateNationalFlagPosition(mountedApp.object_path);
 
     }, display_framerate);
-    intervals.push(interval_UpdateDataDisplay);
+    mountedApp.intervals.push(interval_UpdateDataDisplay);
 }

@@ -51,7 +51,7 @@ function updateDataManager(object_path){
     });
 
     // Updating metadata:
-    document.getElementById('source-meta').textContent = source_URL;
+    document.getElementById('source-meta').textContent = mountedApp.source_URL;
     document.getElementById('name-meta').textContent =  object_path[index]['name'];
     document.getElementById('id-meta').textContent =  object_path[index]['id'];
     

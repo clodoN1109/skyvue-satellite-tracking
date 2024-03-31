@@ -2,25 +2,25 @@ function resetInterface(){
 
     // Reset output variables, intervals, timeouts and canvas.
 
-  timeouts.forEach(element => { 
-    clearTimeout(element);    
+  mountedApp.timeouts.forEach(elementID => { 
+    clearTimeout(elementID);    
   });
 
-  intervals.forEach(element => { 
-    clearInterval(element);    
+  mountedApp.intervals.forEach(elementID => { 
+    clearInterval(elementID);    
   });
   
-  setTimeout(() => {
-    intervals.length = 0;
-    timeouts.length = 0;
-  }, 1000);
+  // setTimeout(() => {
+  //   mountedApp.intervals.length = 0;
+  //   mountedApp.timeouts.length = 0;
+  // }, 1000);
 
   const ctx = canvas.getContext("2d");
   if (ctx) {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
   }
   
-  object_path.length = 0;
+  mountedApp.object_path.length = 0;
 
   //Cleaning the Data Manager.
   let table = document.getElementById('data-table');
@@ -53,13 +53,9 @@ function resetInterface(){
 
   setTimeout(() => {
     mountedApp.tracking = false;  
-  }, 500);
+  }, 250);
   
 
-}
-
-function stopTracking( ){
-  resetInterface();
 }
 
 function selectSatellite(event) {
@@ -71,31 +67,35 @@ function selectSatellite(event) {
 
 function startTracking(norad_number){
 
-  fetchCurrentState(norad_number, object_path);  
+  fetchCurrentState(norad_number, mountedApp.object_path);  
 
   // Starts data collection asynchronous loop.
   const interval_UpdateData = setInterval(() => {
 
-    fetchCurrentState(norad_number, object_path);  
+    fetchCurrentState(norad_number, mountedApp.object_path);  
 
-  }, data_update_rate);
+  }, mountedApp.data_update_rate);
 
   const interval_UpdateDataDisplay = setInterval(() => {
 
     // Parameter to cut avoid ploting points immediately  bellow the satellite's figure,
     // and responsive to the selected value for the data_update_rate parameter.
 
-    updateMap([[object_path.slice(0, -3), line_level_detail]]); 
-    updateObjectPosition(object_path);
-    updateNationalFlagPosition(object_path);
+    updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]); 
+    updateObjectPosition(mountedApp.object_path);
+    updateNationalFlagPosition(mountedApp.object_path);
 
-  }, display_framerate);
+  }, mountedApp.display_framerate);
 
-  intervals.push(interval_UpdateData, interval_UpdateDataDisplay);
+  mountedApp.intervals.push(interval_UpdateData, interval_UpdateDataDisplay);
   mountedApp.tracking = true;
+  
 
 }
 
+function stopTracking( ){
+  resetInterface();
+}
 
 function updateDataDisplay(current_state){
 
@@ -215,7 +215,7 @@ function fetchCurrentState(norad_number, object_path){
   //     "units": "kilometers"
   // }
 
-    API_URL = source_URL + "v1/satellites/" + norad_number + "?units=" + mountedApp.units; 
+    API_URL = mountedApp.source_URL + "v1/satellites/" + norad_number + "?units=" + mountedApp.units; 
       // https://api.wheretheiss.at/v1/satellites/25544?units=miles
   fetch(API_URL)
   .then((response) => response.json())

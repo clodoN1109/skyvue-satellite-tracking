@@ -23,7 +23,7 @@ body {
     padding-bottom: 6em;
 }
 
-#footer {
+/* #footer {
     margin: 0px auto;
     text-align: center;
     font-size: 0.9em;
@@ -35,7 +35,7 @@ body {
     right: 0;
     height: 6em;
     line-height: 7em;
-}
+} */
 
 .article_footer {
    margin: 1.2em auto;

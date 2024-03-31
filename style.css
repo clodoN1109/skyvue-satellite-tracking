@@ -412,8 +412,6 @@ input, .data-field output  {
 	border-width: 0.5px 0.5px 3px 0.5px;
 	border-radius: 5px;
 
-	
-
 	backdrop-filter: blur(20px);
 	
 }
@@ -444,10 +442,11 @@ input, .data-field output  {
 	margin: 0;
 	padding: 40px;
 
+	display: flex;
 	flex-direction: column;
 	align-items: center;
-	align-content: center;
-	justify-items: center	;
+	align-content: flex-start;
+	justify-items: flex-start;
 	justify-content: flex-start;
 
 	gap: 20px;
