@@ -10,12 +10,15 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="./components/map3D/css/style.css" rel="stylesheet" type="text/css"/>
 	<link href="./components/numberSelector/style.css" rel="stylesheet" type="text/css" />
-	<link href="./components/checkbox/style.css" rel="stylesheet" type="text/css" />
 	
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap" rel="stylesheet">
-	
+
+	<link href="./components/DataManager/DataManager.css" rel="stylesheet" type="text/css" />
+	<link href="./components/DataManager/components/DataRow/DataRow.css" rel="stylesheet" type="text/css" />
+	<link href="./components/DataManager/components/DataRow/components/Checkbox/Checkbox.css" rel="stylesheet" type="text/css" />
+
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<script type="text/javascript" src="./components/numberSelector/script.js"></script>
 	
@@ -23,7 +26,7 @@
 		
 		<div id="app">
 			
-			<data-manager></data-manager>
+			<data-manager :object_path="object_path" :units="units" :source="source_URL"></data-manager>
 			
 			<video id="video-bg" muted autoplay loop src="./assets/videos/bg.mp4"></video>
 			
@@ -109,7 +112,7 @@
 							<div>
 								<div>Longitude</div>
 								<div class="data-field">
-									<output style="cursor: default;" type="text" id="longitude" readonly class="" value="0"></output> 
+									<output style="cursor: default;" id="longitude" readonly class="" value="0"></output> 
 									<div class="units coordinates-unit">deg</div>
 								</div>
 							</div>
@@ -117,7 +120,7 @@
 							<div>
 								<div>Altitude</div>
 								<div class="data-field">
-									<output style="cursor: default;" type="text" id="altitude" readonly class="" value="0"></output> 
+									<output style="cursor: default;" id="altitude" readonly class="" value="0"></output> 
 									<div class="units distance-unit">Km</div>
 								</div>
 							</div>
@@ -125,7 +128,7 @@
 							<div>
 								<div>Velocity</div>
 								<div class="data-field">
-									<output style="cursor: default;" type="text" id="velocity" readonly class="" value="0"></output> 
+									<output style="cursor: default;" id="velocity" readonly class="" value="0"></output> 
 									<div class="units velocity-unit">Km/h</div>
 								</div>
 							</div>
@@ -133,7 +136,7 @@
 							<div>
 								<div>Solar Latitude</div>
 								<div class="data-field">
-									<output style="cursor: default;" type="text" id="solar-latitude" readonly class="" value="0"></output> 	
+									<output style="cursor: default;" id="solarlatitude" readonly class="" value="0"></output> 	
 									<div class="units coordinates-unit">deg</div>
 								</div>
 							</div>
@@ -141,7 +144,7 @@
 							<div>
 								<div>Solar Longitude</div>
 								<div class="data-field">
-									<output style="cursor: default;" type="text" id="solar-longitude" readonly class="" value="0"></output> 	
+									<output style="cursor: default;" id="solarlongitude" readonly class="" value="0"></output> 	
 									<div class="units coordinates-unit">deg</div>
 								</div>
 							</div>
@@ -152,7 +155,7 @@
 									Visibility
 								</div>
 								<div class="data-field">
-									<output style="cursor: default;" type="text" id="visibility" readonly class="" value="0"></output> 	
+									<output style="cursor: default;" id="visibility" readonly class="" value="0"></output> 	
 									<div class="units">&nbsp;</div>
 								</div>
 							</div>
@@ -163,7 +166,7 @@
 									Footprint
 								</div>
 								<div class="data-field">
-									<output style="cursor: default;" type="text" id="footprint" readonly class="" value="0"></output> 	
+									<output style="cursor: default;" id="footprint" readonly class="" value="0"></output> 	
 									<div class="units distance-unit">Km</div>
 								</div>
 							</div>
@@ -173,7 +176,7 @@
 						</div>
 						
 						<div class="button-box">
-							<button onclick="openDataManager()" class="button"><img src="./assets/images/data.png" width="30px">DATA MANAGER</button>
+							<button @click="openDataManager()" class="button"><img src="./assets/images/data.png" width="30px">DATA MANAGER</button>
 						</div>
 						
 					</div>
@@ -265,7 +268,7 @@
 						<div onclick="{selectViewerTab(event.target)}" class="tab" id="forecast-tab">FORECAST</div>
 					</div>
 					
-					<output id="time" type="text" readonly value=""></output>
+					<output id="time" readonly value=""></output>
 					
 					<div id="screen" >
 						
@@ -275,14 +278,14 @@
 									<div class="spec-info" title="Name of the object currently being tracked.">?</div>
 									<div class="spec-name">name: </div>	
 								</div>
-								<output class="spec-value" id="name" type="text" readonly value="0"></output>
-								<div class="spec">
-									<div style="display: inline-flex; gap: 5px;">
-										<div class="spec-info" title="The NORAD Catalog Number, also known as the SATCAT, is a nine-digit sequential identifier assigned by the United States Space Command (USSPACECOM) to all artificial objects in Earth’s orbit and those that have left Earth’s orbit. It represents the order of launch or discovery and is used to track satellites and other space objects.">?</div>
-										<div class="spec-id">NORAD catalog number:</div>	
-									</div>
-									<output class="spec-value" id="id" type="text" readonly value="0"></output>
+								<output class="spec-value" id="name" readonly value="0"></output>
+							</div>
+							<div class="spec">
+								<div style="display: inline-flex; gap: 5px;">
+									<div class="spec-info" title="The NORAD Catalog Number, also known as the SATCAT, is a nine-digit sequential identifier assigned by the United States Space Command (USSPACECOM) to all artificial objects in Earth’s orbit and those that have left Earth’s orbit. It represents the order of launch or discovery and is used to track satellites and other space objects.">?</div>
+									<div class="spec-id">NORAD catalog number:</div>	
 								</div>
+								<output class="spec-value" id="id" readonly value="0"></output>
 							</div>
 						</div>
 						
@@ -451,12 +454,12 @@
 		<script type="text/javascript" src="./components/map3D/js/earth_sun.js"></script>
 		<script type="text/javascript" src="./components/map3D/js/clodo.js"></script>
 
-		<script type="text/javascript" src="./components/dataManager/script.js"></script>
-		<!-- <script type="text/javascript" src="./components/checkbox/script.js"></script> -->
-
 		<!-- Vue Framework scripts -->
 		<script type="text/javascript" src="./app.js"></script>
 		<script type="text/javascript" src="./components/dataManager/dataManager.js"></script>
+		<script type="text/javascript" src="./components/DataManager/components/DataRow/DataRow.js"></script>
+		<script type="text/javascript" src="./components/DataManager/components/MetaField/MetaField.js"></script>
+		<script type="text/javascript" src="./components/DataManager/components/DataRow/components/Checkbox/Checkbox.js"></script>
 		<script>
 			const mountedApp = app.mount('#app');
 		</script>

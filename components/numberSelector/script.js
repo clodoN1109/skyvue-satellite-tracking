@@ -53,7 +53,7 @@ function updateConfigurationParameters(id, value){
 
     const interval_UpdateData = setInterval(() => {
 
-        fetchCurrentState(mountedApp.selected_satellite, object_path);  
+        fetchCurrentState(mountedApp.selected_satellite, mountedApp.object_path);  
         
     }, mountedApp.data_update_rate);
     mountedApp.intervals.push(interval_UpdateData);
@@ -64,6 +64,6 @@ function updateConfigurationParameters(id, value){
         updateObjectPosition(mountedApp.object_path);
         updateNationalFlagPosition(mountedApp.object_path);
 
-    }, display_framerate);
+    }, mountedApp.display_framerate);
     mountedApp.intervals.push(interval_UpdateDataDisplay);
 }

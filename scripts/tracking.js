@@ -22,21 +22,7 @@ function resetInterface(){
   
   mountedApp.object_path.length = 0;
 
-  //Cleaning the Data Manager.
-  let table = document.getElementById('data-table');
-  let data_row_containers = table.getElementsByClassName('data-row-container'); 
-  while (data_row_containers.length > 1){
-    data_row_containers[1].remove();
-  }
-
   // Cleaning all interface output fields.
-  document.getElementById('source-meta').textContent = '';
-  document.getElementById('name-meta').textContent = '';
-  document.getElementById('id-meta').textContent = '';
-  document.getElementById('units-meta').textContent = '';
-  document.getElementById('rows-meta').textContent = '';
-  document.getElementById('columns-meta').textContent = '';
-
   document.getElementById("name").value = '';
   document.getElementById("id").value = '';
   document.getElementById("latitude").value = ''; 
@@ -47,8 +33,8 @@ function resetInterface(){
   document.getElementById("footprint").value = ''; 
   document.getElementById("time").value = ''; 
   // document.getElementById("daynum").value = ''; 
-  document.getElementById("solar-latitude").value = ''; 
-  document.getElementById("solar-longitude").value = ''; 
+  document.getElementById("solarlatitude").value = ''; 
+  document.getElementById("solarlongitude").value = ''; 
   // document.getElementById("units").value = ''; 
 
   setTimeout(() => {
@@ -110,8 +96,8 @@ function updateDataDisplay(current_state){
   //   'footprint': footprint,
   //   'time': time,
   //   'daynum': daynum,
-  //   'solar-latitude': solar_lat,
-  //   'solar-longitude': solar_lon,
+  //   'solarlatitude': solar_lat,
+  //   'solarlongitude': solar_lon,
   //   'units': units
   // }
 
@@ -173,6 +159,7 @@ function fetchCurrentState(norad_number, object_path){
 
       let current_state = {
 
+        'index': object_path.length + 1,
         'name':  data.info.satname,
         'id': data.info.satid,
         'latitude': data.positions[0].satlatitude,
@@ -183,15 +170,14 @@ function fetchCurrentState(norad_number, object_path){
         'footprint': data.footprint,
         'time': time,
         'daynum': data.daynum,
-        'solar-latitude': data.solar_lat,
-        'solar-longitude': data.solar_lon,
+        'solarlatitude': data.solar_lat,
+        'solarlongitude': data.solar_lon,
         'units': data.units
       
       }
 
       updateDataDisplay(current_state);
       object_path.push(current_state);
-      updateDataManager(object_path);
       
     }); 
   }
@@ -232,6 +218,7 @@ function fetchCurrentState(norad_number, object_path){
         
     let current_state = {
 
+      'index': object_path.length + 1,
       'name':  data.name,
       'id': data.id,
       'latitude': data.latitude,
@@ -242,15 +229,15 @@ function fetchCurrentState(norad_number, object_path){
       'footprint': data.footprint,
       'time': time,
       'daynum': data.daynum,
-      'solar-latitude': data.solar_lat,
-      'solar-longitude': data.solar_lon,
+      'solarlatitude': data.solar_lat,
+      'solarlongitude': data.solar_lon,
       'units': data.units
     
     }
 
     updateDataDisplay(current_state);
     object_path.push(current_state);
-    updateDataManager(object_path);
+
     
   });
   }

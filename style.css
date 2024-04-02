@@ -70,9 +70,9 @@ header {
 	border-width: 2px;
 	border-radius: 50%; 
 	border-style: solid;
-	border-color: rgba(255, 255, 255, 0.765);
+	border-color: rgba(255, 200, 129, 0.438);
 
-	box-shadow: 0.3vw 0.3vw 1vw 0.2vw rgba(124, 161, 255, 0.437);
+	box-shadow: 0.3vw 0.3vw 1vw 0.2vw rgba(255, 183, 115, 0.158);
 
 	opacity: 0.9;
 	transition: all 1s;
@@ -96,7 +96,7 @@ header {
 
 	cursor: default; 
 	font-size: 60px; 
-	color: rgb(255, 255, 255);
+	color: rgb(253, 177, 90);
 
 	border-width: 0px;
 	border-radius: 8px; 

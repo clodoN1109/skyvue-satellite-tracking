@@ -17,7 +17,7 @@ const app = Vue.createApp( {
 
             ],
             selected_satellite: '',
-            // object_path[i] = [name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units];
+            // object_path[i] = {index : index, name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units};
             object_path: [],
             user_location: [],
             // Container for scheduled intervals.
@@ -34,15 +34,17 @@ const app = Vue.createApp( {
         }
     },
 
-    mounted() {
+    methods: {
 
-        setTimeout(() => {
-            
+        initializeApp() {
+
             const interval_Wiki = setInterval(updateWikiInfo, this.wiki_update_rate);
 
             // Selecting default tabs for each window.
+    
             selectViewerTab(document.getElementById("map2D-tab"));
             selectDataTab(document.getElementById("source-tab"));
+            
             
             // Making data-display and main-window elements have the same height.
             makeSameHeightByID("data-display", "main-window");
@@ -57,8 +59,19 @@ const app = Vue.createApp( {
             gradualOpacity('interface', 1500);    
             map2DGradualAppearance(3000);
 
-        }, 100);
+        },
 
+        openDataManager(){
+            document.getElementById('data-manager-container').style.display = 'flex';
+        }
+
+    },
+
+    mounted() {
+        
+        setTimeout(() => {
+            mountedApp.initializeApp();
+        }, 100);
 
     }
 
