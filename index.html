@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Constellation</title>
-	<link rel="icon" href="assets/images/space_station.png">
+	<link rel="icon" href="assets/space_station.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -15,9 +15,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap" rel="stylesheet">
 
-	<link href="./DataManager.css" rel="stylesheet" type="text/css" />
-	<link href="./DataRow.css" rel="stylesheet" type="text/css" />
-	<link href="./Checkbox.css" rel="stylesheet" type="text/css" />
+	<link href="./components/DataManager/DataManager.css" rel="stylesheet" type="text/css" />
+	<link href="./components/DataManager/components/DataRow/DataRow.css" rel="stylesheet" type="text/css" />
+	<link href="./components/DataManager/components/DataRow/components/Checkbox/Checkbox.css" rel="stylesheet" type="text/css" />
 
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<!-- <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.prod.js"></script> -->
@@ -30,13 +30,13 @@
 			
 			<data-manager :object_path="object_path" :units="units" :source="source_URL"></data-manager>
 			
-			<video id="video-bg" muted autoplay loop src="./assets/videos/bg.mp4"></video>
+			<video id="video-bg" muted autoplay loop src="assets/bg.webm"></video>
 			
 			<header id="header">
 				
 				<div class ="header-grid">
 					<div class="header-box">
-						<img id="logo" src="assets/images/logo.png">
+						<img id="logo" src="assets/logo.png">
 						<div id="header-title-box">
 							<div class="header-text calligraffitti-regular" id="header-title">skyVue</div>
 							<div class="header-text" id="header-subtitle">Satellite Tracking Graphical Interface</div>
@@ -44,7 +44,7 @@
 						
 					</div>
 					
-					<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/images/github.png" width="45px"></a>
+					<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/github.png" width="45px"></a>
 					
 					<!-- <div class="warning">All content here is intended only for learning purposes.</div>
 					</div> -->
@@ -85,14 +85,14 @@
 						
 						<div v-if="!tracking" class="button-box">
 							<button onclick="startTracking(mountedApp.selected_satellite)" class="button">
-								<img src="./assets/images/start_tracking.png" width="30px">
+								<img src="./assets/start_tracking.png" width="30px">
 								START TRACKING
 							</button>
 						</div>
 						
 						<div v-if="tracking" class="button-box">
 							<button onclick="stopTracking()" class="button">
-								<img src="./assets/images/start_tracking.png" width="30px">
+								<img src="./assets/start_tracking.png" width="30px">
 								STOP TRACKING
 							</button>
 						</div>
@@ -178,7 +178,7 @@
 						</div>
 						
 						<div class="button-box">
-							<button @click="openDataManager()" class="button"><img src="./assets/images/data.png" width="30px">DATA MANAGER</button>
+							<button @click="openDataManager()" class="button"><img src="./assets/data.png" width="30px">DATA MANAGER</button>
 						</div>
 						
 					</div>
@@ -292,10 +292,10 @@
 						</div>
 						
 						<div class="display-system" id="map2D-container" v-show="viewer_state === 'map2D'">
-							<img id="map2D-img" src="./assets/images/map2D.png">
-							<img v-if="tracking" id="satellite" src="assets/images/satellite.png" alt="a mundi map" lang="en">
+							<img id="map2D-img" src="./assets/map2D.png">
+							<img v-if="tracking" id="satellite" src="assets/satellite.png" alt="a mundi map" lang="en">
 							<div v-if="tracking" id="visibility-radius"></div>
-							<img id="user-location" src="assets/images/here.png" alt="here" lang="en">
+							<img id="user-location" src="assets/here.png" alt="here" lang="en">
 							<img width="20px" id="user-location-flag">
 							<img v-if="tracking" width="20px" id="satellite-location-flag">
 							<div v-if="tracking" id="satellite-location-name"></div>
@@ -316,8 +316,8 @@
 							<div>IN DEVELOPMENT</div>
 							
 							<div id="contribute">
-								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/join.png" alt="Join the team" style="width: 165px;" ></a>
 							</div>
 							
 						</div>
@@ -327,8 +327,8 @@
 							<div>IN DEVELOPMENT</div>
 							
 							<div id="contribute">
-								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/join.png" alt="Join the team" style="width: 165px;" ></a>
 							</div>
 							
 						</div>
@@ -338,8 +338,8 @@
 							<div>IN DEVELOPMENT</div>
 							
 							<div id="contribute">
-								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/join.png" alt="Join the team" style="width: 165px;" ></a>
 							</div>
 							
 						</div>
@@ -348,23 +348,23 @@
 							
 					<div id="view-labels">
 						<div class="label" id="user-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/images/here.png">
+							<img class="label-img" src="./assets/here.png">
 							<div class="label-text">you're here</div>
 						</div>
 						<div class="label" id="satellite-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/images/satellite.png">
+							<img class="label-img" src="./assets/satellite.png">
 							<div class="label-text">sattelite</div>
 						</div>
 						<div class="label" id="dashed-circle-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/images/dashed_circle.png">
+							<img class="label-img" src="./assets/dashed_circle.png">
 							<div class="label-text">footprint</div>
 						</div>
 						<div class="label" id="user-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/images/dotted_line.png">
+							<img class="label-img" src="./assets/dotted_line.png">
 							<div class="label-text">traveled path</div>
 						</div>
 						<div class="label" id="user-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/images/continuous_line.png">
+							<img class="label-img" src="./assets/continuous_line.png">
 							<div class="label-text">predicted path</div>
 						</div>
 					</div>
@@ -387,8 +387,8 @@
 			<div id="contribute" class="band-container">
 				<div class="band-display">
 					<div id="contribute">
-						<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/images/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-						<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/images/join.png" alt="Join the team" style="width: 165px;" ></a>
+						<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
+						<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/join.png" alt="Join the team" style="width: 165px;" ></a>
 					</div>
 					<div class="inline-flex-container">
 						<h1 id="the-team-title">THE TEAM</h1>
@@ -435,7 +435,7 @@
 					<div class="powered-by">
 						<div>Powerd by</div>
 						
-						<a target="_blank" href="https://wheretheiss.at/w/developer"><img src="./assets/images/wheretheissat.png" width="200px"></a>
+						<a target="_blank" href="https://wheretheiss.at/w/developer"><img src="./assets/wheretheissat.png" width="200px"></a>
 						
 						<a target="_blank" href="https://flagsapi.com/"><img src="https://flagsapi.com/img/logo-countryflags.png" width="200px" style="border-radius: 2%; background-color: rgba(255, 255, 255, 0.205);"></a>
 					</div>
@@ -447,7 +447,6 @@
 					
 		</div>
 				
-		<script type="text/javascript" src="./scripts/mediaPreload.js"></script>
 		<script type="text/javascript" src="./scripts/tracking.js"></script>
 		<script type="text/javascript" src="./scripts/map.js"></script>
 		<script type="text/javascript" src="./scripts/misc.js"></script>
@@ -458,10 +457,10 @@
 
 		<!-- Vue Framework scripts -->
 		<script type="text/javascript" src="./app.js"></script>
-		<script type="text/javascript" src="./DataManager.js"></script>
-		<script type="text/javascript" src="./DataRow.js"></script>
-		<script type="text/javascript" src="./MetaField.js"></script>
-		<script type="text/javascript" src="./Checkbox.js"></script>
+		<script type="text/javascript" src="./components/DataManager/DataManager.js"></script>
+		<script type="text/javascript" src="./components/DataManager/components/DataRow/DataRow.js"></script>
+		<script type="text/javascript" src="./components/DataManager/components/MetaField/MetaField.js"></script>
+		<script type="text/javascript" src="./components/DataManager/components/DataRow/components/Checkbox/Checkbox.js"></script>
 		<script>
 			const mountedApp = app.mount('#app');
 		</script>

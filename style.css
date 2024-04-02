@@ -21,7 +21,7 @@ body {
 
 	content: "";
 
-	background-image: url(./assets/images/background.jpeg);
+	background-image: url(./assets/background.jpeg);
 	background-size: cover;
 
 } */
@@ -434,7 +434,7 @@ input, .data-field output  {
 
 #specs-container {
 
-	/* background-image: url(assets/images/mapmundi.png); 
+	/* background-image: url(assets/mapmundi.png); 
 	background-size:cover;  */
 	width: 800px; 
 	height: 400px;
@@ -554,7 +554,7 @@ input, .data-field output  {
 
 #map3D-container {
 
-	/* background-image: url(assets/images/map3D.png);  */
+	/* background-image: url(assets/map3D.png);  */
 	/* background-size:cover;  */
 	height: inherit;
 	width: inherit;
@@ -712,7 +712,7 @@ footer img{
 
 
 .box-image{
-	background-image: url(assets/images/clodome.png);
+	background-image: url(assets/clodome.png);
 	background-size: contain;
 	position: relative;
 	height: 80px; 
@@ -1200,7 +1200,7 @@ label {
 }
 
 #dev1-button {
-    background-image: url(./assets/images/dev1.png);
+    background-image: url(./assets/dev1.png);
     background-size: contain;
 }
 
