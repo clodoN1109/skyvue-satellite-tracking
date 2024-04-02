@@ -6,3 +6,8 @@
   background-color: #98919100; /* Set the background color */
   border: 1px solid #99999900; /* Add a border for visual clarity */
 }
+
+label {
+	font-family: monospace; 
+	font-weight: bolder;
+}

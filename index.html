@@ -3,25 +3,24 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Constellation</title>
+	<title>SkyVue</title>
+
 	<link rel="icon" href="assets/space_station.png">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="./components/map3D/css/style.css" rel="stylesheet" type="text/css"/>
 	<link href="./components/numberSelector/style.css" rel="stylesheet" type="text/css" />
-	
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Calligraffitti&display=swap" rel="stylesheet">
-
+	<link href="./components/header/header.css" rel="stylesheet" type="text/css" />
+	<link href="./components/Interface/DataPanel/DataPanel.css" rel="stylesheet" type="text/css" />
+	<link href="./components/Interface/ViewPanel/ViewPanel.css" rel="stylesheet" type="text/css" />
 	<link href="./components/dataManager/DataManager.css" rel="stylesheet" type="text/css" />
 	<link href="./components/dataManager/components/DataRow/DataRow.css" rel="stylesheet" type="text/css" />
 	<link href="./components/dataManager/components/DataRow/components/Checkbox/Checkbox.css" rel="stylesheet" type="text/css" />
-
-	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-	<!-- <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.prod.js"></script> -->
-
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!--Vue.js Development Build  -->
+	<!-- <script src="https://unpkg.com/vue@3.0.11/dist/vue.global.prod.js"></script> -->  <!--Vue.js Production Build  -->
 	<script type="text/javascript" src="./components/numberSelector/script.js"></script>
 	
 	<body>
@@ -31,346 +30,15 @@
 			<data-manager :object_path="object_path" :units="units" :source="source_URL"></data-manager>
 			
 			<video id="video-bg" muted autoplay loop src="assets/bg.webm"></video>
-			
-			<header id="header">
-				
-				<div class ="header-grid">
-					<div class="header-box">
-						<img id="logo" src="assets/logo.png">
-						<div id="header-title-box">
-							<div class="header-text calligraffitti-regular" id="header-title">skyVue</div>
-							<div class="header-text" id="header-subtitle">Satellite Tracking Graphical Interface</div>
-						</div>
-						
-					</div>
-					
-					<a target="_blank" href="https://github.com/clodoN1109/ISS-Tracking"><img src="./assets/github.png" width="45px"></a>
-					
-					<!-- <div class="warning">All content here is intended only for learning purposes.</div>
-					</div> -->
-				</div>
-				
-			</header>
+
+			<header-vue></header-vue>
 			
 			<div id="interface" class="interface">
 				
-				<div id="data-display" >
-					
-					<div id="log-box" >
-						<div class="loader" id="log-loader"></div>
-						<div id="log" ></div>
-					</div>
-					
-					<div id="data-tabs">
-						<div onclick="{selectDataTab(event.target)}" class="data-tab" id="source-tab">SOURCE</div>
-						<div onclick="{selectDataTab(event.target)}" class="data-tab" id="data-tab">DATA</div>
-						<div onclick="{selectDataTab(event.target)}" class="data-tab" id="config-tab">CONFIG.</div>
-					</div>
-					
-					<div class="data-container" id="source-container" v-show="data_display_state === 'source'">
-						
-						<div class="parameters-display">
-							<div id="source-display">
-								
-								<div>Satellite selection:</div>
-								<div class="data-field">
-									<select onchange="{selectSatellite(event)}" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475);"  id="satellite-field">
-										<option value="reset"></option>
-										<option v-for="sat in satellites" :value="sat.norad_number">{{sat['name']}}</option>
-									</select>
-								</div>
-								
-							</div>
-						</div>
-						
-						<div v-if="!tracking" class="button-box">
-							<button onclick="startTracking(mountedApp.selected_satellite)" class="button">
-								<img src="./assets/start_tracking.png" width="30px">
-								START TRACKING
-							</button>
-						</div>
-						
-						<div v-if="tracking" class="button-box">
-							<button onclick="stopTracking()" class="button">
-								<img src="./assets/start_tracking.png" width="30px">
-								STOP TRACKING
-							</button>
-						</div>
-						
-					</div>
-					
-					<div class="data-container" id="output-container" v-show="data_display_state === 'data'">
-						
-						<div class="parameters-display">
-							
-							<div>
-								<div>Latitude</div>
-								<div class="data-field">
-									<output style="cursor: default;" id="latitude" readonly value="0"></output> 
-									<div class="units coordinates-unit">deg</div>
-								</div>
-							</div>
-							
-							<div>
-								<div>Longitude</div>
-								<div class="data-field">
-									<output style="cursor: default;" id="longitude" readonly class="" value="0"></output> 
-									<div class="units coordinates-unit">deg</div>
-								</div>
-							</div>
-							
-							<div>
-								<div>Altitude</div>
-								<div class="data-field">
-									<output style="cursor: default;" id="altitude" readonly class="" value="0"></output> 
-									<div class="units distance-unit">Km</div>
-								</div>
-							</div>
-							
-							<div>
-								<div>Velocity</div>
-								<div class="data-field">
-									<output style="cursor: default;" id="velocity" readonly class="" value="0"></output> 
-									<div class="units velocity-unit">Km/h</div>
-								</div>
-							</div>
-							
-							<div>
-								<div>Solar Latitude</div>
-								<div class="data-field">
-									<output style="cursor: default;" id="solarlatitude" readonly class="" value="0"></output> 	
-									<div class="units coordinates-unit">deg</div>
-								</div>
-							</div>
-							
-							<div>
-								<div>Solar Longitude</div>
-								<div class="data-field">
-									<output style="cursor: default;" id="solarlongitude" readonly class="" value="0"></output> 	
-									<div class="units coordinates-unit">deg</div>
-								</div>
-							</div>
-							
-							<div>
-								<div>
-									<div class="spec-info-mini" title="The visibility of a satellite depends on its altitude. It determines the area from which the satellite is visible from an Earth station.">?</div>
-									Visibility
-								</div>
-								<div class="data-field">
-									<output style="cursor: default;" id="visibility" readonly class="" value="0"></output> 	
-									<div class="units">&nbsp;</div>
-								</div>
-							</div>
-							
-							<div>
-								<div>
-									<div class="spec-info-mini" title="The footprint of a communications satellite is the ground area that its transponders offer coverage, and determines the satellite dish diameter required to receive each transponder's signal.">?</div>
-									Footprint
-								</div>
-								<div class="data-field">
-									<output style="cursor: default;" id="footprint" readonly class="" value="0"></output> 	
-									<div class="units distance-unit">Km</div>
-								</div>
-							</div>
-							
-							<br>
-							
-						</div>
-						
-						<div class="button-box">
-							<button @click="openDataManager()" class="button"><img src="./assets/data.png" width="30px">DATA MANAGER</button>
-						</div>
-						
-					</div>
-					
-					<div class="data-container" id="input-container" v-show="data_display_state === 'config'">
-						
-						<div class="parameters-display">
-							
-							<div>
-								<div>
-									<div class="spec-info-mini" title="Interval between queries.">?</div>
-									Data update time
-								</div>
-								
-								<div class="data-field input-box">
-									<input type="text" id="data-update-time" readonly class="input-field" style="cursor: default;" value="5.0">
-									<div class="units time-unit">s</div>
-									<div class="updown-button-pair">
-										<button onclick="increment('data-update-time')" class="updown-button">▲</button>
-										<button onclick="decrement('data-update-time')" class="updown-button">▼</button>	
-									</div>
-								</div>	
-							</div>
-							
-							<div>
-								<div>
-									<div class="spec-info-mini" title="Path plot point density.">?</div>
-									Plot detail level
-								</div>
-								
-								<div class="data-field input-box">
-									<input type="text" id="line-level-detail" readonly class="input-field" style="cursor: default;" value="5">
-									<div class="units time-unit">%</div>
-									<div class="updown-button-pair">
-										<button onclick="increment('line-level-detail')" class="updown-button">▲</button>
-										<button onclick="decrement('line-level-detail')" class="updown-button">▼</button>	
-									</div>
-								</div>	
-							</div>
-							
-							
-							<div>
-								<div>
-									<div class="spec-info-mini" title="Interval for re-rendering the map canvas.">?</div>
-									Display refresh time
-								</div>
-								
-								<div class="data-field input-box">
-									<input type="text" id="display-update-time" readonly class="input-field" style="cursor: default;" value="1.0">
-									<div class="units time-unit">s</div>
-									<div class="updown-button-pair">
-										<button onclick="increment('display-update-time')" class="updown-button">▲</button>
-										<button onclick="decrement('display-update-time')" class="updown-button">▼</button>	
-									</div>
-								</div>	
-							</div>
-							
-							
-							
-							<div>
-								<div>
-									<div class="spec-info-mini" title="">?</div>
-									Units
-								</div>
-								<div class="data-field">
-									<select onchange="{updateUnits(event)}" title="units selection" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475); width: 160px;"  id="units-system-field">
-										<option value="Kilometers">metric</option>
-										<option value="Miles">imperial</option>
-									</select>						
-								</div>
-							</div>
-							
-							<br>
-							
-						</div>
-						
-					</div>
-					
-				</div>
+				<data-panel :tracking="tracking"></data-panel>
 				
-				<div id ="main-window">
-					
-					<div id="view-tabs">
-						<div onclick="{selectViewerTab(event.target)}" class="tab" id="specs-tab">SPECS</div>
-						<div onclick="{selectViewerTab(event.target); updateObjectPosition(mountedApp.object_path);}" class="tab" id="map2D-tab">2D VIEW</div>
-						<div onclick="{selectViewerTab(event.target)}" class="tab" id="map3D-tab">3D VIEW</div>
-						<div onclick="{selectViewerTab(event.target)}" class="tab" id="altitude-tab">ALTITUDE</div>
-						<div onclick="{selectViewerTab(event.target)}" class="tab" id="statistics-tab">STATISTICS</div>
-						<div onclick="{selectViewerTab(event.target)}" class="tab" id="forecast-tab">FORECAST</div>
-					</div>
-					
-					<output id="time" readonly value=""></output>
-					
-					<div id="screen" >
-						
-						<div class="display-system" id="specs-container" v-show="viewer_state === 'specs'">
-							<div class="spec">
-								<div style="display: inline-flex; gap: 5px;">
-									<div class="spec-info" title="Name of the object currently being tracked.">?</div>
-									<div class="spec-name">name: </div>	
-								</div>
-								<output class="spec-value" id="name" readonly value="0"></output>
-							</div>
-							<div class="spec">
-								<div style="display: inline-flex; gap: 5px;">
-									<div class="spec-info" title="The NORAD Catalog Number, also known as the SATCAT, is a nine-digit sequential identifier assigned by the United States Space Command (USSPACECOM) to all artificial objects in Earth’s orbit and those that have left Earth’s orbit. It represents the order of launch or discovery and is used to track satellites and other space objects.">?</div>
-									<div class="spec-id">NORAD catalog number:</div>	
-								</div>
-								<output class="spec-value" id="id" readonly value="0"></output>
-							</div>
-						</div>
-						
-						<div class="display-system" id="map2D-container" v-show="viewer_state === 'map2D'">
-							<img id="map2D-img" src="./assets/map2D.png">
-							<img v-if="tracking" id="satellite" src="assets/satellite.png" alt="a mundi map" lang="en">
-							<div v-if="tracking" id="visibility-radius"></div>
-							<img id="user-location" src="assets/here.png" alt="here" lang="en">
-							<img width="20px" id="user-location-flag">
-							<img v-if="tracking" width="20px" id="satellite-location-flag">
-							<div v-if="tracking" id="satellite-location-name"></div>
-							<div id="user-location-name"></div>
-							<canvas id="canvas"></canvas>
-						</div>
+				<view-panel :tracking="tracking"></view-panel>
 
-						<div class="display-system" id="map3D-container" v-show="viewer_state === 'map3D'">
-							
-							<div class="padding_wrapper"><div class="es_space_drawer_container" id="es_earth_sunlight"></div></div>
-							<div class="es_date" id="es_earth_sunlight_date_slider_container"></div>
-							<div class="es_time" id="es_earth_sunlight_time_slider_container"></div>
-							
-						</div>
-
-						<div class="display-system SOON" id="altitude-container" v-show="viewer_state === 'altitude'">
-							
-							<div>IN DEVELOPMENT</div>
-							
-							<div id="contribute">
-								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/join.png" alt="Join the team" style="width: 165px;" ></a>
-							</div>
-							
-						</div>
-
-						<div class="display-system SOON" id="statistics-container" v-show="viewer_state === 'statistics'">
-							
-							<div>IN DEVELOPMENT</div>
-							
-							<div id="contribute">
-								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/join.png" alt="Join the team" style="width: 165px;" ></a>
-							</div>
-							
-						</div>
-
-						<div class="display-system SOON" id="forecast-container" v-show="viewer_state === 'forecast'">
-							
-							<div>IN DEVELOPMENT</div>
-							
-							<div id="contribute">
-								<a class="buymeacoffee-button" target="_blank" href="https://www.buymeacoffee.com/"><img src="./assets/buymeacoffee-button.png" alt="Buy Me A Coffee" style="width: 165px;" ></a>
-								<a class="jointheteam-button" target="_blank" href="https://trello.com/b/D841pzzW/skylantern-web-app"><img src="./assets/join.png" alt="Join the team" style="width: 165px;" ></a>
-							</div>
-							
-						</div>
-						
-					</div>
-							
-					<div id="view-labels">
-						<div class="label" id="user-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/here.png">
-							<div class="label-text">you're here</div>
-						</div>
-						<div class="label" id="satellite-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/satellite.png">
-							<div class="label-text">sattelite</div>
-						</div>
-						<div class="label" id="dashed-circle-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/dashed_circle.png">
-							<div class="label-text">footprint</div>
-						</div>
-						<div class="label" id="user-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/dotted_line.png">
-							<div class="label-text">traveled path</div>
-						</div>
-						<div class="label" id="user-label" style="opacity: 0.9;">
-							<img class="label-img" src="./assets/continuous_line.png">
-							<div class="label-text">predicted path</div>
-						</div>
-					</div>
-							
-				</div>	
-						
 			</div>
 					
 			<div id="trivia" class="band-container">
@@ -450,13 +118,15 @@
 		<script type="text/javascript" src="./scripts/tracking.js"></script>
 		<script type="text/javascript" src="./scripts/map.js"></script>
 		<script type="text/javascript" src="./scripts/misc.js"></script>
-		<script type="text/javascript" src="./scripts/interface.js"></script>
 		<script type="text/javascript" src="./components/map3D/js/base.js"></script>
 		<script type="text/javascript" src="./components/map3D/js/earth_sun.js"></script>
 		<script type="text/javascript" src="./components/map3D/js/clodo.js"></script>
 
 		<!-- Vue Framework scripts -->
 		<script src="./app.js"></script>
+		<script src="./components/header/header.js"></script>
+		<script src="./components/Interface/DataPanel/DataPanel.js"></script>
+		<script src="./components/Interface/ViewPanel/ViewPanel.js"></script>
 		<script src="./components/dataManager/DataManager.js"></script>
 		<script src="./components/dataManager/components/DataRow/DataRow.js"></script>
 		<script src="./components/dataManager/components/MetaField/MetaField.js"></script>

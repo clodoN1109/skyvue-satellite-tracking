@@ -2,21 +2,11 @@ const app = Vue.createApp( {
 
     data() {
         return{
-            // Interface state
-            viewer_state: 'map2D',
-            data_display_state: 'source',
             // Tracking system state 
             tracking: false, 
             //API configuration
             source_URL: 'https://api.wheretheiss.at/',
             // Collected data
-            satellites: [
-                
-                {norad_number: '25544', name: 'ISS (International Space Station)'},
-                {norad_number: '33053', name: 'GLAST (Fermi Gamma-ray Space Telescope)'},
-
-            ],
-            selected_satellite: '',
             // object_path[i] = {index : index, name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units};
             object_path: [],
             user_location: [],
@@ -36,15 +26,13 @@ const app = Vue.createApp( {
 
     methods: {
 
-        initializeApp() {
+    },
 
-            const interval_Wiki = setInterval(updateWikiInfo, this.wiki_update_rate);
-
-            // Selecting default tabs for each window.
-    
-            selectViewerTab(document.getElementById("map2D-tab"));
-            selectDataTab(document.getElementById("source-tab"));
+    mounted() {
+        
+        setTimeout(() => {
             
+            const interval_Wiki = setInterval(updateWikiInfo, this.wiki_update_rate);
             
             // Making data-display and main-window elements have the same height.
             makeSameHeightByID("data-display", "main-window");
@@ -59,18 +47,6 @@ const app = Vue.createApp( {
             gradualOpacity('interface', 1500);    
             map2DGradualAppearance(3000);
 
-        },
-
-        openDataManager(){
-            document.getElementById('data-manager-container').style.display = 'flex';
-        }
-
-    },
-
-    mounted() {
-        
-        setTimeout(() => {
-            mountedApp.initializeApp();
         }, 100);
 
     }

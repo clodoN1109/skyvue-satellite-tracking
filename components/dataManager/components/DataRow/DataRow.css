@@ -145,3 +145,9 @@
     width: 40px;
     padding: 0 10px;   
 }
+
+.copyButton:hover, .binButton:hover {
+
+	cursor: pointer;
+
+}
