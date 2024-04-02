@@ -255,10 +255,12 @@ input, .data-field output  {
 	max-width: 200px;
 	height: 20px;
 
+	padding-right: 40px;
+
 	display: flex;
 	align-items: center; 
 	align-content: center;	
-	justify-content: center;
+	justify-content: flex-end;
 	justify-items: center;
 
 	cursor: default; 

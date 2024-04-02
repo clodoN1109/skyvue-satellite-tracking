@@ -2,18 +2,17 @@ const app = Vue.createApp( {
 
     data() {
         return{
-            // Tracking system state 
-            tracking: false, 
+            tracking: false,
             //API configuration
             source_URL: 'https://api.wheretheiss.at/',
             // Collected data
             // object_path[i] = {index : index, name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units};
-            object_path: [],
-            user_location: [],
+            object_path: new Array(),
+            user_location: new Array(),
             // Container for scheduled intervals.
             intervals: new Array(),
             // Container for scheduled timeouts.
-            timeouts: [],
+            timeouts: new Array(),
             // Display configuration (time in miliseconds).
             wiki_update_rate: 10000,
             data_update_rate: 5000,
@@ -31,7 +30,7 @@ const app = Vue.createApp( {
     mounted() {
         
         setTimeout(() => {
-            
+
             const interval_Wiki = setInterval(updateWikiInfo, this.wiki_update_rate);
             
             // Making data-display and main-window elements have the same height.

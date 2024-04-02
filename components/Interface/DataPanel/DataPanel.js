@@ -16,6 +16,8 @@ app.component('data-panel', {
 					
 					<div class="data-container" id="source-container" v-show="data_display_state === 'source'">
 						
+						<source></source>
+
 						<div class="parameters-display">
 							<div id="source-display">
 								

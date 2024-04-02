@@ -142,6 +142,8 @@ function fetchCurrentState(norad_number, object_path){
     //   ]
     // }
 
+    activityLogging("requesting data");
+
     API_URL = "https://sky-vue-api.onrender.com/";
 
     fetch(API_URL)
@@ -149,7 +151,7 @@ function fetchCurrentState(norad_number, object_path){
     .then((data) => {
 
       // Signal that fetching process is happening:
-      activityLogging("updating parameters");
+      activityLogging("updating data");
       
       // Updates Earth's ilumination state (so far only for the 3D view):
       updateEarthIlumination(Number(data.positions[0].timestamp));
@@ -184,6 +186,8 @@ function fetchCurrentState(norad_number, object_path){
 
   if (norad_number == 25544) {
 
+    activityLogging("requesting data");
+
       // Json response object example: 
   //   {
   //     "name": "iss",
@@ -208,7 +212,7 @@ function fetchCurrentState(norad_number, object_path){
   .then((data) => {
 
     // Signal that fetching process is happening:
-    activityLogging("updating parameters");
+    activityLogging("updating data");
     
     // Updates Earth's ilumination state (so far only for the 3D view):
     updateEarthIlumination(Number(data.timestamp));

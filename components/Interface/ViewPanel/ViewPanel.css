@@ -334,7 +334,7 @@ canvas {
 	border-width: 5px;
 	border-radius: 50%;
 	border-color: rgba(245, 243, 243, 0);
-	background-color: rgba(192, 185, 177, 0);
+	background-color: rgba(192, 185, 177, 0.936);
 
 	backdrop-filter: blur(10px);
 
