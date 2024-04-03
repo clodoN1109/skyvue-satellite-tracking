@@ -89,7 +89,7 @@ function GLDrawer(scale, ready_callback) {
         for (var i = 0; i < mip_levels; i++) {
             var image = new Image();
             assets[j].push(image);
-            image.src = "./components/map3D/images/earth_sun/" + name + i + ".jpg";
+            image.src = "./components/Interface/ViewPanel/components/Map3DTab/map3D/images/earth_sun/" + name + i + ".jpg";
             image.onload = asset_loaded;
         }
     }

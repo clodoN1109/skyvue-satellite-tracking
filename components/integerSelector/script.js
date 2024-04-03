@@ -27,7 +27,6 @@ function decrement(id) {
 function updateConfigurationParameters(id, value){
            
 
-
     if (id === 'data-update-time')
     { 
         mountedApp.data_update_rate = value * 1000;

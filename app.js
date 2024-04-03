@@ -6,7 +6,7 @@ const app = Vue.createApp( {
             //API configuration
             source_URL: 'https://api.wheretheiss.at/',
             // Collected data
-            // object_path[i] = {index : index, name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units};
+            // object_path[i] = {index, name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units};
             object_path: new Array(),
             user_location: new Array(),
             // Container for scheduled intervals.
