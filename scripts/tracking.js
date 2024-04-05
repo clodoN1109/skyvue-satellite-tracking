@@ -1,81 +1,3 @@
-function resetInterface(){
-
-    // Reset output variables, intervals, timeouts and canvas.
-    
-  mountedApp.timeouts.forEach(elementID => { 
-    clearTimeout(elementID);    
-  });
-
-  mountedApp.intervals.forEach(elementID => { 
-    clearInterval(elementID);    
-  });
-  
-  // setTimeout(() => {
-  //   mountedApp.intervals.length = 0;
-  //   mountedApp.timeouts.length = 0;
-  // }, 1000);
-
-  const ctx = canvas.getContext("2d");
-  if (ctx) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-  }
-  
-  mountedApp.object_path.length = 0;
-
-  // Cleaning all interface output fields.
-  document.getElementById("latitude").value = ''; 
-  document.getElementById("longitude").value = '';  
-  document.getElementById("altitude").value = ''; 
-  document.getElementById("velocity").value = ''; 
-  document.getElementById("visibility").value = ''; 
-  document.getElementById("footprint").value = ''; 
-  document.getElementById("time").value = ''; 
-  // document.getElementById("daynum").value = ''; 
-  document.getElementById("solarlatitude").value = ''; 
-  document.getElementById("solarlongitude").value = ''; 
-  // document.getElementById("units").value = ''; 
-
-  setTimeout(() => {
-    mountedApp.tracking = false;  
-  }, 250);
-  
-
-}
-
-function updateDataDisplay(current_state){
-
-  // current_state object structure:
-  // {
-  //   'name':  name,
-  //   'id': id,
-  //   'latitude': latitude,
-  //   'longitude': longitude,
-  //   'velocity': velocity,
-  //   'visibility': visibility,
-  //   'footprint': footprint,
-  //   'time': time,
-  //   'daynum': daynum,
-  //   'solarlatitude': solar_lat,
-  //   'solarlongitude': solar_lon,
-  //   'units': units
-  // }
-
-  Object.keys(current_state).forEach(key => {
-    
-    data_field_element = document.getElementById(key);
-    value = current_state[key];
-
-    if ((value != undefined) && (data_field_element != undefined)){
-      data_field_element.textContent = value;
-    }
-    
-    if ((value === undefined) && (data_field_element != undefined)){
-      data_field_element.textContent = '-';
-  }    
-});
-
-}
-
 function fetchCurrentState(norad_number, object_path){
 
   if (norad_number == 25544) {
@@ -135,7 +57,6 @@ function fetchCurrentState(norad_number, object_path){
     
     }
 
-    updateDataDisplay(current_state);
     object_path.push(current_state);
 
     
@@ -204,7 +125,6 @@ function fetchCurrentState(norad_number, object_path){
       
       }
 
-      updateDataDisplay(current_state);
       object_path.push(current_state);
       
     }); 

@@ -395,7 +395,7 @@
 
 	display: inline-flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: center;
 
 	white-space: nowrap;
 	overflow-x: auto;

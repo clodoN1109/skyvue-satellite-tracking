@@ -4,12 +4,12 @@ app.component('map2D-tab', {
     `
     <div class="display-system" id="map2D-container">
         <img id="map2D-img" src="./assets/map2D.png">
-        <img v-if="path_length > 0 && tracking" id="satellite" src="assets/satellite.png" alt="a mundi map" lang="en">
-        <div v-if="path_length > 0 && tracking" id="visibility-radius"></div>
+        <img v-show="path_length > 0 && tracking" id="satellite" src="assets/satellite.png" alt="a mundi map" lang="en">
+        <div v-show="path_length > 0 && tracking" id="visibility-radius"></div>
         <img id="user-location" src="assets/here.png" alt="here" lang="en">
         <img width="20px" id="user-location-flag">
-        <img v-if="path_length > 0 && tracking" width="20px" id="satellite-location-flag">
-        <div v-if="path_length > 0 && tracking" id="satellite-location-name"></div>
+        <img v-show="path_length > 0 && tracking" width="20px" id="satellite-location-flag">
+        <div v-show="path_length > 0 && tracking" id="satellite-location-name"></div>
         <div id="user-location-name"></div>
         <canvas id="canvas"></canvas>
     </div>
@@ -29,6 +29,13 @@ app.component('map2D-tab', {
     computed: {
         path_length(){
             return this.object_path.length;
+        }
+    },
+    updated() {
+        if (this.object_path.length > 0) {
+            updateObjectPosition(this.object_path);
+            updateMap([[this.object_path.slice(0, -3), this.line_level_detail]]); 
+            updateNationalFlagPosition(this.object_path);
         }
     }
 })

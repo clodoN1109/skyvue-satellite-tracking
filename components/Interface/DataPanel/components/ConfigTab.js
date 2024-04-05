@@ -133,7 +133,8 @@ app.component('config-tab', {
             }
         
             if (id === 'line-level-detail'){ 
-                mountedApp.line_level_detail = value; 
+                mountedApp.line_level_detail = value;
+                updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]);  
             }
         
             if (mountedApp.tracking === false) {

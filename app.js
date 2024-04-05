@@ -2,6 +2,7 @@ const app = Vue.createApp( {
 
     data() {
         return{
+            active_satellites_tle: [],
             selected_satellite: '',
             tracking: false,
             //API configuration
@@ -27,6 +28,54 @@ const app = Vue.createApp( {
 
     methods: {
 
+        showAllSatellites(){
+
+            // So far I've got a complete list of currently active satellites, 
+            // but the response, not really surprinsinly, doesn't come with
+            // the positions. It would be necessary, now with data massive data, to have access to a really fast, and
+            // likely paid API to request the current positions of all satellites one by one.
+            
+            // API_URL = "https://sky-vue-api.onrender.com/tle/all";
+
+            // fetch(API_URL)
+            // .then((response) => response.json())
+            // .then((data) => {
+
+            //     data.forEach(sat => {
+            //         this.active_satellites_tle.push(
+            //             {name:sat.OBJECT_NAME, id:sat.NORAD_CAT_ID}
+            //         )
+            //     });
+
+            // })
+        },
+
+        
+        resetInterface(){
+            // Reset output variables and canvas.
+
+            const ctx = canvas.getContext("2d");
+            if (ctx) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            }
+
+            mountedApp.object_path.length = 0;
+
+            // Cleaning all interface output fields.
+            document.getElementById("latitude").value = ''; 
+            document.getElementById("longitude").value = '';  
+            document.getElementById("altitude").value = ''; 
+            document.getElementById("velocity").value = ''; 
+            document.getElementById("visibility").value = ''; 
+            document.getElementById("footprint").value = ''; 
+            document.getElementById("time").value = ''; 
+            // document.getElementById("daynum").value = ''; 
+            document.getElementById("solarlatitude").value = ''; 
+            document.getElementById("solarlongitude").value = ''; 
+            // document.getElementById("units").value = ''; 
+
+        },
+
     },
 
     mounted() {
@@ -47,6 +96,8 @@ const app = Vue.createApp( {
         
             gradualOpacity('interface', 1500);    
             map2DGradualAppearance(3000);
+
+            this.showAllSatellites();
 
         }, 100);
 

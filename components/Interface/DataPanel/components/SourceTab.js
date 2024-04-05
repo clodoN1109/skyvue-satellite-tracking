@@ -12,7 +12,7 @@ app.component('source-tab', {
 
                 <div class="source-field">
                     
-                    <input @click="$event.target.value = ''" type="text" class="" v-model="norad_number"/>
+                    <input @keyup.enter="startTracking(norad_number)" @click="$event.target.value = ''" type="text" class="" v-model="norad_number"/>
 
                 </div>
                 <div class="spec">
@@ -57,7 +57,7 @@ app.component('source-tab', {
         
         <div v-if="tracking" class="button-box">
             <button @click="stopTracking()" class="button">
-                <img src="./assets/start_tracking.png" width="30px">
+                <img src="./assets/stop_tracking.png" width="30px">
                 STOP TRACKING
             </button>
         </div>
@@ -79,34 +79,59 @@ app.component('source-tab', {
     methods: {
         
         startTracking(norad_number){
-          
-            fetchCurrentState(norad_number, mountedApp.object_path);  
-          
-            // Starts data collection asynchronous loop.
-            const interval_UpdateData = setInterval(() => {
-          
-              fetchCurrentState(norad_number, mountedApp.object_path);  
-          
-            }, mountedApp.data_update_rate);
-          
-            // Starts representing data on the view tabs.
-            const interval_UpdateDataDisplay = setInterval(() => {
+            
+            function isNumeric(str) {
+                return /^[0-9]+(\.[0-9]+)?$/.test(str);
+            }
+            
+            if( isNumeric(norad_number) ) {
+            
+                mountedApp.resetInterface();
 
-              updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]); 
-              updateObjectPosition(mountedApp.object_path);
-              updateNationalFlagPosition(mountedApp.object_path);
+                fetchCurrentState(norad_number, mountedApp.object_path);  
           
-            }, mountedApp.display_framerate);
+                // Starts data collection asynchronous loop.
+                const interval_UpdateData = setInterval(() => {
+              
+                  fetchCurrentState(norad_number, mountedApp.object_path);  
+              
+                }, mountedApp.data_update_rate);
+              
+                // Starts representing data on the view tabs.
+                const interval_UpdateDataDisplay = setInterval(() => {
+    
+                  updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]); 
+                  updateObjectPosition(mountedApp.object_path);
+                  updateNationalFlagPosition(mountedApp.object_path);
+              
+                }, mountedApp.display_framerate);
+              
+                mountedApp.intervals.push(interval_UpdateData, interval_UpdateDataDisplay);
+                mountedApp.tracking = true;
+                
+            }
+            else {
+                activityLogging("🙄 Invalid input.")
+            }
           
-            mountedApp.intervals.push(interval_UpdateData, interval_UpdateDataDisplay);
-            mountedApp.tracking = true;
             
         },        
 
         stopTracking( ){
-            resetInterface();
-        }
         
+            //Reseting intervals and timeouts. 
+            
+            mountedApp.timeouts.forEach(elementID => { 
+                clearTimeout(elementID);    
+            });
+
+            mountedApp.intervals.forEach(elementID => { 
+                clearInterval(elementID);    
+            });
+            mountedApp.tracking = false; 
+
+        }
+
     },
     updated() {
         mountedApp.selected_satellite = this.norad_number;

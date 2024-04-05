@@ -187,19 +187,92 @@
 	height: 400px;
 
 	margin: 0;
-	padding: 40px;
+	padding: 2vw;
 
-	display: flex;
-	flex-direction: column;
+	display: grid;
+	grid-template-columns: 50% 50%;
 	align-items: center;
-	align-content: flex-start;
-	justify-items: flex-start;
-	justify-content: flex-start;
+	align-content: center;
+	justify-items: center;
+	justify-content: center;
 
 	gap: 20px;
 
 	font-family: 'Courier New', Courier, monospace;
+	
 	cursor: default;
+}
+
+#specs-box, #chatbot-box {
+
+	width: 100%;
+	height: 100%;
+
+}
+
+#chatbot-response {
+	min-height: 100%;
+	font-weight: 200;
+}
+
+.specs-flex {
+
+	width: 100%;
+	height: inherit;
+
+	display: flex;
+	flex-direction: column;
+
+	gap: 0;
+
+	margin: 0;
+	padding: 0;
+
+	border-style: solid;
+	border-color: rgb(255, 255, 255);
+	border-width: 1px;
+	border-radius: 4px;
+}
+
+.specs-header {
+	width: 100%;
+	height: fit-content;
+
+	border-style: solid;
+	border-color: rgba(255, 255, 255, 0.738);
+	border-width: 0 0 1px 0;
+	border-radius: 0px;
+
+	padding: 10px;
+
+	backdrop-filter: blur(20px);
+	background-color: rgba(36, 40, 68, 0.642);
+
+}
+
+.specs-data-display {
+
+	height: 100%;
+	width: 100%;
+	overflow-y: scroll;
+
+	padding: 20px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+	color: white; 	
+
+	scroll-behavior: smooth;
+	scroll-snap-type: mandatory;
+    scrollbar-color: rgb(255, 255, 255) rgba(43, 45, 43, 0.756);
+	-webkit-overflow-scrolling: touch;
+	
+	backdrop-filter: blur(20px);
+	background-color: rgba(77, 85, 152, 0.254);
+
+
 }
 
 .spec {
@@ -214,7 +287,8 @@
 	flex-wrap: nowrap;
 	gap: 30px;
 
-	font-size: 20px;
+	font-size: 1.1vw;
+	font-weight: 100;
 
 }
 
@@ -268,11 +342,11 @@
 }
 
 .spec-name {
-	font-weight: 600;
+	font-weight: 300;
 }
 
 .spec-value {
-	font-weight: 400;
+	font-weight: 200;
 	text-transform: uppercase;
 }
 

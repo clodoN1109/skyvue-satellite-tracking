@@ -65,7 +65,7 @@ app.component('view-panel', {
 
     methods: {
         selectTab(element) {
-
+            
             function highlightTab(element){
 
                 elementClass = element.className;
