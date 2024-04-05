@@ -64,7 +64,7 @@ function updateNationalFlagPosition(object_path){
   
   latitude = object_path[object_path.length-1]['latitude'];
   longitude = object_path[object_path.length-1]['longitude']; 
-  fetch(mountedApp.source_URL + "v1/coordinates/" + latitude + "," + longitude)
+  fetch(mountedApp.locationNameByCoordinates_URL + "v1/coordinates/" + latitude + "," + longitude)
   .then((response) => response.json())
   .then((iss) => {
     

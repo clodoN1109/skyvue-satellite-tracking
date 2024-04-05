@@ -4,29 +4,59 @@ app.component('source-tab', {
     `
     <div class="data-container" id="source-container">
 
-        <div class="parameters-display">
-            <div id="source-display">
+        <div class="source-selector">
+
+            <div id="source-display" style="padding: 0 15px ">
                 
                 <div>Satellite selection:</div>
-                <div class="data-field">
-                    <select onchange="{selectSatellite(event)}" style="color: rgba(255, 254, 254, 0.931); background-color: rgba(72, 96, 161, 0.475);"  id="satellite-field">
-                        <option value="reset"></option>
-                        <option v-for="sat in satellites" :value="sat.norad_number">{{sat['name']}}</option>
-                    </select>
+
+                <div class="source-field">
+                    
+                    <input @click="$event.target.value = ''" type="text" class="" v-model="norad_number"/>
+
+                </div>
+                <div class="spec">
+                    <div style="display: inline-flex; gap: 5px;">
+                        <div class="source-spec-info" title="The NORAD Catalog Number, also known as the SATCAT, is a nine-digit sequential identifier assigned by the United States Space Command (USSPACECOM) to all artificial objects in Earth’s orbit and those that have left Earth’s orbit. It represents the order of launch or discovery and is used to track satellites and other space objects.">?</div>	
+                        <a class="source-spec-name" target="_blank"href=" https://celestrak.org/NORAD/elements/table.php?GROUP=active">NORAD catalog</a>	
+                    </div>
                 </div>
                 
+            </div>
+            
+        </div>
+
+        <div class="data-display">
+            <div class="source-examples-table">
+                <p style="font-size:1.7vh; padding:0;">Examples:</p>
+                <div class="source-example-row">
+                    <div class="source-example-header">NAME</div>
+                    <div class="source-example-header">NORAD</div>
+                </div>
+                <div class="source-example-row">
+                    <div class="source-example-field">ISS - International Space Station</div>
+                    <div class="source-example-field">25544</div>
+                </div>
+                <div class="source-example-row">
+                    <div class="source-example-field">GLAST - Fermi Gamma-ray Space Telescope</div>
+                    <div class="source-example-field">33053</div>
+                </div>
+                <div class="source-example-row">
+                    <div class="source-example-field">STARLINK 1020</div>
+                    <div class="source-example-field">44725</div>
+                </div>
             </div>
         </div>
         
         <div v-if="!tracking" class="button-box">
-            <button onclick="startTracking(mountedApp.selected_satellite)" class="button">
+            <button @click="startTracking(norad_number)" class="button">
                 <img src="./assets/start_tracking.png" width="30px">
                 START TRACKING
             </button>
         </div>
         
         <div v-if="tracking" class="button-box">
-            <button onclick="stopTracking()" class="button">
+            <button @click="stopTracking()" class="button">
                 <img src="./assets/start_tracking.png" width="30px">
                 STOP TRACKING
             </button>
@@ -37,19 +67,48 @@ app.component('source-tab', {
     ,
     data() {
         return {
-            satellites: [
-                
-            {norad_number: '25544', name: 'ISS (International Space Station)'},
-            {norad_number: '33053', name: 'GLAST (Fermi Gamma-ray Space Telescope)'},
-
-            ],
-            selected_satellite: ''
+            norad_number: 'Enter NORAD number'
         }
     },
     props: {
         tracking: {
             type: Boolean,
             required: true
+        },
+    },
+    methods: {
+        
+        startTracking(norad_number){
+          
+            fetchCurrentState(norad_number, mountedApp.object_path);  
+          
+            // Starts data collection asynchronous loop.
+            const interval_UpdateData = setInterval(() => {
+          
+              fetchCurrentState(norad_number, mountedApp.object_path);  
+          
+            }, mountedApp.data_update_rate);
+          
+            // Starts representing data on the view tabs.
+            const interval_UpdateDataDisplay = setInterval(() => {
+
+              updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]); 
+              updateObjectPosition(mountedApp.object_path);
+              updateNationalFlagPosition(mountedApp.object_path);
+          
+            }, mountedApp.display_framerate);
+          
+            mountedApp.intervals.push(interval_UpdateData, interval_UpdateDataDisplay);
+            mountedApp.tracking = true;
+            
+        },        
+
+        stopTracking( ){
+            resetInterface();
         }
+        
+    },
+    updated() {
+        mountedApp.selected_satellite = this.norad_number;
     }
 })

@@ -48,7 +48,7 @@ app.component('data-manager', {
     data(){
 
         return {
-            data_header: {'index': '#', 'name':'NAME', 'id':'ID', 'latitude':'LATITUDE', 'altitude':'ALTITUDE', 'longitude':'LONGITUDE', 'altitude':'ALTITUDE', 'velocity':'VELOCITY', 'visibility':'VISIBILITY', 'footprint':'FOOTPRINT', 'time':'TIME', 'daynum':'DAYNUM', 'solarlatitude':'SOLAR LAT.', 'solarlongitude':'SOLAR LON.', 'units':'UNITS'},
+            data_header: {'index': '#', 'name':'NAME', 'id':'ID', 'latitude':'LATITUDE', 'longitude':'LONGITUDE', 'altitude':'ALTITUDE', 'velocity':'VELOCITY', 'visibility':'VISIBILITY', 'footprint':'FOOTPRINT', 'time':'TIME', 'daynum':'DAYNUM', 'solarlatitude':'SOLAR LAT.', 'solarlongitude':'SOLAR LON.', 'units':'UNITS'},
             data_units: {'index': '()', 'name':'()', 'id':'()', 'latitude':'(degrees)', 'longitude':'(degrees)', 'altitude':'(km)', 'velocity':'(km/h)', 'visibility':'()', 'footprint':'(Km)', 'time':'(GMT)', 'daynum':'()', 'solarlatitude':'(degrees)', 'solarlongitude':'(degrees)', 'units':'()'},
         }
 
@@ -125,10 +125,10 @@ app.component('data-manager', {
             path = this.object_path;
 
             if (path.length > 0){
-                return {'sourceURL: ': this.source.toString(), 'name: ': path[0].name.toString(), 'id: ': path[0].id.toString(), 'rows: ': this.object_path.length.toString(), 'columns: ': Object.keys(path[0]).length.toString(),'units: ':this.units.toString()} 
+                return {'source: ': this.source.toString(), 'name: ': path[0].name.toString(), 'id: ': path[0].id.toString(), 'rows: ': this.object_path.length.toString(), 'columns: ': Object.keys(path[0]).length.toString(),'units: ':this.units.toString()} 
             }
 
-            return {'sourceURL: ': '', 'name: ': '', 'id: ': '', 'rows: ': '', 'columns: ': '','units: ': ''}
+            return {'source: ': '', 'name: ': '', 'id: ': '', 'rows: ': '', 'columns: ': '','units: ': ''}
         }
 
     }

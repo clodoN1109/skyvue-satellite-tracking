@@ -16,7 +16,7 @@ app.component('data-panel', {
 		
 		<source-tab v-show="data_display_state === 'source'" :tracking="tracking"></source-tab>
 		<data-tab  v-show="data_display_state === 'data'"></data-tab>
-		<config-tab  v-show="data_display_state === 'config'"></config-tab>				
+		<config-tab  v-show="data_display_state === 'config'" :source="source" :tracking="tracking"></config-tab>				
 	
 	</div>
     `
@@ -32,7 +32,15 @@ app.component('data-panel', {
         tracking: {
             type: Boolean,
             required: true
-        }
+        },
+		selected_satellite: {
+			type: String,
+			required: true
+		},
+		source: {
+			type: String,
+			required: true
+		}
     },
     methods: {
         selectTab(element){

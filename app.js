@@ -2,9 +2,11 @@ const app = Vue.createApp( {
 
     data() {
         return{
+            selected_satellite: '',
             tracking: false,
             //API configuration
-            source_URL: 'https://api.wheretheiss.at/',
+            source_URL: '',
+            locationNameByCoordinates_URL: 'https://api.wheretheiss.at/',
             // Collected data
             // object_path[i] = {index, name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units};
             object_path: new Array(),

@@ -4,7 +4,7 @@ app.component('data-tab', {
     `
     <div class="data-container" id="output-container">
 						
-        <div class="parameters-display">
+        <div class="data-display">
             
             <div>
                 <div>Latitude</div>

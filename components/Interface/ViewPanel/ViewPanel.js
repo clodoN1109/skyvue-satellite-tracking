@@ -8,7 +8,7 @@ app.component('view-panel', {
             <div @click="selectTab($event.target)" class="tab" id="specs-tab">SPECS</div>
             <div @click="selectTab($event.target)" class="tab" id="map2D-tab">2D VIEW</div>
             <div @click="selectTab($event.target)" class="tab" id="map3D-tab">3D VIEW</div>
-            <div @click="selectTab($event.target)" class="tab" id="altitude-tab">ALTITUDE</div>
+            <div @click="selectTab($event.target)" class="tab" id="altitude-tab">PLANETARIUM</div>
             <div @click="selectTab($event.target)" class="tab" id="statistics-tab">STATISTICS</div>
             <div @click="selectTab($event.target)" class="tab" id="forecast-tab">FORECAST</div>
         </div>
@@ -17,8 +17,8 @@ app.component('view-panel', {
         
         <div id="screen" >
         
-            <specs-tab  v-show="viewer_state === 'specs'"></specs-tab>
-            <map2D-tab  v-show="viewer_state === 'map2D'" :tracking="tracking"></map2D-tab>
+            <specs-tab  v-show="viewer_state === 'specs'" :tracking="tracking" :selected_satellite="selected_satellite"></specs-tab>
+            <map2D-tab  v-show="viewer_state === 'map2D'" :tracking="tracking" :object_path="object_path"></map2D-tab>
             <map3D-tab  v-show="viewer_state === 'map3D'"></map3D-tab>
             <altitude-tab  v-show="viewer_state === 'altitude'"></altitude-tab>
             <statistics-tab  v-show="viewer_state === 'statistics'"></statistics-tab>
@@ -52,7 +52,15 @@ app.component('view-panel', {
         tracking: {
             type: Boolean,
             required: true
-        }
+        },
+        object_path: {
+            type: Array,
+            required: true
+        },
+		selected_satellite: {
+			type: String,
+			required: true
+		}
     },
 
     methods: {

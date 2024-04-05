@@ -1,4 +1,4 @@
-input, .data-field output  {
+.data-field input, .data-field output  {
 	color: white;
 	background-color: rgba(31, 28, 28, 0.754);
 	width: 100%;
@@ -10,6 +10,23 @@ input, .data-field output  {
 	border-width: 1px;
 	border-radius: 5px;
 }
+
+.source-field input, .source-field output  {
+	
+	color: rgba(217, 204, 204, 0.874);
+	font-size: 1.8vh;
+
+	background-color: rgba(31, 28, 28, 0.754);
+	width: 100%;
+
+	text-align: center;
+
+	border-style: solid;
+	border-color: rgb(255, 255, 255);
+	border-width: 1px;
+	border-radius: 5px;
+}
+
 
 .input-box{
 
@@ -183,7 +200,7 @@ input, .data-field output  {
 	height: fit-content;
 	width: 100%;
 
-	padding: 15px 30px;
+	padding: 15px 15px;
 
 	display: flex;
 	flex-wrap: wrap;
@@ -220,7 +237,7 @@ input, .data-field output  {
 	justify-items: flex-start;
 	align-items: center;
 	align-content: center;
-	gap: 10px;
+	gap: 0;
 
 	color: white; 
 	font-family: monospace; 	
@@ -297,7 +314,25 @@ input, .data-field output  {
 	100% { transform: rotate(360deg); }
 }
 
-.parameters-display {
+.source-selector {
+
+	height: fit-content;
+	width: 100%;
+
+	padding: 5px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+}
+
+.source-selector .source-display {
+	padding: 0 15px;
+}
+
+
+.data-display {
 
 	height: auto;
 	width: 100%;
@@ -330,4 +365,137 @@ input, .data-field output  {
 	margin: 2px 5px	2px 0px;
 	font-size: 14px;
 	font-weight: 300;
+}
+
+.source-examples-table {
+
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	gap: 0;
+
+	font-size: 1.5vh;
+	font-weight: 100;
+	color: white;
+}
+
+.source-example-row {
+
+	display: grid;
+	grid-template-columns: 70% 30%;
+	gap: 0;
+
+	justify-content: center;
+	align-items: center;
+
+	color: white;
+}
+
+.source-example-header {
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	white-space: nowrap;
+	overflow-x: auto;
+	scrollbar-width: thin;
+	
+	padding: 0 10px;
+
+	color: white;
+	background-color: rgba(43, 39, 39, 0.841);
+	width: 100%;
+
+	text-align: center;
+
+	border-style: solid;
+	border-color: rgb(255, 255, 255);
+	border-width: 1px;
+	border-radius: 0px;
+
+
+}
+
+.source-example-field {
+
+	min-height: 50px;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	/* white-space: nowrap; */
+	/* overflow-x: auto; */
+	/* scrollbar-width: thin; */
+	
+	padding: 0 1px;
+
+	color: white;
+	background-color: rgba(55, 48, 48, 0.496);
+	width: 100%;
+
+	text-align: center;
+
+	border-style: solid;
+	border-color: rgb(255, 255, 255);
+	border-width: 1px;
+	border-radius: 0px;
+
+
+}
+
+.source-spec-info {
+
+	width: 20px;
+	height: 18px;
+
+	display: inline-flex;
+	align-items: center;
+	align-content: center;
+	justify-items: center;
+	justify-content: center;
+
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 50%;
+	border-color: rgba(235, 235, 235, 0.817);
+	background-color: rgba(192, 185, 177, 0);
+
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.source-spec-name {
+	font-size: 1.5vh;
+	cursor: pointer;
+}
+
+.updown-button-pair {
+    display: inline-flex;
+    gap: 0;
+    padding: 0;
+    margin: 3px;
+
+    border-style: solid;
+	border-color: rgb(255, 255, 255);
+	border-width: 3px;
+	border-radius: 5px; 
+}
+
+.updown-button {
+
+    background-color: transparent;
+    color: white;
+
+    border-style: none;
+    height: fit-content;
+    line-height:normal;
+
+}
+
+.input-field {
+
+    max-width: 100px;
+
 }

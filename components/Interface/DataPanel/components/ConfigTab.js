@@ -4,7 +4,7 @@ app.component('config-tab', {
     `
     <div class="data-container" id="input-container">
 						
-        <div class="parameters-display">
+        <div class="data-display">
             
             <div>
                 <div>
@@ -16,8 +16,8 @@ app.component('config-tab', {
                     <input type="text" id="data-update-time" readonly class="input-field" style="cursor: default;" value="5.0">
                     <div class="units time-unit">s</div>
                     <div class="updown-button-pair">
-                        <button onclick="increment('data-update-time')" class="updown-button">▲</button>
-                        <button onclick="decrement('data-update-time')" class="updown-button">▼</button>	
+                        <button @click="increment('data-update-time')" class="updown-button">▲</button>
+                        <button @click="decrement('data-update-time')" class="updown-button">▼</button>	
                     </div>
                 </div>	
             </div>
@@ -32,8 +32,8 @@ app.component('config-tab', {
                     <input type="text" id="line-level-detail" readonly class="input-field" style="cursor: default;" value="5">
                     <div class="units time-unit">%</div>
                     <div class="updown-button-pair">
-                        <button onclick="increment('line-level-detail')" class="updown-button">▲</button>
-                        <button onclick="decrement('line-level-detail')" class="updown-button">▼</button>	
+                        <button @click="increment('line-level-detail')" class="updown-button">▲</button>
+                        <button @click="decrement('line-level-detail')" class="updown-button">▼</button>	
                     </div>
                 </div>	
             </div>
@@ -49,15 +49,15 @@ app.component('config-tab', {
                     <input type="text" id="display-update-time" readonly class="input-field" style="cursor: default;" value="1.0">
                     <div class="units time-unit">s</div>
                     <div class="updown-button-pair">
-                        <button onclick="increment('display-update-time')" class="updown-button">▲</button>
-                        <button onclick="decrement('display-update-time')" class="updown-button">▼</button>	
+                        <button @click="increment('display-update-time')" class="updown-button">▲</button>
+                        <button @click="decrement('display-update-time')" class="updown-button">▼</button>	
                     </div>
                 </div>	
             </div>
             
             
             
-            <div>
+            <div v-if="source === 'https://api.wheretheiss.at/' && tracking">
                 <div>
                     <div class="spec-info-mini" title="">?</div>
                     Units
@@ -76,4 +76,95 @@ app.component('config-tab', {
         
     </div>
     `
+    ,
+    props: {
+        source: {
+            type: String,
+			required: true
+        },
+        tracking: {
+            type: Boolean,
+            required: true
+        }
+    }
+    ,
+    methods: {
+        increment(id) {
+
+            let integerInput = document.getElementById(id);
+        
+            const currentValue = parseInt(integerInput.value);
+            if (currentValue >= 100) {return}
+        
+            integerInput.value = (currentValue + 1);
+         
+            this.updateConfigurationParameters(id, integerInput.value);
+        
+        },
+        
+        decrement(id) {
+        
+            let integerInput = document.getElementById(id);
+        
+            const currentValue = parseInt(integerInput.value);
+            if (currentValue <= 1) {return}
+        
+            integerInput.value = (currentValue - 1).toPrecision(2);
+           
+            this.updateConfigurationParameters(id, integerInput.value);
+        
+        },
+
+        updateConfigurationParameters(id, value){
+           
+
+            if (id === 'data-update-time')
+            { 
+                mountedApp.data_update_rate = value * 1000;
+        
+                if (value == 1) {mountedApp.loader_time = 500;}
+                // Parameter to cut avoid ploting points near the satellite's figure,
+                // and responsive to the selected value for the data_update_rate parameter.
+                else {mountedApp.loader_time = 1000;}
+            }
+        
+            if (id === 'display-update-time'){ 
+                mountedApp.display_framerate = value * 1000; 
+            }
+        
+            if (id === 'line-level-detail'){ 
+                mountedApp.line_level_detail = value; 
+            }
+        
+            if (mountedApp.tracking === false) {
+                return
+            }
+        
+            mountedApp.intervals.forEach(element => {
+                clearInterval(element);    
+            });
+        
+            mountedApp.intervals.length = 0;
+        
+            // Restarts data collection asynchronous loop.
+            const interval_UpdateData = setInterval(() => {
+                
+              fetchCurrentState(mountedApp.selected_satellite, mountedApp.object_path);  
+          
+            }, mountedApp.data_update_rate);
+          
+            const interval_UpdateDataDisplay = setInterval(() => {
+          
+              updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]); 
+              updateObjectPosition(mountedApp.object_path);
+              updateNationalFlagPosition(mountedApp.object_path);
+          
+            }, mountedApp.display_framerate);
+          
+            mountedApp.intervals.push(interval_UpdateData, interval_UpdateDataDisplay);
+        
+        }
+
+
+    }
 })
