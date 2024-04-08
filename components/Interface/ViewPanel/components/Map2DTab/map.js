@@ -23,22 +23,18 @@ function updateMap(paths) {
       lat = latitude/scale_fix;
       lon = longitude/scale_fix;
       
-      ctx.fillStyle = "rgba(255, 255, 255, 1)";
-      ctx.fillRect(lon, lat, 2, 2);
+      canvas2D.getContext('2d').fillStyle = "rgba(255, 255, 255, 1)";
+      canvas2D.getContext('2d').fillRect(lon, lat, 2, 2);
     }
 
   }
 
-  const ctx = canvas.getContext("2d");
-  if (ctx) {
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-    paths.forEach(path => {
-      drawArray(path[0], path[1]);
-    });
+  let canvas2D = document.getElementById('canvas2D');
+  canvas2D.getContext('2d').clearRect(0, 0, canvas2D.width, canvas2D.height);
+  paths.forEach(path => {
+    drawArray(path[0], path[1]);
+  });
     
-  }
 }
 
 function updateObjectPosition(object_path){
@@ -64,13 +60,16 @@ function updateNationalFlagPosition(object_path){
   
   latitude = object_path[object_path.length-1]['latitude'];
   longitude = object_path[object_path.length-1]['longitude']; 
-  fetch(mountedApp.locationNameByCoordinates_URL + "v1/coordinates/" + latitude + "," + longitude)
+
+  // https://secure.geonames.org/countryCodeJSON?formatted=true&lat=47.03&lng=10.2&username=clodolinus&style=full
+  fetch("https://secure.geonames.org/countryCodeJSON?formatted=true&lat=" + latitude + "&lng=" + longitude + "&username=clodolinus&style=full")
   .then((response) => response.json())
-  .then((iss) => {
+  .then((data) => {
     
-    let country_code = iss.country_code;
+    let country_code = data.countryCode;
+    
     // country_code = 'BR';   
-    if (country_code != "??"){
+    if (country_code != undefined){
       
       document.getElementById("satellite-location-name").textContent = country_code;
       let flagURL = "https://flagsapi.com/" + country_code + "/shiny/64.png";

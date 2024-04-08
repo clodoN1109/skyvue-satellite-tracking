@@ -20,31 +20,7 @@ app.component('specs-tab', {
 
             <div class="specs-header"><img src="./assets/bing.png" alt="powered-by-bing-copilot" width="30px" /> MICROSOFT COPILOT</div>                
             <div class="specs-data-display">
-                    <output id="chatbot-response" readonly value="
-                    The Fermi Gamma-ray Space Telescope (FGST), formerly known as the Gamma-ray Large Area Space Telescope (GLAST), is a remarkable space observatory designed for gamma-ray astronomy observations from low Earth orbit. Let’s delve into its fascinating details:
-                    Purpose and Mission:
-                    The Fermi telescope aims to explore the energy of the universe by studying gamma rays.
-                    Its primary instrument is the Large Area Telescope (LAT), which detects photons with energies ranging from about 20 million to 300 billion electronvolts (20 MeV to 300 GeV).
-                    The LAT covers approximately 20% of the sky and serves as a successor to the EGRET instrument on the Compton Gamma Ray Observatory.
-                    Another instrument aboard Fermi is the Gamma-ray Burst Monitor (GBM), which studies gamma-ray bursts and solar flares.
-                    Launch and Collaboration:
-                    Fermi was launched on June 11, 2008, at 16:05 UTC aboard a Delta II 7920-H rocket.
-                    The mission is a joint venture involving NASA, the United States Department of Energy, and government agencies from France, Germany, Italy, Japan, and Sweden.
-                    It has become the most sensitive gamma-ray telescope in orbit, surpassing the capabilities of the INTEGRAL telescope.
-                    Scientific Instruments:
-                    Large Area Telescope (LAT):
-                    An imaging gamma-ray detector that detects photons in the specified energy range.
-                    Provides an all-sky survey to study phenomena such as active galactic nuclei, pulsars, high-energy sources, and dark matter.
-                    Gamma-ray Burst Monitor (GBM):
-                    Consists of 14 scintillation detectors.
-                    Detects gamma-ray bursts across the entire sky not occluded by Earth.
-                    Legacy and Recognition:
-                    Fermi is named after the renowned high-energy physics pioneer, Enrico Fermi.
-                    The project is a recognized CERN experiment (RE7).
-                    In summary, the Fermi Gamma-ray Space Telescope plays a crucial role in unraveling the mysteries of the high-energy universe, and its observations continue to enhance our understanding of cosmic phenomena. 🌌🔭🌠
-                    "
-                    ></output>
-                </div>
+                    <output id="chatbot-response" readonly value=""></output>
             </div>
     
         </div>

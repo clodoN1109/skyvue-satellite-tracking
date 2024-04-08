@@ -11,6 +11,7 @@ const app = Vue.createApp( {
             // Collected data
             // object_path[i] = {index, name, id, latitude, longitude, altitude, velocity, visibility, footprint, time, daynum, solar_lat, solar_lon, units};
             object_path: new Array(),
+            predicted_path: new Array(),
             user_location: new Array(),
             // Container for scheduled intervals.
             intervals: new Array(),
@@ -54,10 +55,7 @@ const app = Vue.createApp( {
         resetInterface(){
             // Reset output variables and canvas.
 
-            const ctx = canvas.getContext("2d");
-            if (ctx) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-            }
+            canvas2D.getContext('2d').clearRect(0, 0, canvas2D.width, canvas2D.height);
 
             mountedApp.object_path.length = 0;
 

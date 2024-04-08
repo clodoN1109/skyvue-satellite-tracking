@@ -129,7 +129,8 @@ function map2DGradualAppearance(timeToAppear){
 
     setTimeout(() => {
       showUserLocation(mountedApp.user_location);
-    }, 3000);
+    }, 500);
+    
   }, timeToAppear);
   
 }

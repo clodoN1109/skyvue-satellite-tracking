@@ -35,8 +35,9 @@ function true_anomaly(e, E) {
 
 function GLDrawer(scale, ready_callback) {
 
-    var canvas = document.createElement("canvas");
-    var gl = canvas.getContext('experimental-webgl');
+    var canvas3D = document.createElement("canvas");
+    canvas3D.id = 'canvas3D';
+    var gl = canvas3D.getContext('experimental-webgl');
 
     var asset_names = ["land", "clouds", "lights"];
     var mip_levels = 2;
@@ -226,15 +227,15 @@ function GLDrawer(scale, ready_callback) {
     var ndc_sx, ndc_sy;
 
     this.begin = function(width, height) {
-        canvas.width = width * scale;
-        canvas.height = height * scale;
+        canvas3D.width = width * scale;
+        canvas3D.height = height * scale;
 
         ndc_sx = 2 / width;
         ndc_sy = 2 / height;
 
         gl.clearColor(0.0, 0.0, 0.0, 0.0);
         gl.clear(gl.COLOR_BUFFER_BIT);
-        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.viewport(0, 0, canvas3D.width, canvas3D.height);
     }
 
     this.draw_earth = function(center, radius, rotation, sun_dir, sun_scale, point_scale) {
@@ -318,7 +319,7 @@ function SpaceDrawer(gl, scale, container, mode) {
     var wrapper = document.createElement("div");
     wrapper.classList.add("canvas_container");
 
-    var canvas;
+    var canvas3D;
 
     let year = 2019,
         month = 1,
@@ -443,12 +444,12 @@ function SpaceDrawer(gl, scale, container, mode) {
     var mvp = [1, 0, 0, 0, 1, 0, 0, 0, 1];
     var arcball;
 
-    canvas = document.createElement("canvas");
-    canvas.style.position = "absolute";
-    canvas.style.top = "0";
-    canvas.style.left = "0";
+    canvas3D = document.createElement("canvas");
+    canvas3D.style.position = "absolute";
+    canvas3D.style.top = "0";
+    canvas3D.style.left = "0";
 
-    wrapper.appendChild(canvas);
+    wrapper.appendChild(canvas3D);
     container.appendChild(wrapper);
 
     arcball = new ArcBall(mvp, function() {
@@ -468,20 +469,20 @@ function SpaceDrawer(gl, scale, container, mode) {
 
 
     if (mode == "plane") {
-        new Dragger(canvas, function(x, y) {
+        new Dragger(canvas3D, function(x, y) {
             drag_y = Math.max(0, Math.min(max_tilt, drag_y - y));
             self.repaint();
         })
     }
 
     function canvas_space(e) {
-        var r = canvas.getBoundingClientRect();
+        var r = canvas3D.getBoundingClientRect();
         return [width - (e.clientX - r.left), (e.clientY - r.top)];
     }
 
 
     if (arcball) {
-        new TouchHandler(canvas,
+        new TouchHandler(canvas3D,
 
             function(e) {
 
@@ -517,11 +518,11 @@ function SpaceDrawer(gl, scale, container, mode) {
 
     this.repaint = function() {
 
-        var ctx = canvas.getContext("2d");
+        var ctx = canvas3D.getContext("2d");
 
         ctx.resetTransform();
         ctx.fillStyle = "rgba(0,0,0,0)";
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas3D.width, canvas3D.height);
         ctx.scale(scale, scale);
 
         function earth_sunlight(point) {
@@ -612,10 +613,10 @@ function SpaceDrawer(gl, scale, container, mode) {
         height = Math.max(wrapper.clientHeight, 400);
 
 
-        canvas.style.width = width + "px";
-        canvas.style.height = height + "px";
-        canvas.width = width * scale;
-        canvas.height = height * scale;
+        canvas3D.style.width = width + "px";
+        canvas3D.style.height = height + "px";
+        canvas3D.width = width * scale;
+        canvas3D.height = height * scale;
 
 
         if (arcball) {

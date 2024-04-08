@@ -203,12 +203,23 @@
 	cursor: default;
 }
 
-#specs-box, #chatbot-box {
+#specs-box {
+
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+    flex-direction: column;
+	gap: 2vh;
+}
+
+#chatbot-box {
 
 	width: 100%;
 	height: 100%;
 
 }
+
 
 #chatbot-response {
 	min-height: 100%;

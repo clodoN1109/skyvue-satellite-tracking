@@ -87,48 +87,62 @@ app.component('data-tab', {
     </div>
     `
     ,
+    props: {
+        object_path: {
+            type: Array,
+            required: true
+        }
+    },
+    computed: {
+
+        path_length () {
+            return this.object_path.length;
+        }
+
+    },
     methods: {
         openDataManager(){
             document.getElementById('data-manager-container').style.display = 'flex';
         }
     },
+    watch: {
+        path_length(new_value, old_value){
 
-    updated(){
+            // current_state object structure:
+            // {
+            //   'name':  name,F
+            //   'id': id,
+            //   'latitude': latitude,
+            //   'longitude': longitude,
+            //   'velocity': velocity,
+            //   'visibility': visibility,
+            //   'footprint': footprint,
+            //   'time': time,
+            //   'daynum': daynum,
+            //   'solarlatitude': solar_lat,
+            //   'solarlongitude': solar_lon,
+            //   'units': units
+            // }
 
-        // current_state object structure:
-        // {
-        //   'name':  name,F
-        //   'id': id,
-        //   'latitude': latitude,
-        //   'longitude': longitude,
-        //   'velocity': velocity,
-        //   'visibility': visibility,
-        //   'footprint': footprint,
-        //   'time': time,
-        //   'daynum': daynum,
-        //   'solarlatitude': solar_lat,
-        //   'solarlongitude': solar_lon,
-        //   'units': units
-        // }
-
-        object_path = mountedApp.object_path;
-        length = object_path.length;
-        if (length > 0) {
-            current_state = object_path[length - 1];        
-            Object.keys(current_state).forEach(key => {
+            object_path = mountedApp.object_path;
+            length = object_path.length;
+            if (length > 0) {
+                current_state = object_path[length - 1];        
+                Object.keys(current_state).forEach(key => {
+                    
+                    data_field_element = document.getElementById(key);
+                    value = current_state[key];
                 
-                data_field_element = document.getElementById(key);
-                value = current_state[key];
-            
-                if ((value != undefined) && (data_field_element != undefined)){
-                    data_field_element.textContent = value;
-                }
-                
-                if ((value === undefined) && (data_field_element != undefined)){
-                    data_field_element.textContent = '-';
-                }    
-            });
+                    if ((value != undefined) && (data_field_element != undefined)){
+                        data_field_element.textContent = value;
+                    }
+                    
+                    if ((value === undefined) && (data_field_element != undefined)){
+                        data_field_element.textContent = '-';
+                    }    
+                });
+            }
+        
         }
-     
     }
 })

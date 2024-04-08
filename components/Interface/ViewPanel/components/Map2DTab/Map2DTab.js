@@ -11,7 +11,7 @@ app.component('map2D-tab', {
         <img v-show="path_length > 0 && tracking" width="20px" id="satellite-location-flag">
         <div v-show="path_length > 0 && tracking" id="satellite-location-name"></div>
         <div id="user-location-name"></div>
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas2D"></canvas>
     </div>
 
     `
@@ -29,13 +29,6 @@ app.component('map2D-tab', {
     computed: {
         path_length(){
             return this.object_path.length;
-        }
-    },
-    updated() {
-        if (this.object_path.length > 0) {
-            updateObjectPosition(this.object_path);
-            updateMap([[this.object_path.slice(0, -3), this.line_level_detail]]); 
-            updateNationalFlagPosition(this.object_path);
         }
     }
 })

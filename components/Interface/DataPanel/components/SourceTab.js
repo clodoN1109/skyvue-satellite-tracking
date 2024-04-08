@@ -28,7 +28,7 @@ app.component('source-tab', {
 
         <div class="data-display">
             <div class="source-examples-table">
-                <p style="font-size:1.7vh; padding:0;">Examples:</p>
+                <p style="font-size:1.7vh; padding:0; font-weight:100">Examples</p>
                 <div class="source-example-row">
                     <div class="source-example-header">NAME</div>
                     <div class="source-example-header">NORAD</div>
@@ -89,6 +89,7 @@ app.component('source-tab', {
                 mountedApp.resetInterface();
 
                 fetchCurrentState(norad_number, mountedApp.object_path);  
+                fecthPredictedPath(norad_number, mountedApp.predicted_path)
           
                 // Starts data collection asynchronous loop.
                 const interval_UpdateData = setInterval(() => {
@@ -100,7 +101,7 @@ app.component('source-tab', {
                 // Starts representing data on the view tabs.
                 const interval_UpdateDataDisplay = setInterval(() => {
     
-                  updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]); 
+                  updateMap([[mountedApp.object_path, mountedApp.line_level_detail]]); 
                   updateObjectPosition(mountedApp.object_path);
                   updateNationalFlagPosition(mountedApp.object_path);
               
@@ -108,6 +109,8 @@ app.component('source-tab', {
               
                 mountedApp.intervals.push(interval_UpdateData, interval_UpdateDataDisplay);
                 mountedApp.tracking = true;
+
+                
                 
             }
             else {

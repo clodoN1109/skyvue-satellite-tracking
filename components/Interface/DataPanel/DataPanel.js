@@ -15,7 +15,7 @@ app.component('data-panel', {
 		</div>
 		
 		<source-tab v-show="data_display_state === 'source'" :tracking="tracking"></source-tab>
-		<data-tab  v-show="data_display_state === 'data'"></data-tab>
+		<data-tab :object_path="object_path" v-show="data_display_state === 'data'"></data-tab>
 		<config-tab  v-show="data_display_state === 'config'" :source="source" :tracking="tracking"></config-tab>				
 	
 	</div>
@@ -40,7 +40,11 @@ app.component('data-panel', {
 		source: {
 			type: String,
 			required: true
-		}
+		},
+		object_path: {
+            type: Array,
+            required: true
+        },
     },
     methods: {
         selectTab(element){

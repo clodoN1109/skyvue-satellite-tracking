@@ -132,6 +132,31 @@ function fetchCurrentState(norad_number, object_path){
 
 }
 
+function fecthPredictedPath(norad_number, predicted_path = []){
+
+  // Request a satellite's TLE info based on its NORAD number. 
+  API_URL = "https://sky-vue-api.onrender.com/tle/" + norad_number;
+  fetch(API_URL)
+  .then((response) => response.json())
+  .then((tle) => {
+
+    tle_string = JSON.stringify(tle);
+    // console.log(tle_string);
+
+    // Request computed orbit based on the TLE info.
+    API_URL = "https://skyvue-python-api.onrender.com/tle?satTLE=" + tle_string;
+    fetch(API_URL)
+    .then((response) => response.json())
+    .then((data) => {
+      
+      console.log(data);
+
+    });
+
+  })
+  
+}
+
 function activityLogging(activityLog){
 
   document.getElementById("log").textContent = activityLog;
@@ -177,11 +202,12 @@ function showUserLocation(user_location){
         document.getElementById("user-location").style.transform = "translate(" + userX + "px, " + userY +  "px)";
         document.getElementById("user-location").style.opacity = 1;
 
-        fetch(mountedApp.locationNameByCoordinates_URL + "v1/coordinates/" + user_location[0] + "," + user_location[1])
+        // https://secure.geonames.org/countryCodeJSON?formatted=true&lat=47.03&lng=10.2&username=clodolinus&style=full
+        fetch("https://secure.geonames.org/countryCodeJSON?formatted=true&lat=" + user_location[0] + "&lng=" + user_location[1] + "&username=clodolinus&style=full")
         .then((response) => response.json())
-        .then((iss) => {
+        .then((data) => {
           
-          let country_code = iss.country_code;
+          let country_code = data.countryCode;
           // country_code = 'BR';
           
           document.getElementById("user-location-name").textContent = country_code;

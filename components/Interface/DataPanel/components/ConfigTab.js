@@ -134,7 +134,7 @@ app.component('config-tab', {
         
             if (id === 'line-level-detail'){ 
                 mountedApp.line_level_detail = value;
-                updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]);  
+                updateMap([[mountedApp.object_path, mountedApp.line_level_detail]]);  
             }
         
             if (mountedApp.tracking === false) {
@@ -156,7 +156,7 @@ app.component('config-tab', {
           
             const interval_UpdateDataDisplay = setInterval(() => {
           
-              updateMap([[mountedApp.object_path.slice(0, -3), mountedApp.line_level_detail]]); 
+              updateMap([[mountedApp.object_path, mountedApp.line_level_detail]]); 
               updateObjectPosition(mountedApp.object_path);
               updateNationalFlagPosition(mountedApp.object_path);
           
