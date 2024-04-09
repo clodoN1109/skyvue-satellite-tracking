@@ -149,7 +149,8 @@ function fecthPredictedPath(norad_number, predicted_path = []){
     .then((response) => response.json())
     .then((data) => {
       
-      console.log(data);
+      mountedApp.predicted_path = data.path;
+      console.log(mountedApp.predicted_path);
 
     });
 
@@ -170,12 +171,40 @@ function activityLogging(activityLog){
   setTimeout(() => {
 
     document.getElementById("log-loader").style.borderTopColor = "#f3f3f3a0";
-    document.getElementById("log-loader").style.animation = "spin 0.1s linear infinite";
+    document.getElementById("log-loader").style.animation = "";
     
     document.getElementById("log").style.transition = "all 2s";
     document.getElementById("log").style.opacity = 0;
 
   }, mountedApp.loader_time);
+  
+}
+
+function satbotActivityLogging(state){
+
+  if (state === 'waiting') {
+    document.getElementById("satbot-loader").style.borderTopColor = "#ffffff";
+    document.getElementById("satbot-loader").style.animation = "spin 0.1s linear infinite";
+  }
+  else {
+    document.getElementById("satbot-loader").style.borderTopColor = "#f3f3f3a0";
+    document.getElementById("satbot-loader").style.animation = '';
+
+  }
+  
+}
+
+function tleActivityLogging(state){
+
+  if (state === 'waiting') {
+    document.getElementById("tle-loader").style.borderTopColor = "#ffffff";
+    document.getElementById("tle-loader").style.animation = "spin 0.1s linear infinite";
+  }
+  else {
+    document.getElementById("tle-loader").style.borderTopColor = "#f3f3f3a0";
+    document.getElementById("tle-loader").style.animation = '';
+
+  }
   
 }
 

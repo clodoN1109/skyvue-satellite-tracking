@@ -23,7 +23,8 @@ body {
 .interface {
 
 	width: 100%;
-	height: 80vh;
+	/* height: 80vh; */
+	height: fit-content;
 	margin: 0;
 	padding: 0;
 
@@ -103,6 +104,12 @@ footer {
 	color: white;
 }
 
+.power-ups {
+	width: 50%;
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 3vw;
+}
 
 footer img{
 
@@ -176,7 +183,8 @@ p{
 
 	width: 100%;
 	height: 100px;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
+	padding: 0 2vw;
 
 
 	display: flex;
@@ -186,7 +194,7 @@ p{
 	align-items: center;
 
 	font-family: 'Courier New', Courier, monospace; 
-	font-size: 20px;
+	font-size: 15px;
 	font-weight: 100;
 	color: rgb(253, 253, 253);
 
@@ -223,6 +231,11 @@ p{
 	backdrop-filter: blur(20px);
 	background-color: rgba(77, 85, 152, 0.254);
 
+}
+
+#trivia {
+	margin-top: 0;
+	min-height: 0;
 }
 
 .band-display  {

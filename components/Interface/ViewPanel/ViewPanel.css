@@ -220,10 +220,33 @@
 
 }
 
+.satbot-background {
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+
+	width: inherit;
+	height: inherit;
+
+	object-fit: fill;
+	opacity: 0.2;
+}
+
 
 #chatbot-response {
+
+	display: relative;
+	z-index: 1000;
+	
+	text-emphasis-style:;
+	text-emphasis-color: black;
+
 	min-height: 100%;
-	font-weight: 200;
+	font-weight: 800;
+
+	color: rgb(237, 239, 241);
 }
 
 .specs-flex {
@@ -249,6 +272,8 @@
 	width: 100%;
 	height: fit-content;
 
+	display: inline-flex;
+
 	border-style: solid;
 	border-color: rgba(255, 255, 255, 0.738);
 	border-width: 0 0 1px 0;
@@ -260,6 +285,7 @@
 	background-color: rgba(36, 40, 68, 0.642);
 
 }
+
 
 .specs-data-display {
 
@@ -307,6 +333,8 @@
 
 	width: 15px;
 	height: 15px;
+
+	margin: 0 0 0 1vw;
 
 	display: inline-flex;
 	align-items: center;

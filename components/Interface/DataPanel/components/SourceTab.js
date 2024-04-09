@@ -79,6 +79,10 @@ app.component('source-tab', {
     methods: {
         
         startTracking(norad_number){
+        
+            this.stopTracking();
+
+            document.getElementById('chatbot-response').textContent = '';
             
             function isNumeric(str) {
                 return /^[0-9]+(\.[0-9]+)?$/.test(str);
@@ -101,9 +105,19 @@ app.component('source-tab', {
                 // Starts representing data on the view tabs.
                 const interval_UpdateDataDisplay = setInterval(() => {
     
-                  updateMap([[mountedApp.object_path, mountedApp.line_level_detail]]); 
-                  updateObjectPosition(mountedApp.object_path);
-                  updateNationalFlagPosition(mountedApp.object_path);
+                    if (mountedApp.object_path.length === 0) {
+                        return
+                    }
+
+                    updateMap([
+                        [mountedApp.object_path, mountedApp.line_level_detail],
+                        [mountedApp.predicted_path, 100]
+                    ]);
+                        
+                    updateObjectPosition(mountedApp.object_path);
+                    updateNationalFlagPosition(mountedApp.object_path);                        
+                   
+
               
                 }, mountedApp.display_framerate);
               
@@ -120,7 +134,7 @@ app.component('source-tab', {
             
         },        
 
-        stopTracking( ){
+        stopTracking(){
         
             //Reseting intervals and timeouts. 
             
