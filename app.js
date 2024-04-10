@@ -23,7 +23,9 @@ const app = Vue.createApp( {
             display_framerate: 1000,
             line_level_detail: 5,
             loader_time: 1000,
-            units: 'kilometers'
+            units: 'kilometers',
+            // possible values: 'retreated', 'full'
+            satbot_display: 'retreated'
         }
     },
 

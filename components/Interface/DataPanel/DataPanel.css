@@ -241,7 +241,7 @@
 
 	color: white; 
 	font-family: monospace; 	
-	font-weight: bold;
+	font-weight: 100;
 
 	border-style: solid;
 	border-color: rgb(255, 255, 255);
@@ -310,8 +310,8 @@
 }
 
 #satbot-loader, #tle-loader {
-	width: 25px;
-	height: 25px;
+	width: 35px;
+	height: 35px;
 	border-top-color: #f3f3f3a0;
 	animation: spin 1s linear infinite;
 }

@@ -26,21 +26,7 @@ app.component('specs-tab', {
 
         <div class="specs-flex">
 
-            <div class="specs-header">
-                <div class="loader" id="satbot-loader"></div> 
-                &emsp; Satbot AI Assistant
-            </div>                
-            <div class="specs-data-display" >
-                    <img class=" satbot-background" src="./assets/chatGPT.webp" />
-                    <div id="chatbot-response">
-                    Hi! I am Satbot.
-                    <br><br> 
-                    I am a robot assistant with a great passion for all things related to space. 
-                    <br><br>
-                    I will help you find out more about the satellites you are tracking.
-                    </div>
-            </div>
-    
+           
         </div>
 
     </div>

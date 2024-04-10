@@ -122,9 +122,10 @@ app.component('source-tab', {
                 }, mountedApp.display_framerate);
               
                 mountedApp.intervals.push(interval_UpdateData, interval_UpdateDataDisplay);
-                mountedApp.tracking = true;
-
                 
+                setTimeout(() => {
+                    mountedApp.tracking = true;
+                }, 100);
                 
             }
             else {
@@ -136,7 +137,9 @@ app.component('source-tab', {
 
         stopTracking(){
         
-            //Reseting intervals and timeouts. 
+            //Reseting variables, intervals and timeouts. 
+            
+            mountedApp.tracking = false; 
             
             mountedApp.timeouts.forEach(elementID => { 
                 clearTimeout(elementID);    
@@ -145,7 +148,7 @@ app.component('source-tab', {
             mountedApp.intervals.forEach(elementID => { 
                 clearInterval(elementID);    
             });
-            mountedApp.tracking = false; 
+            
 
         }
 

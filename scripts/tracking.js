@@ -187,8 +187,13 @@ function satbotActivityLogging(state){
     document.getElementById("satbot-loader").style.animation = "spin 0.1s linear infinite";
   }
   else {
-    document.getElementById("satbot-loader").style.borderTopColor = "#f3f3f3a0";
-    document.getElementById("satbot-loader").style.animation = '';
+    document.getElementById("satbot-loader").style.borderTopColor = "#f3f3f3";
+    document.getElementById("satbot-loader").style.animation = "spin 1s linear infinite";
+    
+    mountedApp.satbot_display = 'full';
+    setTimeout(() => {
+      mountedApp.satbot_display = 'retreated';
+    }, 6000);
 
   }
   
@@ -202,7 +207,7 @@ function tleActivityLogging(state){
   }
   else {
     document.getElementById("tle-loader").style.borderTopColor = "#f3f3f3a0";
-    document.getElementById("tle-loader").style.animation = '';
+    document.getElementById("tle-loader").style.animation = "";
 
   }
   
