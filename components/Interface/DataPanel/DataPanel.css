@@ -309,9 +309,9 @@
 	animation: spin 1s linear infinite;
 }
 
-#satbot-loader, #tle-loader {
-	width: 35px;
-	height: 35px;
+#tle-loader {
+	width: 25px;
+	height: 25px;
 	border-top-color: #f3f3f3a0;
 	animation: spin 1s linear infinite;
 }

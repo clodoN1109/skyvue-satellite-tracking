@@ -93,7 +93,6 @@ app.component('source-tab', {
                 mountedApp.resetInterface();
 
                 fetchCurrentState(norad_number, mountedApp.object_path);  
-                fecthPredictedPath(norad_number, mountedApp.predicted_path)
           
                 // Starts data collection asynchronous loop.
                 const interval_UpdateData = setInterval(() => {

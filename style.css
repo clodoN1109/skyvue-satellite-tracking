@@ -156,7 +156,7 @@ p{
 
 #wiki-loader {
 	border-top-color: #ffffff;
-	animation: spin 1s linear infinite;
+	animation: spin 4s linear infinite;
 }
 
 @keyframes spin {

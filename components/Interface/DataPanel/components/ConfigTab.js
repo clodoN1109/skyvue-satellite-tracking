@@ -123,8 +123,6 @@ app.component('config-tab', {
                 mountedApp.data_update_rate = value * 1000;
         
                 if (value == 1) {mountedApp.loader_time = 500;}
-                // Parameter to cut avoid ploting points near the satellite's figure,
-                // and responsive to the selected value for the data_update_rate parameter.
                 else {mountedApp.loader_time = 1000;}
             }
         
